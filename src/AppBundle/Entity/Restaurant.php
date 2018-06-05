@@ -43,7 +43,7 @@ class Restaurant
     private $emails;
 
     /**
-     * @ORM\ManyToOne(targetEntity="City")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="restaurants")
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;

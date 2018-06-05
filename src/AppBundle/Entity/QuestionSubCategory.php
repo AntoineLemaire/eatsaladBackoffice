@@ -29,7 +29,7 @@ class QuestionSubCategory
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="QuestionCategory")
+     * @ORM\ManyToOne(targetEntity="QuestionCategory", inversedBy="questionSubCategories")
      * @ORM\JoinColumn(nullable=false)
      */
     private $questionCategory;

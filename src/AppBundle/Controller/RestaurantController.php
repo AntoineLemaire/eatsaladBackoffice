@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
@@ -35,6 +36,19 @@ class RestaurantController extends FOSRestController
             return new View("restaurant not found", Response::HTTP_NOT_FOUND);
         }
         return $singleresult;
+    }
+
+    /**
+     * @Rest\Get("/rest/restaurant-by-city/{id_city}")
+     */
+    public function getByCityAction($id_city)
+    {
+        $city = $this->getDoctrine()->getRepository('AppBundle:City')->find($id_city);
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->findByCity($city);
+        if ($restresult === null) {
+            return new View("there are no restaurants exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
     }
 
     /**
