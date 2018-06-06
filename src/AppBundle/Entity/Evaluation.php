@@ -77,6 +77,11 @@ class Evaluation
     private $restaurant;
 
     /**
+     * @ORM\OneToMany(targetEntity="EvaluationAnswer", mappedBy="evaluation",cascade={"remove"})
+     */
+    private $evaluationAnswers;
+
+    /**
      * Get id.
      *
      * @return int
@@ -276,5 +281,48 @@ class Evaluation
     public function getRestaurant()
     {
         return $this->restaurant;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add evaluationAnswer.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
+     *
+     * @return Evaluation
+     */
+    public function addEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
+    {
+        $this->evaluationAnswers[] = $evaluationAnswer;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaluationAnswer.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
+    {
+        return $this->evaluationAnswers->removeElement($evaluationAnswer);
+    }
+
+    /**
+     * Get evaluationAnswers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvaluationAnswers()
+    {
+        return $this->evaluationAnswers;
     }
 }

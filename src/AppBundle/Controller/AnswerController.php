@@ -14,7 +14,7 @@ use AppBundle\Entity\Answer;
 class AnswerController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/answer/")
+     * @Rest\Get("/rest/answers")
      */
     public function getAction()
     {

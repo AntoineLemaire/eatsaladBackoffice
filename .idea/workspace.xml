@@ -2,40 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b2a660d-1ab6-4dde-92b6-4d1801cf3f98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/eatsaladBackoffice.iml" afterPath="$PROJECT_DIR$/.idea/eatsaladBackoffice.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Service/FileUploader.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CityController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CityController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/QuestionCategoryController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/QuestionCategoryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/QuestionSubCategoryController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/QuestionSubCategoryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Answer.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Answer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Question.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Question.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Restaurant.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Restaurant.php" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/config.xml" afterPath="$USER_HOME$/Programming/eatsaladApp/config.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutquestionmodal/ajoutquestionmodal.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutquestionmodal/ajoutquestionmodal.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutrestaurantmodal/ajoutrestaurantmodal.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutrestaurantmodal/ajoutrestaurantmodal.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.html" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/archive/archive.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/archive/archive.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/archiveevaluation/archiveevaluation.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/archiveevaluation/archiveevaluation.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation-main-category/evaluation-main-category.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation-main-category/evaluation-main-category.ts" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.html" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.html" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.html" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantlist/restaurantlist.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantlist/restaurantlist.html" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantlist/restaurantlist.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantlist/restaurantlist.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/signature/signature.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/signature/signature.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/statistic/statistic.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/statistic/statistic.ts" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.html" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.html" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.ts" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts" afterPath="$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,41 +36,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="database.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="242" column="40" lean-forward="false" selection-start-line="242" selection-start-column="40" selection-end-line="242" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-                <marker date="1528278169353" expanded="true" signature="5943:6345" ph="SELECT quest... question_category" />
-                <marker date="1528278169353" expanded="true" signature="10451:10475" ph="SELECT * FRO... response" />
-                <marker date="1528278169353" expanded="true" signature="12983:13009" ph="SELECT * FRO... evaluation" />
-                <marker date="1528278169353" expanded="true" signature="24485:24582" ph="SELECT path question_has_response_image" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="evaluationcategory.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="evaluationcategory.ts" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="143" column="77" lean-forward="true" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
+            <state relative-caret-position="357">
+              <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="evaluation.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="854">
+              <caret line="332" column="93" lean-forward="false" selection-start-line="332" selection-start-column="93" selection-end-line="332" selection-end-column="93" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
-                <element signature="e#156#214#0" expanded="true" />
-                <element signature="e#398#469#0" expanded="true" />
+                <element signature="e#0#53#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="evaluationcategory.html" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.html">
+      <file leaf-file-name="EvaluationAnswerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+            <state relative-caret-position="1004">
+              <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+              <folding>
+                <element signature="e#40#99#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Evaluation.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="51" column="7" lean-forward="false" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -100,38 +84,41 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>memory_li</find>
-      <find>QuetionSubCategory</find>
-      <find>questionCategory</find>
-      <find>question_sub_categories</find>
-      <find>asset</find>
-      <find>string</find>
-      <find>__</find>
-      <find>doctrine</find>
-      <find>doctrine_extensions</find>
-      <find>@Gedmo\Mapping\Annotation\Sortable</find>
-      <find>addRest</find>
-      <find>getCityById</find>
-      <find>ville</find>
-      <find>addrest</find>
-      <find>getAllRestaurants</find>
-      <find>console.lo</find>
-      <find>console.</find>
-      <find>getRestaurant</find>
-      <find>.do</find>
-      <find>setSub</find>
-      <find>subcategoriesD</find>
-      <find>getEv</find>
-      <find>getCategoryById</find>
-      <find>evaluation</find>
-      <find>categories</find>
-      <find>getEvaluations</find>
-      <find>getCategories</find>
+      <find>EvaluationAnswer</find>
+      <find>EvaluationAnswers</find>
+      <find>/rest/evaluation-answers</find>
+      <find>questionHasResponse</find>
+      <find>FileTransferObject</find>
+      <find>upload</find>
+      <find>photo</find>
+      <find>onSelectionChange</find>
+      <find>imagesArray</find>
+      <find>copyFileToLocalDir</find>
+      <find>evaluationAnswer</find>
+      <find>getEvaluationAnswerImage</find>
+      <find>toSt</find>
+      <find>toStr</find>
+      <find>AnswerImage</find>
+      <find>EvaluationAnswerImages</find>
+      <find>$evaluationAnswerImage</find>
+      <find>evaluationAnswerImage</find>
+      <find>images</find>
+      <find>setComment</find>
+      <find>image</find>
+      <find>console.log</find>
+      <find>console</find>
+      <find>getpat</find>
+      <find>toString</find>
+      <find>paramet</find>
+      <find>move</find>
+      <find>http://localhost:80/eatsaladBackoffice/web/app_dev.php/rest/evaluation-answer-upload-photos</find>
+      <find>access</find>
+      <find>encodeURI</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/Programming/eatsaladApp" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -143,8 +130,6 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/QuestionCategory.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/City.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/QuestionController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Answer.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/QuestionSubCategory.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
@@ -152,27 +137,43 @@
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.html" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantlist/restaurantlist.ts" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Question.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Restaurant.php" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.html" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.ts" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.ts" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/CityController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutquestionmodal/ajoutquestionmodal.ts" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/archiveevaluation/archiveevaluation.ts" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/signature/signature.ts" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/statistic/statistic.ts" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation-main-category/evaluation-main-category.ts" />
-        <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationController.php" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/archive/archive.ts" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/QuestionCategoryController.php" />
-        <option value="$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/QuestionSubCategoryController.php" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.html" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Answer.php" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.html" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswers.php" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerImagesController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerImageController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswersController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswerImage.php" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswerPhotos.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswer.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/FileUploader.php" />
+        <option value="$PROJECT_DIR$/app/config/services.yml" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/ionic.config.json" />
         <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.ts" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/config.xml" />
+        <option value="$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerController.php" />
       </list>
     </option>
   </component>
@@ -190,8 +191,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="22" />
-    <option name="width" value="1680" />
-    <option name="height" value="960" />
+    <option name="width" value="1280" />
+    <option name="height" value="1349" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -215,25 +216,58 @@
           <expand>
             <path>
               <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eatsaladApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eatsaladApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eatsaladApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="uploads" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eatsaladBackoffice" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="uploads" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="photos" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="eatsaladBackoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="eatsaladApp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pages" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="evaluationcategory" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -249,11 +283,13 @@
     <property name="typescript-compiler-editor-notification" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/uploads" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/FOS/RestBundle/Controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/AppBundle/Controller" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/FOS/RestBundle/Controller" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -286,15 +322,15 @@
       <workItem from="1528184617340" duration="1380000" />
       <workItem from="1528195612734" duration="67000" />
       <workItem from="1528195750385" duration="18738000" />
-      <workItem from="1528269266054" duration="7784000" />
+      <workItem from="1528269266054" duration="34791000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42167000" />
+    <option name="totallyTimeSpent" value="69174000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1680" height="960" extended-state="6" />
+    <frame x="0" y="22" width="2560" height="1349" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -304,7 +340,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1959707" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15250199" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -331,191 +367,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EvaluationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="57" column="54" lean-forward="false" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5565">
-          <caret line="265" column="35" lean-forward="false" selection-start-line="265" selection-start-column="35" selection-end-line="265" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="41" column="6" lean-forward="false" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="987">
-          <caret line="55" column="7" lean-forward="false" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="41" column="6" lean-forward="false" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="44" column="5" lean-forward="false" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../bin/php/php7.1.8/conf/php.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="231" column="18" lean-forward="false" selection-start-line="231" selection-start-column="18" selection-end-line="231" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dotation-app/src/DotationBundle/Entity/DotationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1544">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Answer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="69" column="33" lean-forward="true" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="47" column="26" lean-forward="false" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/QuestionCategory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="33" column="34" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/City.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="37" column="34" lean-forward="false" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutrestaurantmodal/ajoutrestaurantmodal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="39" lean-forward="false" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutrestaurantmodal/ajoutrestaurantmodal.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/ajoutvillemodal/ajoutvillemodal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="823">
-          <caret line="102" column="41" lean-forward="true" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -535,22 +390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Restaurant.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="50" column="7" lean-forward="true" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Question.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -563,14 +402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,34 +442,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="61" column="19" lean-forward="true" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
-          <folding>
-            <element signature="e#4#46#0" expanded="true" />
-            <marker date="1528271915274" expanded="true" signature="91243:91258" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="91514:91529" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="91619:91635" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="91919:91934" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="92174:92189" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="92279:92295" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="92583:92598" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="92822:92837" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="92927:92943" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="93231:93246" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="93469:93484" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="93574:93590" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97110:97121" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97264:97301" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97367:97387" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97495:97507" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97693:97713" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="97821:97842" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="98749:98766" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="98874:98886" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="99070:99087" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="99181:99311" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="99396:99422" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="99606:99619" ph="..." />
-            <marker date="1528271915274" expanded="true" signature="99712:99811" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -658,36 +462,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="61" lean-forward="true" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#53#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/QuestionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="58" />
           <folding />
         </state>
       </provider>
@@ -708,20 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="242" column="40" lean-forward="false" selection-start-line="242" selection-start-column="40" selection-end-line="242" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <marker date="1528278169353" expanded="true" signature="5943:6345" ph="SELECT quest... question_category" />
-            <marker date="1528278169353" expanded="true" signature="10451:10475" ph="SELECT * FRO... response" />
-            <marker date="1528278169353" expanded="true" signature="12983:13009" ph="SELECT * FRO... evaluation" />
-            <marker date="1528278169353" expanded="true" signature="24485:24582" ph="SELECT path question_has_response_image" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/CityController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -738,21 +502,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/QuestionSubCategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/villelist/villelist.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1743">
           <caret line="83" column="17" lean-forward="false" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
-            <element signature="e#164#204#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="false" />
+            <element signature="e#164#204#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -765,22 +521,291 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/QuestionSubCategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="7" lean-forward="false" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        <state relative-caret-position="286">
+          <caret line="19" column="141" lean-forward="false" selection-start-line="19" selection-start-column="141" selection-end-line="19" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/app/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="183" column="33" lean-forward="true" selection-start-line="183" selection-start-column="33" selection-end-line="183" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1702">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AnswerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerImagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerImageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/assets/dump.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-83">
+          <caret line="41" column="62" lean-forward="false" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/common/lib/Doctrine/Common/Persistence/ObjectRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="72" column="20" lean-forward="false" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Answer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="40" column="6" lean-forward="false" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/RestaurantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="47" column="35" lean-forward="false" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/app/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#75#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="121" column="22" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#58#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Restaurant.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="46" column="38" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Question.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="53" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/restaurantdetail/restaurantdetail.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/providers/database/database.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="170" column="4" lean-forward="false" selection-start-line="170" selection-start-column="4" selection-end-line="170" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1528312565403" expanded="true" signature="6375:6777" ph="SELECT quest... question_category" />
+            <marker date="1528312565403" expanded="true" signature="13495:13521" ph="SELECT * FRO... evaluation" />
+            <marker date="1528312565403" expanded="true" signature="24997:25094" ph="SELECT path question_has_response_image" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/City.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="773">
+          <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="150" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="48" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswerPhotos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/EvaluationAnswer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2125">
+          <caret line="53" column="7" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/UploadedFile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="76" column="41" lean-forward="false" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="41" />
+          <folding>
+            <element signature="e#288#354#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/ionic.config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/FileUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="20" column="45" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluationcategory/evaluationcategory.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="143" column="77" lean-forward="true" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
+        <state relative-caret-position="357">
+          <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/node_modules/@ionic-native/file-transfer/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="187" column="90" lean-forward="false" selection-start-line="187" selection-start-column="81" selection-end-line="187" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Evaluation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="51" column="7" lean-forward="false" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Programming/eatsaladApp/src/pages/evaluation/evaluation.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="854">
+          <caret line="332" column="93" lean-forward="false" selection-start-line="332" selection-start-column="93" selection-end-line="332" selection-end-column="93" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
-            <element signature="e#156#214#0" expanded="true" />
-            <element signature="e#398#469#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EvaluationAnswerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1004">
+          <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#99#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

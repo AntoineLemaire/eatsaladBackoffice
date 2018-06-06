@@ -45,7 +45,7 @@ class Evaluation
     /**
      * @var array
      *
-     * @ORM\Column(name="subcategories_done", type="json", nullable=false)
+     * @ORM\Column(name="subcategories_done", type="array", nullable=false)
      */
     private $subcategoriesDone;
 
@@ -75,6 +75,11 @@ class Evaluation
      * @ORM\JoinColumn(nullable=false)
      */
     private $restaurant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EvaluationAnswer", mappedBy="evaluation",cascade={"remove"})
+     */
+    private $evaluationAnswers;
 
     /**
      * Get id.
@@ -161,13 +166,13 @@ class Evaluation
     /**
      * Set subcategoriesDone.
      *
-     * @param json $subcategoriesDone
+     * @param array\null $subcategoriesDone
      *
      * @return Evaluation
      */
     public function setSubcategoriesDone($subcategoriesDone)
     {
-        $this->subcategoriesDone = json_encode($subcategoriesDone);
+        $this->subcategoriesDone = $subcategoriesDone;
 
         return $this;
     }
@@ -276,5 +281,48 @@ class Evaluation
     public function getRestaurant()
     {
         return $this->restaurant;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add evaluationAnswer.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
+     *
+     * @return Evaluation
+     */
+    public function addEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
+    {
+        $this->evaluationAnswers[] = $evaluationAnswer;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaluationAnswer.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
+    {
+        return $this->evaluationAnswers->removeElement($evaluationAnswer);
+    }
+
+    /**
+     * Get evaluationAnswers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvaluationAnswers()
+    {
+        return $this->evaluationAnswers;
     }
 }

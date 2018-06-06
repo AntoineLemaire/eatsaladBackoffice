@@ -1,0 +1,203 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EvaluationAnswer
+ *
+ * @ORM\Table(name="evaluation_answer")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EvaluationAnswerRepository")
+ */
+class EvaluationAnswer
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=255)
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Evaluation")
+     * @ORM\JoinColumn(name="id_evaluation", referencedColumnName="id")
+     */
+    private $evaluation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Question")
+     * @ORM\JoinColumn(name="id_question", referencedColumnName="id")
+     */
+    private $question;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Answer")
+     * @ORM\JoinColumn(name="id_answer", referencedColumnName="id")
+     */
+    private $answer;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EvaluationAnswerPhotos", mappedBy="evaluationAnswer", cascade={"persist", "remove"})
+     */
+    private $photos;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set comment.
+     *
+     * @param string $comment
+     *
+     * @return EvaluationAnswer
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment.
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation|null $evaluation
+     *
+     * @return EvaluationAnswer
+     */
+    public function setEvaluation(\AppBundle\Entity\Evaluation $evaluation = null)
+    {
+        $this->evaluation = $evaluation;
+
+        return $this;
+    }
+
+    /**
+     * Get evaluation.
+     *
+     * @return \AppBundle\Entity\Evaluation|null
+     */
+    public function getEvaluation()
+    {
+        return $this->evaluation;
+    }
+
+    /**
+     * Set question.
+     *
+     * @param \AppBundle\Entity\Question|null $question
+     *
+     * @return EvaluationAnswer
+     */
+    public function setQuestion(\AppBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question.
+     *
+     * @return \AppBundle\Entity\Question|null
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set answer.
+     *
+     * @param \AppBundle\Entity\Answer|null $answer
+     *
+     * @return EvaluationAnswer
+     */
+    public function setAnswer(\AppBundle\Entity\Answer $answer = null)
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get answer.
+     *
+     * @return \AppBundle\Entity\Answer|null
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * Add photo.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswerPhotos $photo
+     *
+     * @return EvaluationAnswer
+     */
+    public function addPhoto(\AppBundle\Entity\EvaluationAnswerPhotos $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo.
+     *
+     * @param \AppBundle\Entity\EvaluationAnswerPhotos $photo
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removePhoto(\AppBundle\Entity\EvaluationAnswerPhotos $photo)
+    {
+        return $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+}

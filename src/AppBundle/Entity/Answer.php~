@@ -28,6 +28,13 @@ class Answer
      */
     private $answer;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="score", type="integer")
+     */
+    private $score;
+
 
     /**
      * Get id
@@ -72,5 +79,29 @@ class Answer
         return $this->answer;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * Set score.
+     *
+     * @param int $score
+     *
+     * @return Answer
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score.
+     *
+     * @return int
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 }

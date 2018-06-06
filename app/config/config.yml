@@ -7,6 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    photos_directory: '%kernel.project_dir%/web/uploads/photos'
 
 framework:
     #esi: ~
@@ -68,6 +69,10 @@ swiftmailer:
 
 # EasyAdmin Configuration
 easy_admin:
+    list:
+        actions:
+            - { name: 'edit', icon: 'pencil', label: '' }
+            - { name: 'delete', icon: 'trash', label: '' }
     site_name: 'EatSalad'
     design:
         brand_color: '#76B728'
