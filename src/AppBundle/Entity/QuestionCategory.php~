@@ -31,7 +31,7 @@ class QuestionCategory
     /**
      * @ORM\OneToMany(targetEntity="QuestionSubCategory", mappedBy="questionCategory")
      */
-    private $questionSubCategories; // Notez le « s », une annonce est liée à plusieurs candidatures
+    private $questionSubCategories;
 
     /**
      * Get id

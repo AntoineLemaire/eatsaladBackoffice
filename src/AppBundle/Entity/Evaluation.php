@@ -29,36 +29,55 @@ class Evaluation
     private $date;
 
     /**
-     * @var string
+     * @var \boolean
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="temp", type="boolean")
      */
-    private $comment;
+    private $temp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="controller_name", type="string", length=255)
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="subcategories_done", type="array", nullable=false)
+     */
+    private $subcategoriesDone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="controller_name", type="string", length=255, nullable=true)
      */
     private $controllerName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="controller_signature", type="string", length=255)
+     * @ORM\Column(name="controller_signature", type="string", length=255, nullable=true)
      */
     private $controllerSignature;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="franchised_signature", type="text")
+     * @ORM\Column(name="franchised_signature", type="text", nullable=true)
      */
     private $franchisedSignature;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="evaluations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -68,7 +87,7 @@ class Evaluation
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
      *
@@ -82,7 +101,7 @@ class Evaluation
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -92,13 +111,37 @@ class Evaluation
     }
 
     /**
-     * Set comment
+     * Set temp.
      *
-     * @param string $comment
+     * @param bool $temp
      *
      * @return Evaluation
      */
-    public function setComment($comment)
+    public function setTemp($temp)
+    {
+        $this->temp = $temp;
+
+        return $this;
+    }
+
+    /**
+     * Get temp.
+     *
+     * @return bool
+     */
+    public function getTemp()
+    {
+        return $this->temp;
+    }
+
+    /**
+     * Set comment.
+     *
+     * @param string|null $comment
+     *
+     * @return Evaluation
+     */
+    public function setComment($comment = null)
     {
         $this->comment = $comment;
 
@@ -106,9 +149,9 @@ class Evaluation
     }
 
     /**
-     * Get comment
+     * Get comment.
      *
-     * @return string
+     * @return string|null
      */
     public function getComment()
     {
@@ -116,13 +159,37 @@ class Evaluation
     }
 
     /**
-     * Set controllerName
+     * Set subcategoriesDone.
      *
-     * @param string $controllerName
+     * @param array\null $subcategoriesDone
      *
      * @return Evaluation
      */
-    public function setControllerName($controllerName)
+    public function setSubcategoriesDone($subcategoriesDone)
+    {
+        $this->subcategoriesDone = $subcategoriesDone;
+
+        return $this;
+    }
+
+    /**
+     * Get subcategoriesDone.
+     *
+     * @return array
+     */
+    public function getSubcategoriesDone()
+    {
+        return $this->subcategoriesDone;
+    }
+
+    /**
+     * Set controllerName.
+     *
+     * @param string|null $controllerName
+     *
+     * @return Evaluation
+     */
+    public function setControllerName($controllerName = null)
     {
         $this->controllerName = $controllerName;
 
@@ -130,9 +197,9 @@ class Evaluation
     }
 
     /**
-     * Get controllerName
+     * Get controllerName.
      *
-     * @return string
+     * @return string|null
      */
     public function getControllerName()
     {
@@ -140,13 +207,13 @@ class Evaluation
     }
 
     /**
-     * Set controllerSignature
+     * Set controllerSignature.
      *
-     * @param string $controllerSignature
+     * @param string|null $controllerSignature
      *
      * @return Evaluation
      */
-    public function setControllerSignature($controllerSignature)
+    public function setControllerSignature($controllerSignature = null)
     {
         $this->controllerSignature = $controllerSignature;
 
@@ -154,9 +221,9 @@ class Evaluation
     }
 
     /**
-     * Get controllerSignature
+     * Get controllerSignature.
      *
-     * @return string
+     * @return string|null
      */
     public function getControllerSignature()
     {
@@ -164,13 +231,13 @@ class Evaluation
     }
 
     /**
-     * Set franchisedSignature
+     * Set franchisedSignature.
      *
-     * @param string $franchisedSignature
+     * @param string|null $franchisedSignature
      *
      * @return Evaluation
      */
-    public function setFranchisedSignature($franchisedSignature)
+    public function setFranchisedSignature($franchisedSignature = null)
     {
         $this->franchisedSignature = $franchisedSignature;
 
@@ -178,12 +245,36 @@ class Evaluation
     }
 
     /**
-     * Get franchisedSignature
+     * Get franchisedSignature.
      *
-     * @return string
+     * @return string|null
      */
     public function getFranchisedSignature()
     {
         return $this->franchisedSignature;
+    }
+
+    /**
+     * Set restaurant.
+     *
+     * @param \AppBundle\Entity\Restaurant $restaurant
+     *
+     * @return Evaluation
+     */
+    public function setRestaurant(\AppBundle\Entity\Restaurant $restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant.
+     *
+     * @return \AppBundle\Entity\Restaurant
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
     }
 }

@@ -66,16 +66,43 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+# EasyAdmin Configuration
 easy_admin:
+    site_name: 'EatSalad'
+    design:
+        brand_color: '#76B728'
+        menu:
+            - { entity: 'Evaluation', label: 'Évaluation', icon: 'check-circle', default: true }
+            - label: 'Questions'
+              icon: 'tasks'
+              children:
+                  - { entity: 'QuestionCategory', label: 'Catégories', icon: 'folder' }
+                  - { entity: 'QuestionSubCategory', label: 'Sous-Catégories', icon: 'folder-open' }
+                  - { entity: 'Question', label: 'Questions', icon: 'question' }
+            - { entity: 'Answer', label: 'Réponses', icon: 'comment' }
+            - { entity: 'City', label: 'Villes', icon: 'map-marker' }
+            - { entity: 'Restaurant', label: 'Restaurants', icon: 'cutlery' }
+        assets:
+            favicon: '/assets/backend/favicon.png'
     entities:
         Answer:
             class: AppBundle\Entity\Answer
         Question:
             class: AppBundle\Entity\Question
+            edit:
+                fields:
+#                    - { property: 'position', icon: 'position', help: 'Position de la question dans la sous-catégorie' }
+                    - { property: 'question', icon: 'question' }
+                    - { property: 'questionSubCategory', icon: 'question' }
         QuestionCategory:
             class: AppBundle\Entity\QuestionCategory
         QuestionSubCategory:
             class: AppBundle\Entity\QuestionSubCategory
+            edit:
+                fields:
+                    - { property: 'name'}
+                    - { property: 'questionCategory'}
+                    - { property: 'questions', type: 'entity', type_options: { class: 'AppBundle\Entity\Question', multiple: true } }
         Evaluation:
             class: AppBundle\Entity\Evaluation
         Restaurant:
@@ -106,3 +133,9 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+
+# Stof\DoctrineExtensionsBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            sortable: true

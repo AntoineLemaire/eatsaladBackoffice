@@ -14,13 +14,13 @@ use AppBundle\Entity\QuestionCategory;
 class QuestionCategoryController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/question-category/")
+     * @Rest\Get("/rest/question-categories")
      */
     public function getAction()
     {
         $restresult = $this->getDoctrine()->getRepository('AppBundle:QuestionCategory')->findAll();
         if ($restresult === null) {
-            return new View("there are no categories exist", Response::HTTP_NOT_FOUND);
+            return new View("there are no category exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
     }

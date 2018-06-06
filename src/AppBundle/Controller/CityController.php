@@ -54,6 +54,6 @@ class CityController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($data);
         $em->flush();
-        return new View("City Added Successfully", Response::HTTP_OK);
+        return new View($data->getId(), Response::HTTP_OK);
     }
 }

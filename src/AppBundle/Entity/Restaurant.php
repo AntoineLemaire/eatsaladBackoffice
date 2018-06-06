@@ -49,6 +49,11 @@ class Restaurant
     private $city;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Evaluation", mappedBy="restaurant")
+     */
+    private $evaluations;
+
+    /**
      * Get id
      *
      * @return int
@@ -163,5 +168,48 @@ class Restaurant
     public function getCity()
     {
         return $this->city;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation $evaluation
+     *
+     * @return Restaurant
+     */
+    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
+    {
+        $this->evaluations[] = $evaluation;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation $evaluation
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
+    {
+        return $this->evaluations->removeElement($evaluation);
+    }
+
+    /**
+     * Get evaluations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvaluations()
+    {
+        return $this->evaluations;
     }
 }

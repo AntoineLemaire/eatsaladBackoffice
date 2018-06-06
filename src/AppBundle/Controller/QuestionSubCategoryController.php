@@ -14,7 +14,7 @@ use AppBundle\Entity\QuestionSubCategory;
 class QuestionSubCategoryController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/question-sub-category/")
+     * @Rest\Get("/rest/question-sub-categories/")
      */
     public function getAction()
     {

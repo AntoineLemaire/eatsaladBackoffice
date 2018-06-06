@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +23,12 @@ class Question
     private $id;
 
     /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=255)
@@ -29,13 +36,26 @@ class Question
     private $question;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="QuestionSubCategory", inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $questionSubCategory;
 
     /**
-     * Get id
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->question;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+
+
+    /**
+     * Get id.
      *
      * @return int
      */
@@ -45,7 +65,31 @@ class Question
     }
 
     /**
-     * Set question
+     * Set position.
+     *
+     * @param int $position
+     *
+     * @return Question
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set question.
      *
      * @param string $question
      *
@@ -59,7 +103,7 @@ class Question
     }
 
     /**
-     * Get question
+     * Get question.
      *
      * @return string
      */
@@ -69,7 +113,7 @@ class Question
     }
 
     /**
-     * Set questionSubCategory
+     * Set questionSubCategory.
      *
      * @param \AppBundle\Entity\QuestionSubCategory $questionSubCategory
      *
@@ -83,23 +127,12 @@ class Question
     }
 
     /**
-     * Get questionSubCategory
+     * Get questionSubCategory.
      *
      * @return \AppBundle\Entity\QuestionSubCategory
      */
     public function getQuestionSubCategory()
     {
         return $this->questionSubCategory;
-    }
-
-    /**
-     * Generates the magic method
-     *
-     */
-    public function __toString(){
-        // to show the name of the Category in the select
-        return $this->question;
-        // to show the id of the Category in the select
-        // return $this->id;
     }
 }

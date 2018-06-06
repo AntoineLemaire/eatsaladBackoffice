@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Programming/eatsaladApp/.idea/eatsaladApp.iml" filepath="$USER_HOME$/Programming/eatsaladApp/.idea/eatsaladApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/eatsaladBackoffice.iml" filepath="$PROJECT_DIR$/.idea/eatsaladBackoffice.iml" />
     </modules>
   </component>

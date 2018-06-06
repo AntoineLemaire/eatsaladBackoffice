@@ -39,7 +39,7 @@ class RestaurantController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/rest/restaurant-by-city/{id_city}")
+     * @Rest\Get("/rest/restaurants-by-city/{id_city}")
      */
     public function getByCityAction($id_city)
     {
