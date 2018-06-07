@@ -97,22 +97,19 @@ class EvaluationAnswerController extends FOSRestController
      */
     public function uploadPhotosAction(Request $request)
     {
-//        Tester la reception des options et creer si il existe le dossier 'path'
         $uploadedFile = $request->files->get('file');
-//        $fileSystem = new Filesystem();
-//        try {
-//            $fileSystem->mkdir('../../web/uploads/photos/', 777);
-//        } catch (IOExceptionInterface $exception) {
-//            echo "An error occurred while creating your directory at ".$exception->getPath();
-//        }
-        $directory = $this->container->getParameter('photos_directory');
-        //and most important is move(),
-        $uploadedFile->move($directory,
+        $fileSystem = new Filesystem();
+        $restPath = $this->container->getParameter('photos_directory');
+        if (!$fileSystem->exists($restPath.'/'.$uploadedFile->params['folder_path'])){
+            try {
+                $fileSystem->mkdir($restPath.'/'.$uploadedFile->params['folder_path'], 777);
+            } catch (IOExceptionInterface $exception) {
+                echo "An error occurred while creating your directory at ".$exception->getPath();
+            }
+        }
+        $finalDirectory = $restPath.'/'.$uploadedFile->params['folder_path'];
+        $uploadedFile->move($finalDirectory,
             $uploadedFile->getClientOriginalName()
         );
-
-        return new JsonResponse($uploadedFile);
-        // Return answers of the current evaluation
-//        return $evaluation->getEvaluationAnswers();
     }
 }
