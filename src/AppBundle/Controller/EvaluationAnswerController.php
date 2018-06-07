@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\EvaluationAnswer;
-use AppBundle\Entity\EvaluationAnswerPhotos;
+use AppBundle\Entity\Photos;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -76,7 +76,7 @@ class EvaluationAnswerController extends FOSRestController
             {
                 $photos = $postData['data']['photos'];
                 foreach ($photos as $photo) {
-                    $evaluationAnswerPhotos = new EvaluationAnswerPhotos();
+                    $evaluationAnswerPhotos = new Photos();
                     $evaluationAnswerPhotos->setEvaluationAnswer($evaluationAnswer);
                     $evaluationAnswerPhotos->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
                     $evaluationAnswerPhotos->setName($photo['name']);
@@ -98,16 +98,17 @@ class EvaluationAnswerController extends FOSRestController
     public function uploadPhotosAction(Request $request)
     {
         $uploadedFile = $request->files->get('file');
-        $fileSystem = new Filesystem();
+        $folder_path = $request->files->get('folder_path');
         $restPath = $this->container->getParameter('photos_directory');
-        if (!$fileSystem->exists($restPath.'/'.$uploadedFile->params['folder_path'])){
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists($restPath.'/'.$folder_path)){
             try {
-                $fileSystem->mkdir($restPath.'/'.$uploadedFile->params['folder_path'], 777);
+                $fileSystem->mkdir($restPath.'/'.$folder_path, 777);
             } catch (IOExceptionInterface $exception) {
                 echo "An error occurred while creating your directory at ".$exception->getPath();
             }
         }
-        $finalDirectory = $restPath.'/'.$uploadedFile->params['folder_path'];
+        $finalDirectory = $restPath.'/'.$folder_path;
         $uploadedFile->move($finalDirectory,
             $uploadedFile->getClientOriginalName()
         );
