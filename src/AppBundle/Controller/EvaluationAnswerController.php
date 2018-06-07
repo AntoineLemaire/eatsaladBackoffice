@@ -14,7 +14,8 @@ use AppBundle\Entity\EvaluationAnswer;
 use AppBundle\Entity\EvaluationAnswerPhotos;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class EvaluationAnswerController extends FOSRestController
 {
@@ -98,19 +99,19 @@ class EvaluationAnswerController extends FOSRestController
     {
 //        Tester la reception des options et creer si il existe le dossier 'path'
         $uploadedFile = $request->files->get('file');
-        $fileSystem = new Filesystem();
-        try {
-            $fileSystem->mkdir('/tmp/random/dir/', 777);
-        } catch (IOExceptionInterface $exception) {
-            echo "An error occurred while creating your directory at ".$exception->getPath();
-        }
+//        $fileSystem = new Filesystem();
+//        try {
+//            $fileSystem->mkdir('../../web/uploads/photos/', 777);
+//        } catch (IOExceptionInterface $exception) {
+//            echo "An error occurred while creating your directory at ".$exception->getPath();
+//        }
         $directory = $this->container->getParameter('photos_directory');
         //and most important is move(),
         $uploadedFile->move($directory,
             $uploadedFile->getClientOriginalName()
         );
 
-        return "image successfully uploaded";
+        return new JsonResponse($uploadedFile);
         // Return answers of the current evaluation
 //        return $evaluation->getEvaluationAnswers();
     }
