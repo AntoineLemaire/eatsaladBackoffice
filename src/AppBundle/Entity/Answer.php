@@ -35,41 +35,6 @@ class Answer
      */
     private $score;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set answer
-     *
-     * @param string $answer
-     *
-     * @return Answer
-     */
-    public function setAnswer($answer)
-    {
-        $this->answer = $answer;
-
-        return $this;
-    }
-
-    /**
-     * Get answer
-     *
-     * @return string
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
-    }
-
     /**
      * Generates the magic method
      *
@@ -79,29 +44,5 @@ class Answer
         return $this->answer;
         // to show the id of the Category in the select
         // return $this->id;
-    }
-
-    /**
-     * Set score.
-     *
-     * @param int $score
-     *
-     * @return Answer
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
-
-        return $this;
-    }
-
-    /**
-     * Get score.
-     *
-     * @return int
-     */
-    public function getScore()
-    {
-        return $this->score;
     }
 }

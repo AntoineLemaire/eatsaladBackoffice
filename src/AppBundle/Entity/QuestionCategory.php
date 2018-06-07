@@ -29,84 +29,9 @@ class QuestionCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="QuestionSubCategory", mappedBy="questionCategory")
+     * @ORM\OneToMany(targetEntity="QuestionSubCategory")
      */
     private $questionSubCategories;
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return QuestionCategory
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->questionSubCategories = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add questionSubCategory
-     *
-     * @param \AppBundle\Entity\QuestionSubCategory $questionSubCategory
-     *
-     * @return QuestionCategory
-     */
-    public function addQuestionSubCategory(\AppBundle\Entity\QuestionSubCategory $questionSubCategory)
-    {
-        $this->questionSubCategories[] = $questionSubCategory;
-
-        return $this;
-    }
-
-    /**
-     * Remove questionSubCategory
-     *
-     * @param \AppBundle\Entity\QuestionSubCategory $questionSubCategory
-     */
-    public function removeQuestionSubCategory(\AppBundle\Entity\QuestionSubCategory $questionSubCategory)
-    {
-        $this->questionSubCategories->removeElement($questionSubCategory);
-    }
-
-    /**
-     * Get questionSubCategories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getQuestionSubCategories()
-    {
-        return $this->questionSubCategories;
-    }
 
     /**
      * Generates the magic method

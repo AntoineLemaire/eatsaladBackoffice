@@ -36,13 +36,6 @@ class Question
     private $question;
 
     /**
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="QuestionSubCategory", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $questionSubCategory;
-
-    /**
      * Generates the magic method
      *
      */
@@ -53,86 +46,4 @@ class Question
         // return $this->id;
     }
 
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set position.
-     *
-     * @param int $position
-     *
-     * @return Question
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position.
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * Set question.
-     *
-     * @param string $question
-     *
-     * @return Question
-     */
-    public function setQuestion($question)
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * Get question.
-     *
-     * @return string
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * Set questionSubCategory.
-     *
-     * @param \AppBundle\Entity\QuestionSubCategory $questionSubCategory
-     *
-     * @return Question
-     */
-    public function setQuestionSubCategory(\AppBundle\Entity\QuestionSubCategory $questionSubCategory)
-    {
-        $this->questionSubCategory = $questionSubCategory;
-
-        return $this;
-    }
-
-    /**
-     * Get questionSubCategory.
-     *
-     * @return \AppBundle\Entity\QuestionSubCategory
-     */
-    public function getQuestionSubCategory()
-    {
-        return $this->questionSubCategory;
-    }
 }

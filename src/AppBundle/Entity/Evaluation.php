@@ -71,12 +71,6 @@ class Evaluation
     private $franchisedSignature;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="evaluations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $restaurant;
-
-    /**
      * @ORM\OneToMany(targetEntity="EvaluationAnswer", mappedBy="evaluation",cascade={"remove"})
      */
     private $evaluationAnswers;
