@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\Answer;
-use AppBundle\Entity\Photos;
+use AppBundle\Entity\EvaluationAnswer;
+use AppBundle\Entity\Photo;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -57,7 +57,7 @@ class EvaluationAnswerController extends FOSRestController
             return new View("No evaluation", Response::HTTP_NOT_ACCEPTABLE);
         }
         foreach ($postDatas['answers'] as $index => $postData) {
-            $evaluationAnswer = new Answer();
+            $evaluationAnswer = new EvaluationAnswer();
             $question = $em->getRepository('AppBundle:Question')->find($postData['data']['question']['id']);
             $answer = $em->getRepository('AppBundle:Answer')->find($postData['data']['answer']['id']);
             if(empty($answer) || empty($question))
@@ -76,7 +76,7 @@ class EvaluationAnswerController extends FOSRestController
             {
                 $photos = $postData['data']['photos'];
                 foreach ($photos as $photo) {
-                    $evaluationAnswerPhotos = new Photos();
+                    $evaluationAnswerPhotos = new Photo();
                     $evaluationAnswerPhotos->setEvaluationAnswer($evaluationAnswer);
                     $evaluationAnswerPhotos->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
                     $evaluationAnswerPhotos->setName($photo['name']);
