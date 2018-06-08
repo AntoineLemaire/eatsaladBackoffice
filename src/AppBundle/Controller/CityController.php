@@ -56,4 +56,21 @@ class CityController extends FOSRestController
         $em->flush();
         return new View($data->getId(), Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/city/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $city = $this->getDoctrine()->getRepository('AppBundle:City')->find($id);
+        if (empty($city)) {
+            return new View("City not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($city);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

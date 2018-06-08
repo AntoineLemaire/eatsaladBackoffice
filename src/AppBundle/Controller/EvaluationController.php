@@ -73,4 +73,21 @@ class EvaluationController extends FOSRestController
         $em->flush();
         return new Response($evaluation->getId(), Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/evaluation/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluation = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id);
+        if (empty($evaluation)) {
+            return new View("Evaluation not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($evaluation);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

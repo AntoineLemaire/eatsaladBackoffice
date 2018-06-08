@@ -58,4 +58,21 @@ class QuestionController extends FOSRestController
         $em->flush();
         return new View("Question Added Successfully", Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/question/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($id);
+        if (empty($question)) {
+            return new View("Question not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($question);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

@@ -58,4 +58,21 @@ class SubCategoryController extends FOSRestController
         $em->flush();
         return new View("SubCategory Added Successfully", Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/$sub-category/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $subCategory = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->find($id);
+        if (empty($subCategory)) {
+            return new View("SubCategory not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($subCategory);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

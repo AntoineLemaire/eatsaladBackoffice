@@ -93,7 +93,7 @@ class EvaluationAnswerController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/rest/evaluation-answer-upload-photos")
+     * @Rest\Post("/rest/evaluation-answer/upload")
      */
     public function uploadPhotosAction(Request $request)
     {
@@ -112,5 +112,22 @@ class EvaluationAnswerController extends FOSRestController
         $uploadedFile->move($finalDirectory,
             $uploadedFile->getClientOriginalName()
         );
+    }
+
+    /**
+     * @Rest\Delete("/rest/evaluation-answer/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluationAnswer = $this->getDoctrine()->getRepository('AppBundle:EvaluationAnswer')->find($id);
+        if (empty($evaluationAnswer)) {
+            return new View("EvaluationAnswer not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($evaluationAnswer);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
     }
 }

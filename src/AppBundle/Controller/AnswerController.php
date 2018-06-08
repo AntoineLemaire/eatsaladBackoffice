@@ -54,4 +54,21 @@ class AnswerController extends FOSRestController
         $em->flush();
         return new View("Answer Added Successfully", Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/answer/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $answer = $this->getDoctrine()->getRepository('AppBundle:Answer')->find($id);
+        if (empty($answer)) {
+            return new View("Answer not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($answer);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

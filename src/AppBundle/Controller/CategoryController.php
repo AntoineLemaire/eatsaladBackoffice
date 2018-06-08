@@ -54,4 +54,21 @@ class CategoryController extends FOSRestController
         $em->flush();
         return new View("Category Added Successfully", Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/category/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $this->getDoctrine()->getRepository('AppBundle:Category')->find($id);
+        if (empty($category)) {
+            return new View("Category not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($category);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }

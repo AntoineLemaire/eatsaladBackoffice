@@ -75,4 +75,21 @@ class RestaurantController extends FOSRestController
         $em->flush();
         return new View("Restaurant Added Successfully", Response::HTTP_OK);
     }
+
+    /**
+     * @Rest\Delete("/rest/restaurant/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restaurant = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->find($id);
+        if (empty($restaurant)) {
+            return new View("Restaurant not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $em->remove($restaurant);
+            $em->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }
