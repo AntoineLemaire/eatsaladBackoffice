@@ -36,13 +36,6 @@ class Photo
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="EvaluationAnswer")
-     * @ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id")
-     */
-    private $evaluationAnswer;
-
-
-    /**
      * Get id.
      *
      * @return int

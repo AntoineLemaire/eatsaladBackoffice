@@ -32,8 +32,8 @@ class SubCategory
      * One SubCategory have Many Questions.
      * @ORM\ManyToMany(targetEntity="Question", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="subcategory_questions",
-     *      joinColumns={@ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
     private $questions;
