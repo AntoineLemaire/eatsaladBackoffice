@@ -9,16 +9,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\QuestionSubCategory;
+use AppBundle\Entity\SubCategory;
 
-class QuestionSubCategoryController extends FOSRestController
+class SubCategoryController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/question-sub-categories/")
+     * @Rest\Get("/rest/sub-categories")
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:QuestionSubCategory')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->findAll();
         if ($restresult === null) {
             return new View("there are no subcategories exist", Response::HTTP_NOT_FOUND);
         }
@@ -26,11 +26,11 @@ class QuestionSubCategoryController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/rest/question-sub-category/{id}")
+     * @Rest\Get("/rest/sub-category/{id}")
      */
     public function idAction($id)
     {
-        $singleresult = $this->getDoctrine()->getRepository('AppBundle:QuestionSubCategory')->find($id);
+        $singleresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->find($id);
         if ($singleresult === null) {
             return new View("subcategory not found", Response::HTTP_NOT_FOUND);
         }
@@ -38,22 +38,23 @@ class QuestionSubCategoryController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/rest/question-sub-category")
+     * @Rest\Post("/rest/sub-category")
      */
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $data = new QuestionSubCategory();
+        $subCategory = new SubCategory();
         $name = $request->get('name');
         $id_category = $request->get('id_category');
-        $category = $em->getRepository('AppBundle:QuestionCategory')->find($id_category);
+        $category = $em->getRepository('AppBundle:Category')->find($id_category);
         if(empty($name) || empty($category))
         {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-        $data->setName($name);
-        $data->setQuestionCategory($category);
-        $em->persist($data);
+        $subCategory->setName($name);
+        $category->addSubcategory($subCategory);
+        $em->persist($subCategory);
+        $em->persist($category);
         $em->flush();
         return new View("SubCategory Added Successfully", Response::HTTP_OK);
     }

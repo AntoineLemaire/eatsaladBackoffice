@@ -36,13 +36,6 @@ class Question
     private $question;
 
     /**
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="QuestionSubCategory", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $questionSubCategory;
-
-    /**
      * Generates the magic method
      *
      */
@@ -113,26 +106,26 @@ class Question
     }
 
     /**
-     * Set questionSubCategory.
+     * Set subCategory.
      *
-     * @param \AppBundle\Entity\QuestionSubCategory $questionSubCategory
+     * @param \AppBundle\Entity\SubCategory|null $subCategory
      *
      * @return Question
      */
-    public function setQuestionSubCategory(\AppBundle\Entity\QuestionSubCategory $questionSubCategory)
+    public function setSubCategory(\AppBundle\Entity\SubCategory $subCategory = null)
     {
-        $this->questionSubCategory = $questionSubCategory;
+        $this->subCategory = $subCategory;
 
         return $this;
     }
 
     /**
-     * Get questionSubCategory.
+     * Get subCategory.
      *
-     * @return \AppBundle\Entity\QuestionSubCategory
+     * @return \AppBundle\Entity\SubCategory|null
      */
-    public function getQuestionSubCategory()
+    public function getSubCategory()
     {
-        return $this->questionSubCategory;
+        return $this->subCategory;
     }
 }

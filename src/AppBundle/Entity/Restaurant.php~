@@ -43,97 +43,14 @@ class Restaurant
     private $emails;
 
     /**
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="restaurants")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $city;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Evaluation", mappedBy="restaurant")
+     * One Restaurant have Many Evaluations.
+     * @ORM\ManyToMany(targetEntity="Evaluation")
+     * @ORM\JoinTable(name="restaurant_evaluation",
+     *      joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $evaluations;
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Restaurant
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return Restaurant
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set emails
-     *
-     * @param array $emails
-     *
-     * @return Restaurant
-     */
-    public function setEmails($emails)
-    {
-        $this->emails = $emails;
-
-        return $this;
-    }
-
-    /**
-     * Get emails
-     *
-     * @return array
-     */
-    public function getEmails()
-    {
-        return $this->emails;
-    }
 
     /**
      * Generates the magic method
@@ -147,34 +64,93 @@ class Restaurant
     }
 
     /**
-     * Set city
-     *
-     * @param \AppBundle\Entity\City $city
-     *
-     * @return Restaurant
-     */
-    public function setCity(\AppBundle\Entity\City $city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \AppBundle\Entity\City
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return Restaurant
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set address.
+     *
+     * @param string $address
+     *
+     * @return Restaurant
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address.
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set emails.
+     *
+     * @param string $emails
+     *
+     * @return Restaurant
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+
+        return $this;
+    }
+
+    /**
+     * Get emails.
+     *
+     * @return string
+     */
+    public function getEmails()
+    {
+        return $this->emails;
     }
 
     /**

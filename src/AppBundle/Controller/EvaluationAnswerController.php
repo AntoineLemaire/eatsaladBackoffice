@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\EvaluationAnswer;
+use AppBundle\Entity\Answer;
 use AppBundle\Entity\Photos;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -57,7 +57,7 @@ class EvaluationAnswerController extends FOSRestController
             return new View("No evaluation", Response::HTTP_NOT_ACCEPTABLE);
         }
         foreach ($postDatas['answers'] as $index => $postData) {
-            $evaluationAnswer = new EvaluationAnswer();
+            $evaluationAnswer = new Answer();
             $question = $em->getRepository('AppBundle:Question')->find($postData['data']['question']['id']);
             $answer = $em->getRepository('AppBundle:Answer')->find($postData['data']['answer']['id']);
             if(empty($answer) || empty($question))

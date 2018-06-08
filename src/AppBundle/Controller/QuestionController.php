@@ -43,17 +43,18 @@ class QuestionController extends FOSRestController
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $data = new Question();
-        $question = $request->get('question');
+        $question = new Question();
+        $questionContent = $request->get('question');
         $id_subcategory = $request->get('id_subcategory');
-        $subcategory = $em->getRepository('AppBundle:QuestionSubCategory')->find($id_subcategory);
-        if(empty($question) || empty($subcategory))
+        $subcategory = $em->getRepository('AppBundle:SubCategory')->find($id_subcategory);
+        if(empty($questionContent) || empty($subcategory))
         {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-        $data->setQuestion($question);
-        $data->setQuestionSubCategory($subcategory);
-        $em->persist($data);
+        $question->setQuestion($questionContent);
+        $subcategory->addQuestion($question);
+        $em->persist($question);
+        $em->persist($subcategory);
         $em->flush();
         return new View("Question Added Successfully", Response::HTTP_OK);
     }

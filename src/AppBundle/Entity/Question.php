@@ -46,4 +46,86 @@ class Question
         // return $this->id;
     }
 
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set position.
+     *
+     * @param int $position
+     *
+     * @return Question
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set question.
+     *
+     * @param string $question
+     *
+     * @return Question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question.
+     *
+     * @return string
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set subCategory.
+     *
+     * @param \AppBundle\Entity\SubCategory|null $subCategory
+     *
+     * @return Question
+     */
+    public function setSubCategory(\AppBundle\Entity\SubCategory $subCategory = null)
+    {
+        $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get subCategory.
+     *
+     * @return \AppBundle\Entity\SubCategory|null
+     */
+    public function getSubCategory()
+    {
+        return $this->subCategory;
+    }
 }

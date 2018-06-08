@@ -43,7 +43,12 @@ class Restaurant
     private $emails;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Evaluation")
+     * One Restaurant have Many Evaluations.
+     * @ORM\ManyToMany(targetEntity="Evaluation")
+     * @ORM\JoinTable(name="restaurant_evaluation",
+     *      joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $evaluations;
 
@@ -56,5 +61,131 @@ class Restaurant
         return $this->name;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return Restaurant
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set address.
+     *
+     * @param string $address
+     *
+     * @return Restaurant
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address.
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set emails.
+     *
+     * @param string $emails
+     *
+     * @return Restaurant
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+
+        return $this;
+    }
+
+    /**
+     * Get emails.
+     *
+     * @return string
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * Add evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation $evaluation
+     *
+     * @return Restaurant
+     */
+    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
+    {
+        $this->evaluations[] = $evaluation;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation $evaluation
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
+    {
+        return $this->evaluations->removeElement($evaluation);
+    }
+
+    /**
+     * Get evaluations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvaluations()
+    {
+        return $this->evaluations;
     }
 }

@@ -71,9 +71,33 @@ class Evaluation
     private $franchisedSignature;
 
     /**
-     * @ORM\OneToMany(targetEntity="EvaluationAnswer", mappedBy="evaluation",cascade={"remove"})
+     * One Evaluation have Many EvaluationAnswers.
+     * @ORM\ManyToMany(targetEntity="EvaluationAnswer")
+     * @ORM\JoinTable(name="evaluation_evaluation_answer",
+     *      joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $evaluationAnswers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return "Évaluation du ".$this->date->format('Y-m-d H:i:s');
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
 
     /**
      * Get id.
@@ -160,7 +184,7 @@ class Evaluation
     /**
      * Set subcategoriesDone.
      *
-     * @param array\null $subcategoriesDone
+     * @param array $subcategoriesDone
      *
      * @return Evaluation
      */
@@ -251,37 +275,6 @@ class Evaluation
     public function getFranchisedSignature()
     {
         return $this->franchisedSignature;
-    }
-
-    /**
-     * Set restaurant.
-     *
-     * @param \AppBundle\Entity\Restaurant $restaurant
-     *
-     * @return Evaluation
-     */
-    public function setRestaurant(\AppBundle\Entity\Restaurant $restaurant)
-    {
-        $this->restaurant = $restaurant;
-
-        return $this;
-    }
-
-    /**
-     * Get restaurant.
-     *
-     * @return \AppBundle\Entity\Restaurant
-     */
-    public function getRestaurant()
-    {
-        return $this->restaurant;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

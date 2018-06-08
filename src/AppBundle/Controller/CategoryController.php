@@ -9,16 +9,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\QuestionCategory;
+use AppBundle\Entity\Category;
 
-class QuestionCategoryController extends FOSRestController
+class CategoryController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/question-categories")
+     * @Rest\Get("/rest/categories")
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:QuestionCategory')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
         if ($restresult === null) {
             return new View("there are no category exist", Response::HTTP_NOT_FOUND);
         }
@@ -26,11 +26,11 @@ class QuestionCategoryController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/rest/question-category/{id}")
+     * @Rest\Get("/rest/category/{id}")
      */
     public function idAction($id)
     {
-        $singleresult = $this->getDoctrine()->getRepository('AppBundle:QuestionCategory')->find($id);
+        $singleresult = $this->getDoctrine()->getRepository('AppBundle:Category')->find($id);
         if ($singleresult === null) {
             return new View("category not found", Response::HTTP_NOT_FOUND);
         }
@@ -38,12 +38,12 @@ class QuestionCategoryController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/rest/question-category")
+     * @Rest\Post("/rest/category")
      */
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $data = new QuestionCategory();
+        $data = new Category();
         $name = $request->get('name');
         if(empty($name))
         {

@@ -15,7 +15,7 @@ use AppBundle\Entity\Restaurant;
 class RestaurantController extends FOSRestController
 {
     /**
-     * @Rest\Get("/rest/restaurant/")
+     * @Rest\Get("/rest/restaurants")
      */
     public function getAction()
     {
@@ -44,11 +44,10 @@ class RestaurantController extends FOSRestController
     public function getByCityAction($id_city)
     {
         $city = $this->getDoctrine()->getRepository('AppBundle:City')->find($id_city);
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->findByCity($city);
-        if ($restresult === null) {
+        if ($city === null) {
             return new View("there are no restaurants exist", Response::HTTP_NOT_FOUND);
         }
-        return $restresult;
+        return $city->getRestaurants();
     }
 
     /**
@@ -57,9 +56,8 @@ class RestaurantController extends FOSRestController
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $data = new Restaurant();
+        $restaurant = new Restaurant();
         $name = $request->get('name');
-        $address = $request->get('address');
         $emails = $request->get('emails');
         $address = $request->get('address');
         $id_city = $request->get('id_city');
@@ -68,11 +66,12 @@ class RestaurantController extends FOSRestController
         {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-        $data->setName($name);
-        $data->setAddress($address);
-        $data->setEmails($emails);
-        $data->setCity($city);
-        $em->persist($data);
+        $restaurant->setName($name);
+        $restaurant->setAddress($address);
+        $restaurant->setEmails($emails);
+        $city->addRestaurant($restaurant);
+        $em->persist($city);
+        $em->persist($restaurant);
         $em->flush();
         return new View("Restaurant Added Successfully", Response::HTTP_OK);
     }

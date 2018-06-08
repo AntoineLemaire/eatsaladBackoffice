@@ -38,15 +38,15 @@ class EvaluationController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/rest/evaluations-by-restaurant/{id}")
+     * @Rest\Get("/rest/evaluations-by-restaurant/{id_restaurant}")
      */
-    public function getByRestaurantAction($id)
+    public function getByRestaurantAction($id_restaurant)
     {
-        $singleresult = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id);
-        if ($singleresult === null) {
+        $restaurant = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->find($id_restaurant);
+        if ($restaurant === null) {
             return new View("evaluation not found", Response::HTTP_NOT_FOUND);
         }
-        return $singleresult;
+        return $restaurant->getEvaluations();
     }
 
     /**
@@ -55,22 +55,22 @@ class EvaluationController extends FOSRestController
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $data = new Evaluation();
+        $evaluation = new Evaluation();
         $date = new \Datetime('NOW');
         $id_restaurant = $request->get('id_restaurant');
         $subcategoriesDone = $request->get('subcategories_done');
-
         $restaurant = $em->getRepository('AppBundle:Restaurant')->find($id_restaurant);
         if(empty($date) || empty($restaurant))
         {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-        $data->setDate($date);
-        $data->setTemp(true);
-        $data->setSubcategoriesDone($subcategoriesDone);
-        $data->setRestaurant($restaurant);
-        $em->persist($data);
+        $evaluation->setDate($date);
+        $evaluation->setTemp(true);
+        $evaluation->setSubcategoriesDone($subcategoriesDone);
+        $restaurant->addEvaluation($evaluation);
+        $em->persist($restaurant);
+        $em->persist($evaluation);
         $em->flush();
-        return new Response($data->getId(), Response::HTTP_OK);
+        return new Response($evaluation->getId(), Response::HTTP_OK);
     }
 }

@@ -36,12 +36,35 @@ class City
     private $postcode;
 
     /**
-     * @ORM\OneToMany(targetEntity="Restaurant", mappedBy="city")
+     * One City have Many Restaurants.
+     * @ORM\ManyToMany(targetEntity="Restaurant")
+     * @ORM\JoinTable(name="city_restaurant",
+     *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $restaurants;
 
     /**
-     * Get id
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->name;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->restaurants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
      *
      * @return int
      */
@@ -51,7 +74,7 @@ class City
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -65,7 +88,7 @@ class City
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -75,7 +98,7 @@ class City
     }
 
     /**
-     * Set postcode
+     * Set postcode.
      *
      * @param string $postcode
      *
@@ -89,7 +112,7 @@ class City
     }
 
     /**
-     * Get postcode
+     * Get postcode.
      *
      * @return string
      */
@@ -97,16 +120,9 @@ class City
     {
         return $this->postcode;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->restaurants = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add restaurant
+     * Add restaurant.
      *
      * @param \AppBundle\Entity\Restaurant $restaurant
      *
@@ -120,17 +136,19 @@ class City
     }
 
     /**
-     * Remove restaurant
+     * Remove restaurant.
      *
      * @param \AppBundle\Entity\Restaurant $restaurant
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeRestaurant(\AppBundle\Entity\Restaurant $restaurant)
     {
-        $this->restaurants->removeElement($restaurant);
+        return $this->restaurants->removeElement($restaurant);
     }
 
     /**
-     * Get restaurants
+     * Get restaurants.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -138,16 +156,4 @@ class City
     {
         return $this->restaurants;
     }
-
-    /**
-     * Generates the magic method
-     *
-     */
-    public function __toString(){
-        // to show the name of the Category in the select
-        return $this->name;
-        // to show the id of the Category in the select
-        // return $this->id;
-    }
-
 }

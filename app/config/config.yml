@@ -81,8 +81,8 @@ easy_admin:
             - label: 'Questions'
               icon: 'tasks'
               children:
-                  - { entity: 'QuestionCategory', label: 'Catégories', icon: 'folder' }
-                  - { entity: 'QuestionSubCategory', label: 'Sous-Catégories', icon: 'folder-open' }
+                  - { entity: 'Category', label: 'Catégories', icon: 'folder' }
+                  - { entity: 'SubCategory', label: 'Sous-Catégories', icon: 'folder-open' }
                   - { entity: 'Question', label: 'Questions', icon: 'question' }
             - { entity: 'Answer', label: 'Réponses', icon: 'comment' }
             - { entity: 'City', label: 'Villes', icon: 'map-marker' }
@@ -98,15 +98,15 @@ easy_admin:
                 fields:
 #                    - { property: 'position', icon: 'position', help: 'Position de la question dans la sous-catégorie' }
                     - { property: 'question', icon: 'question' }
-                    - { property: 'questionSubCategory', icon: 'question' }
-        QuestionCategory:
-            class: AppBundle\Entity\QuestionCategory
-        QuestionSubCategory:
-            class: AppBundle\Entity\QuestionSubCategory
+                    - { property: 'subCategory', icon: 'question' }
+        Category:
+            class: AppBundle\Entity\Category
+        SubCategory:
+            class: AppBundle\Entity\SubCategory
             edit:
                 fields:
                     - { property: 'name'}
-                    - { property: 'questionCategory'}
+                    - { property: 'category'}
                     - { property: 'questions', type: 'entity', type_options: { class: 'AppBundle\Entity\Question', multiple: true } }
         Evaluation:
             class: AppBundle\Entity\Evaluation

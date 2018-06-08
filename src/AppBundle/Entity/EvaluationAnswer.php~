@@ -29,25 +29,12 @@ class EvaluationAnswer
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Evaluation")
-     * @ORM\JoinColumn(name="id_evaluation", referencedColumnName="id")
-     */
-    private $evaluation;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Question")
-     * @ORM\JoinColumn(name="id_question", referencedColumnName="id")
-     */
-    private $question;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Answer")
-     * @ORM\JoinColumn(name="id_answer", referencedColumnName="id")
-     */
-    private $answer;
-
-    /**
-     * @ORM\OneToMany(targetEntity="EvaluationAnswerPhotos", mappedBy="evaluationAnswer", cascade={"persist", "remove"})
+     * One EvaluationAnswer have Many Photos.
+     * @ORM\ManyToMany(targetEntity="Photo")
+     * @ORM\JoinTable(name="evaluation_answer_photo",
+     *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $photos;
 
@@ -94,85 +81,13 @@ class EvaluationAnswer
     }
 
     /**
-     * Set evaluation.
-     *
-     * @param \AppBundle\Entity\Evaluation|null $evaluation
-     *
-     * @return EvaluationAnswer
-     */
-    public function setEvaluation(\AppBundle\Entity\Evaluation $evaluation = null)
-    {
-        $this->evaluation = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Get evaluation.
-     *
-     * @return \AppBundle\Entity\Evaluation|null
-     */
-    public function getEvaluation()
-    {
-        return $this->evaluation;
-    }
-
-    /**
-     * Set question.
-     *
-     * @param \AppBundle\Entity\Question|null $question
-     *
-     * @return EvaluationAnswer
-     */
-    public function setQuestion(\AppBundle\Entity\Question $question = null)
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * Get question.
-     *
-     * @return \AppBundle\Entity\Question|null
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * Set answer.
-     *
-     * @param \AppBundle\Entity\Answer|null $answer
-     *
-     * @return EvaluationAnswer
-     */
-    public function setAnswer(\AppBundle\Entity\Answer $answer = null)
-    {
-        $this->answer = $answer;
-
-        return $this;
-    }
-
-    /**
-     * Get answer.
-     *
-     * @return \AppBundle\Entity\Answer|null
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
-    }
-
-    /**
      * Add photo.
      *
-     * @param \AppBundle\Entity\EvaluationAnswerPhotos $photo
+     * @param \AppBundle\Entity\Photo $photo
      *
      * @return EvaluationAnswer
      */
-    public function addPhoto(\AppBundle\Entity\EvaluationAnswerPhotos $photo)
+    public function addPhoto(\AppBundle\Entity\Photo $photo)
     {
         $this->photos[] = $photo;
 
@@ -182,11 +97,11 @@ class EvaluationAnswer
     /**
      * Remove photo.
      *
-     * @param \AppBundle\Entity\EvaluationAnswerPhotos $photo
+     * @param \AppBundle\Entity\Photo $photo
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removePhoto(\AppBundle\Entity\EvaluationAnswerPhotos $photo)
+    public function removePhoto(\AppBundle\Entity\Photo $photo)
     {
         return $this->photos->removeElement($photo);
     }
