@@ -30,10 +30,31 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Question", cascade={"persist"})
+     *
+     */
+    private $question;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Answer", cascade={"persist"})
+     *
+     */
+    private $answer;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Evaluation", cascade={"persist"})
+     *
+     */
+    private $evaluation;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
      * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_answer_photo",
-     *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
     private $photos;

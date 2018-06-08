@@ -32,8 +32,8 @@ class Category
      * One Category have Many SubCategories.
      * @ORM\ManyToMany(targetEntity="SubCategory", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="category_subcategories",
-     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
     private $subCategories;

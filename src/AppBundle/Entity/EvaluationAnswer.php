@@ -30,6 +30,27 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Question", cascade={"persist"})
+     *
+     */
+    private $question;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Answer", cascade={"persist"})
+     *
+     */
+    private $answer;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
+     * @ORM\OneToOne(targetEntity="Evaluation", cascade={"persist"})
+     *
+     */
+    private $evaluation;
+
+    /**
+     * One EvaluationAnswer have Many Photos.
      * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_answer_photo",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -114,5 +135,77 @@ class EvaluationAnswer
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set question.
+     *
+     * @param \AppBundle\Entity\Question|null $question
+     *
+     * @return EvaluationAnswer
+     */
+    public function setQuestion(\AppBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question.
+     *
+     * @return \AppBundle\Entity\Question|null
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set answer.
+     *
+     * @param \AppBundle\Entity\Answer|null $answer
+     *
+     * @return EvaluationAnswer
+     */
+    public function setAnswer(\AppBundle\Entity\Answer $answer = null)
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get answer.
+     *
+     * @return \AppBundle\Entity\Answer|null
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * Set evaluation.
+     *
+     * @param \AppBundle\Entity\Evaluation|null $evaluation
+     *
+     * @return EvaluationAnswer
+     */
+    public function setEvaluation(\AppBundle\Entity\Evaluation $evaluation = null)
+    {
+        $this->evaluation = $evaluation;
+
+        return $this;
+    }
+
+    /**
+     * Get evaluation.
+     *
+     * @return \AppBundle\Entity\Evaluation|null
+     */
+    public function getEvaluation()
+    {
+        return $this->evaluation;
     }
 }
