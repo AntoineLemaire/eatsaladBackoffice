@@ -46,7 +46,7 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToOne(targetEntity="Evaluation", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Evaluation", inversedBy="evaluationAnswers", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")
      *
      */
