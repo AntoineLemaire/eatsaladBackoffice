@@ -72,7 +72,7 @@ class Evaluation
 
     /**
      * One Evaluation have Many EvaluationAnswers.
-     * @ORM\ManyToMany(targetEntity="EvaluationAnswer")
+     * @ORM\ManyToMany(targetEntity="EvaluationAnswer", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_evaluation_answer",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", unique=true)}

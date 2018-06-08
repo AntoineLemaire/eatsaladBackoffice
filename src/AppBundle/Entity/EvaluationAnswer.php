@@ -30,7 +30,7 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToMany(targetEntity="Photo")
+     * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_answer_photo",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true)}

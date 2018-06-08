@@ -44,7 +44,7 @@ class Restaurant
 
     /**
      * One Restaurant have Many Evaluations.
-     * @ORM\ManyToMany(targetEntity="Evaluation")
+     * @ORM\ManyToMany(targetEntity="Evaluation", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="restaurant_evaluation",
      *      joinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", unique=true)}

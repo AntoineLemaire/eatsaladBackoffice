@@ -30,7 +30,7 @@ class SubCategory
 
     /**
      * One SubCategory have Many Questions.
-     * @ORM\ManyToMany(targetEntity="Question")
+     * @ORM\ManyToMany(targetEntity="Question", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="subcategory_questions",
      *      joinColumns={@ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id", unique=true)}
@@ -49,4 +49,81 @@ class SubCategory
         // return $this->id;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return SubCategory
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add question.
+     *
+     * @param \AppBundle\Entity\Question $question
+     *
+     * @return SubCategory
+     */
+    public function addQuestion(\AppBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question.
+     *
+     * @param \AppBundle\Entity\Question $question
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeQuestion(\AppBundle\Entity\Question $question)
+    {
+        return $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }
