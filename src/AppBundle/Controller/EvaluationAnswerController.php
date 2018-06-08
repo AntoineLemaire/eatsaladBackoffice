@@ -98,12 +98,12 @@ class EvaluationAnswerController extends FOSRestController
     public function uploadPhotosAction(Request $request)
     {
         $uploadedFile = $request->files->get('file');
-        $folder_path = $request->files->get('folder_path');
+        $folder_path = $request->request->get('folder_path');
         $restPath = $this->container->getParameter('photos_directory');
         $fileSystem = new Filesystem();
         if (!$fileSystem->exists($restPath.'/'.$folder_path)){
             try {
-                $fileSystem->mkdir($restPath.'/'.$folder_path, 777);
+                $fileSystem->mkdir($restPath.'/'.$folder_path);
             } catch (IOExceptionInterface $exception) {
                 echo "An error occurred while creating your directory at ".$exception->getPath();
             }
@@ -112,6 +112,8 @@ class EvaluationAnswerController extends FOSRestController
         $uploadedFile->move($finalDirectory,
             $uploadedFile->getClientOriginalName()
         );
+
+        return "Upload ok";
     }
 
     /**
