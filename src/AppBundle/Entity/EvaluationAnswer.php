@@ -30,21 +30,24 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\OneToOne(targetEntity="Question", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Question", cascade={"persist"})
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      *
      */
     private $question;
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\OneToOne(targetEntity="Answer", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Answer", cascade={"persist"})
+     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id")
      *
      */
     private $answer;
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\OneToOne(targetEntity="Evaluation", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Evaluation", cascade={"persist"})
+     * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")
      *
      */
     private $evaluation;
@@ -99,42 +102,6 @@ class EvaluationAnswer
     public function getComment()
     {
         return $this->comment;
-    }
-
-    /**
-     * Add photo.
-     *
-     * @param \AppBundle\Entity\Photo $photo
-     *
-     * @return EvaluationAnswer
-     */
-    public function addPhoto(\AppBundle\Entity\Photo $photo)
-    {
-        $this->photos[] = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Remove photo.
-     *
-     * @param \AppBundle\Entity\Photo $photo
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removePhoto(\AppBundle\Entity\Photo $photo)
-    {
-        return $this->photos->removeElement($photo);
-    }
-
-    /**
-     * Get photos.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
     }
 
     /**
@@ -207,5 +174,41 @@ class EvaluationAnswer
     public function getEvaluation()
     {
         return $this->evaluation;
+    }
+
+    /**
+     * Add photo.
+     *
+     * @param \AppBundle\Entity\Photo $photo
+     *
+     * @return EvaluationAnswer
+     */
+    public function addPhoto(\AppBundle\Entity\Photo $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo.
+     *
+     * @param \AppBundle\Entity\Photo $photo
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removePhoto(\AppBundle\Entity\Photo $photo)
+    {
+        return $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 }
