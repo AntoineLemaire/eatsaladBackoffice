@@ -150,15 +150,34 @@ class EvaluationController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $id_evaluation = $request->request->get('id_evaluation');
         $controllerName = $request->request->get('controllerName');
-        $controllerSignature = $request->request->get('controllerSignature');
-        $controllerFranchised = $request->request->get('controllerFranchised');
+        $controllerImage = $request->request->get('controllerSignature');
+        $franchisedImage = $request->request->get('controllerFranchised');
+        $restPath = $this->container->getParameter('photos_directory');
+
         $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
-        if(empty($controllerFranchised) || empty($controllerSignature || $controllerName))
-        {
-            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+
+        // Save Signatures to server
+        $controllerBase64 = str_replace('data:image/png;base64,', '', $controllerImage);
+        $controllerSignature = base64_decode(str_replace(' ', '+', $controllerBase64));
+        $controllerPath = $restPath.'/'.$id_evaluation.'/signatures/controller.png';
+        $successController = file_put_contents($controllerPath, $controllerSignature);
+        if(!$successController || empty($controllerName))
+            return new View("Error while uploading controller data", Response::HTTP_NOT_ACCEPTABLE);
+
+        if($franchisedImage != null){
+            $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
+            $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
+            $franchisedPath = $restPath.'/'.$id_evaluation.'/signatures/franchised.png';
+            $successFranchised = file_put_contents($franchisedPath, $franchisedSignature);
+            if(!$successFranchised)
+                return new View("Error while uploading franchised signature", Response::HTTP_NOT_ACCEPTABLE);
+        }else{
+            $franchisedPath = null;
         }
+
         $evaluation->setControllerName($controllerName);
-        $evaluation->setControllerSignature();
+        $evaluation->setControllerSignature($controllerPath);
+        $evaluation->setFranchisedSignature($franchisedPath);
         $evaluation->setTemp(false);
         $em->persist($evaluation);
         $em->flush();
