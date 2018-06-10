@@ -175,15 +175,22 @@ class EvaluationController extends FOSRestController
         $id_evaluation = $request->request->get('id_evaluation');
         $controllerName = $request->request->get('controllerName');
         $controllerImage = $request->request->get('controllerSignature');
-        $franchisedImage = $request->request->get('controllerFranchised');
+        $franchisedImage = $request->request->get('franchisedSignature');
         $restPath = $this->container->getParameter('photos_directory');
 
         $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
-
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists($restPath.'/'.$id_evaluation)){
+            try {
+                $fileSystem->mkdir($restPath.'/'.$id_evaluation);
+            } catch (IOExceptionInterface $exception) {
+                echo "An error occurred while creating your directory at ".$exception->getPath();
+            }
+        }
         // Save Signatures to server
         $controllerBase64 = str_replace('data:image/png;base64,', '', $controllerImage);
         $controllerSignature = base64_decode(str_replace(' ', '+', $controllerBase64));
-        $controllerPath = $restPath.'/'.$id_evaluation.'/signatures/controller.png';
+        $controllerPath = $restPath.'/'.$id_evaluation.'/controller.png';
         $successController = file_put_contents($controllerPath, $controllerSignature);
         if(!$successController || empty($controllerName))
             return new View("Error while uploading controller data", Response::HTTP_NOT_ACCEPTABLE);
@@ -191,7 +198,7 @@ class EvaluationController extends FOSRestController
         if($franchisedImage != null){
             $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
             $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
-            $franchisedPath = $restPath.'/'.$id_evaluation.'/signatures/franchised.png';
+            $franchisedPath = $restPath.'/'.$id_evaluation.'/franchised.png';
             $successFranchised = file_put_contents($franchisedPath, $franchisedSignature);
             if(!$successFranchised)
                 return new View("Error while uploading franchised signature", Response::HTTP_NOT_ACCEPTABLE);
