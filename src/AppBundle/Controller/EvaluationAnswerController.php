@@ -79,7 +79,7 @@ class EvaluationAnswerController extends FOSRestController
                     $evaluationAnswerImages->setEvaluationAnswer($evaluationAnswer);
                     $evaluationAnswerImages->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
                     $evaluationAnswerImages->setName($photo['name']);
-                    $evaluationAnswer->addPhoto($evaluationAnswerImages);
+                    $evaluationAnswer->addImage($evaluationAnswerImages);
                 }
             }
 
