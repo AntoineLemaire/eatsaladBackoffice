@@ -98,6 +98,25 @@ class EvaluationController extends FOSRestController
     }
 
     /**
+     * @Rest\Post("/rest/evaluation/refusal")
+     */
+    public function setRefusal(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $refusal = $request->request->get('refusal');
+        $id_evaluation = $request->request->get('id_evaluation');
+        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+        if(empty($subcategory_done))
+        {
+            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+        }
+        $evaluation->setRefusal($refusal);
+        $em->persist($evaluation);
+        $em->flush();
+        return new Response($evaluation, Response::HTTP_OK);
+    }
+
+    /**
      * @Rest\Post("/rest/evaluation/validate")
      */
     public function validateEvaluation(Request $request)

@@ -71,6 +71,13 @@ class Evaluation
     private $franchisedSignature;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="refusal", type="boolean", nullable=true)
+     */
+    private $refusal;
+
+    /**
      * One Evaluation have Many EvaluationAnswers.
      * @ORM\ManyToMany(targetEntity="EvaluationAnswer", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_evaluation_answer",
@@ -311,5 +318,29 @@ class Evaluation
     public function getEvaluationAnswers()
     {
         return $this->evaluationAnswers;
+    }
+
+    /**
+     * Set refusal
+     *
+     * @param boolean $refusal
+     *
+     * @return Evaluation
+     */
+    public function setRefusal($refusal)
+    {
+        $this->refusal = $refusal;
+
+        return $this;
+    }
+
+    /**
+     * Get refusal
+     *
+     * @return boolean
+     */
+    public function getRefusal()
+    {
+        return $this->refusal;
     }
 }

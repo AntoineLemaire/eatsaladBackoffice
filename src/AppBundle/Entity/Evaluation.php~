@@ -71,6 +71,13 @@ class Evaluation
     private $franchisedSignature;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="refusal", type="boolean")
+     */
+    private $refusal;
+
+    /**
      * One Evaluation have Many EvaluationAnswers.
      * @ORM\ManyToMany(targetEntity="EvaluationAnswer", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_evaluation_answer",

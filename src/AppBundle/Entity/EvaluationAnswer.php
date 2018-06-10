@@ -46,14 +46,6 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToOne(targetEntity="Evaluation", inversedBy="evaluationAnswers", cascade={"persist"})
-     * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")
-     *
-     */
-    private $evaluation;
-
-    /**
-     * One EvaluationAnswer have Many Photos.
      * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_answer_photo",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -163,29 +155,6 @@ class EvaluationAnswer
         return $this->answer;
     }
 
-    /**
-     * Set evaluation.
-     *
-     * @param \AppBundle\Entity\Evaluation|null $evaluation
-     *
-     * @return EvaluationAnswer
-     */
-    public function setEvaluation(\AppBundle\Entity\Evaluation $evaluation = null)
-    {
-        $this->evaluation = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Get evaluation.
-     *
-     * @return \AppBundle\Entity\Evaluation|null
-     */
-    public function getEvaluation()
-    {
-        return $this->evaluation;
-    }
 
     /**
      * Add photo.

@@ -67,7 +67,6 @@ class EvaluationAnswerController extends FOSRestController
             $evaluationAnswer->setComment($postData['data']['comment']);
             $evaluationAnswer->setQuestion($question);
             $evaluationAnswer->setAnswer($answer);
-            $evaluationAnswer->setEvaluation($evaluation);
 
             $em->persist($evaluationAnswer);
             $em->flush();
@@ -85,6 +84,10 @@ class EvaluationAnswerController extends FOSRestController
             }
 
             $em->persist($evaluationAnswer);
+            $em->flush();
+
+            $evaluation->addEvaluationAnswer($evaluationAnswer);
+            $em->persist($evaluation);
             $em->flush();
         }
 
