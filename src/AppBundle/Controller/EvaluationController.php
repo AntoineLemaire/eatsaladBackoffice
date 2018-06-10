@@ -117,24 +117,6 @@ class EvaluationController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/rest/evaluation/validate")
-     */
-    public function validateEvaluation(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $id_evaluation = $request->request->get('id_evaluation');
-        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
-        if(empty($subcategory_done))
-        {
-            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
-        }
-        $evaluation->setTemp(false);
-        $em->persist($evaluation);
-        $em->flush();
-        return new Response($evaluation, Response::HTTP_OK);
-    }
-
-    /**
      * @Rest\Delete("/rest/evaluation/{id}")
      */
     public function deleteAction($id)
@@ -158,5 +140,29 @@ class EvaluationController extends FOSRestController
             $em->flush();
         }
         return new View("Deleted successfully", Response::HTTP_OK);
+    }
+
+    /**
+     * @Rest\Post("/rest/evaluation/report")
+     */
+    public function createReport(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id_evaluation = $request->request->get('id_evaluation');
+        $controllerName = $request->request->get('controllerName');
+        $controllerSignature = $request->request->get('controllerSignature');
+        $controllerFranchised = $request->request->get('controllerFranchised');
+        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+        if(empty($controllerFranchised) || empty($controllerSignature || $controllerName))
+        {
+            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+        }
+        $evaluation->setControllerName($controllerName);
+        $evaluation->setControllerSignature();
+        $evaluation->setTemp(false);
+        $em->persist($evaluation);
+        $em->flush();
+
+        return new Response($evaluation, Response::HTTP_OK);
     }
 }

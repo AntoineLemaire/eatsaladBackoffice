@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Photos
+ * Image
  *
- * @ORM\Table(name="photo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PhotosRepository")
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
  */
-class Photo
+class Image
 {
     /**
      * @var int
@@ -50,7 +50,7 @@ class Photo
      *
      * @param string $path
      *
-     * @return Photo
+     * @return Image
      */
     public function setPath($path)
     {
@@ -74,7 +74,7 @@ class Photo
      *
      * @param string $name
      *
-     * @return Photo
+     * @return Image
      */
     public function setName($name)
     {
@@ -98,7 +98,7 @@ class Photo
      *
      * @param \AppBundle\Entity\EvaluationAnswer|null $evaluationAnswer
      *
-     * @return Photo
+     * @return Image
      */
     public function setEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer = null)
     {

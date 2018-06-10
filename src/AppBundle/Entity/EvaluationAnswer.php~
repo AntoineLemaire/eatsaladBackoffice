@@ -46,20 +46,23 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToOne(targetEntity="Evaluation", cascade={"persist"})
-     * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")
-     *
-     */
-    private $evaluation;
-
-    /**
-     * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="evaluation_answer_photo",
+     * @ORM\ManyToMany(targetEntity="Image", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="evaluation_answer_image",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
-    private $photos;
+    private $images;
+
+    /**
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->question." : ".$this->answer;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
 
 }

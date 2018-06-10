@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\EvaluationAnswer;
-use AppBundle\Entity\Photo;
+use AppBundle\Entity\Image;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -75,11 +75,11 @@ class EvaluationAnswerController extends FOSRestController
             {
                 $photos = $postData['data']['photos'];
                 foreach ($photos as $photo) {
-                    $evaluationAnswerPhotos = new Photo();
-                    $evaluationAnswerPhotos->setEvaluationAnswer($evaluationAnswer);
-                    $evaluationAnswerPhotos->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
-                    $evaluationAnswerPhotos->setName($photo['name']);
-                    $evaluationAnswer->addPhoto($evaluationAnswerPhotos);
+                    $evaluationAnswerImages = new Image();
+                    $evaluationAnswerImages->setEvaluationAnswer($evaluationAnswer);
+                    $evaluationAnswerImages->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
+                    $evaluationAnswerImages->setName($photo['name']);
+                    $evaluationAnswer->addPhoto($evaluationAnswerImages);
                 }
             }
 

@@ -46,13 +46,13 @@ class EvaluationAnswer
 
     /**
      * One EvaluationAnswer have Many Photos.
-     * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="evaluation_answer_photo",
+     * @ORM\ManyToMany(targetEntity="Image", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="evaluation_answer_image",
      *      joinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
-    private $photos;
+    private $images;
 
     /**
      * Generates the magic method
@@ -70,7 +70,7 @@ class EvaluationAnswer
      */
     public function __construct()
     {
-        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -155,40 +155,39 @@ class EvaluationAnswer
         return $this->answer;
     }
 
-
     /**
-     * Add photo.
+     * Add image.
      *
-     * @param \AppBundle\Entity\Photo $photo
+     * @param \AppBundle\Entity\Image $image
      *
      * @return EvaluationAnswer
      */
-    public function addPhoto(\AppBundle\Entity\Photo $photo)
+    public function addImage(\AppBundle\Entity\Image $image)
     {
-        $this->photos[] = $photo;
+        $this->images[] = $image;
 
         return $this;
     }
 
     /**
-     * Remove photo.
+     * Remove image.
      *
-     * @param \AppBundle\Entity\Photo $photo
+     * @param \AppBundle\Entity\Image $image
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removePhoto(\AppBundle\Entity\Photo $photo)
+    public function removeImage(\AppBundle\Entity\Image $image)
     {
-        return $this->photos->removeElement($photo);
+        return $this->images->removeElement($image);
     }
 
     /**
-     * Get photos.
+     * Get images.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPhotos()
+    public function getImages()
     {
-        return $this->photos;
+        return $this->images;
     }
 }
