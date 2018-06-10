@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Evaluation;
+use Symfony\Component\Filesystem\Filesystem;
+
 
 class EvaluationController extends FOSRestController
 {
@@ -85,6 +87,15 @@ class EvaluationController extends FOSRestController
             return new View("Evaluation not found", Response::HTTP_NOT_FOUND);
         }
         else {
+            $fileSystem = new Filesystem();
+            $restPath = $this->container->getParameter('photos_directory');
+            $evaluationAnswers = $evaluation->getEvaluationAnswers();
+            foreach ($evaluationAnswers as $index => $evaluationAnswer) {
+                $photos = $evaluationAnswer->getPhotos();
+                foreach ($photos as $index => $photo) {
+                    $fileSystem->remove($restPath.'/'.$photo->getPath().$photo->getName());
+                }
+            }
             $em->remove($evaluation);
             $em->flush();
         }
