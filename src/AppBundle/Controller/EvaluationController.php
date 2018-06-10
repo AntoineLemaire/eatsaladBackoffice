@@ -93,7 +93,7 @@ class EvaluationController extends FOSRestController
             foreach ($evaluationAnswers as $index => $evaluationAnswer) {
                 $photos = $evaluationAnswer->getPhotos();
                 foreach ($photos as $index => $photo) {
-                    $fileSystem->remove($restPath.'/'.$photo->getPath().$photo->getName());
+                    $fileSystem->remove($restPath.'/'.$evaluation->getId());
                 }
             }
             $em->remove($evaluation);
