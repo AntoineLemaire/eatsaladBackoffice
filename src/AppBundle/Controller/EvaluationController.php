@@ -143,6 +143,30 @@ class EvaluationController extends FOSRestController
     }
 
     /**
+     * @Rest\Post("/rest/evaluation-signature/upload")
+     */
+    public function uploadSignatureAction(Request $request)
+    {
+        $uploadedFile = $request->files->get('file');
+        $folder_path = $request->request->get('folder_path');
+        $restPath = $this->container->getParameter('photos_directory');
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists($restPath.'/'.$folder_path)){
+            try {
+                $fileSystem->mkdir($restPath.'/'.$folder_path);
+            } catch (IOExceptionInterface $exception) {
+                echo "An error occurred while creating your directory at ".$exception->getPath();
+            }
+        }
+        $finalDirectory = $restPath.'/'.$folder_path;
+        $uploadedFile->move($finalDirectory,
+            $uploadedFile->getClientOriginalName()
+        );
+
+        return "Upload ok";
+    }
+
+    /**
      * @Rest\Post("/rest/evaluation/report")
      */
     public function createReport(Request $request)
