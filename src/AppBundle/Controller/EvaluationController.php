@@ -77,6 +77,25 @@ class EvaluationController extends FOSRestController
     }
 
     /**
+     * @Rest\Post("/rest/evaluation/subcategories-done")
+     */
+    public function addSubcategoryDone(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id_evaluation = $request->request->get('id_evaluation');
+        $subcategories_done = $request->request->get('subcategories_done');
+        $evaluation = $em->getRepository('AppBundle:Restaurant')->find($id_evaluation);
+        if(empty($subcategories_done))
+        {
+            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+        }
+        $evaluation->setSubcategoriesDone($subcategories_done);
+        $em->persist($evaluation);
+        $em->flush();
+        return new Response("Subcategories updated", Response::HTTP_OK);
+    }
+
+    /**
      * @Rest\Delete("/rest/evaluation/{id}")
      */
     public function deleteAction($id)
