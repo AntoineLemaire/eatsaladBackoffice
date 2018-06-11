@@ -96,7 +96,7 @@ easy_admin:
             class: AppBundle\Entity\Question
             edit:
                 fields:
-#                    - { property: 'position', icon: 'position', help: 'Position de la question dans la sous-catégorie' }
+                    - { property: 'position', icon: 'position', help: 'Position de la question dans la sous-catégorie' }
                     - { property: 'question', icon: 'question' }
                     - { property: 'subCategory', icon: 'question' }
         Category:
@@ -110,6 +110,8 @@ easy_admin:
                     - { property: 'questions', type: 'entity', type_options: { class: 'AppBundle\Entity\Question', multiple: true } }
         Evaluation:
             class: AppBundle\Entity\Evaluation
+            list:
+                fields: ['id', 'date', { property: 'controllerName', label: 'Controlleur' }, { property: 'controllerSignature', label: 'Signature du controlleur', type: 'image', base_path: 'uploads/photos/' }, { property: 'franchisedSignature', label: 'Signature du franchisé', type: 'image', base_path: 'uploads/photos/' }, { property: 'temp', label: 'Effectué' }]
         Restaurant:
             class: AppBundle\Entity\Restaurant
         City:

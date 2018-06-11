@@ -29,13 +29,6 @@ class Evaluation
     private $date;
 
     /**
-     * @var \boolean
-     *
-     * @ORM\Column(name="temp", type="boolean")
-     */
-    private $temp;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="comment", type="text", nullable=true)
@@ -138,30 +131,6 @@ class Evaluation
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set temp.
-     *
-     * @param bool $temp
-     *
-     * @return Evaluation
-     */
-    public function setTemp($temp)
-    {
-        $this->temp = $temp;
-
-        return $this;
-    }
-
-    /**
-     * Get temp.
-     *
-     * @return bool
-     */
-    public function getTemp()
-    {
-        return $this->temp;
     }
 
     /**

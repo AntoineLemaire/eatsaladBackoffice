@@ -10,11 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Evaluation;
+use AppBundle\Service\Html2Pdf;
 use Symfony\Component\Filesystem\Filesystem;
-
 
 class EvaluationController extends FOSRestController
 {
+
     /**
      * @Rest\Get("/rest/evaluation")
      */
@@ -67,7 +68,6 @@ class EvaluationController extends FOSRestController
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
         $evaluation->setDate($date);
-        $evaluation->setTemp(true);
         $evaluation->setSubcategoriesDone($subcategoriesDone);
         $restaurant->addEvaluation($evaluation);
         $em->persist($restaurant);
@@ -178,41 +178,44 @@ class EvaluationController extends FOSRestController
         $franchisedImage = $request->request->get('franchisedSignature');
         $restPath = $this->container->getParameter('photos_directory');
 
-        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
         $fileSystem = new Filesystem();
         if (!$fileSystem->exists($restPath.'/'.$id_evaluation)){
             try {
                 $fileSystem->mkdir($restPath.'/'.$id_evaluation);
             } catch (IOExceptionInterface $exception) {
-                echo "An error occurred while creating your directory at ".$exception->getPath();
+                return new View("An error occurred while creating your directory at ".$exception->getPath(), Response::HTTP_NOT_ACCEPTABLE);
             }
         }
         // Save Signatures to server
         $controllerBase64 = str_replace('data:image/png;base64,', '', $controllerImage);
         $controllerSignature = base64_decode(str_replace(' ', '+', $controllerBase64));
-        $controllerPath = $restPath.'/'.$id_evaluation.'/controller.png';
-        $successController = file_put_contents($controllerPath, $controllerSignature);
+        $controllerPath = $id_evaluation.'/controller.png';
+        $fullControllerPath = $restPath.'/'.$controllerPath;
+        $successController = file_put_contents($fullControllerPath, $controllerSignature);
         if(!$successController || empty($controllerName))
             return new View("Error while uploading controller data", Response::HTTP_NOT_ACCEPTABLE);
 
         if($franchisedImage != null){
             $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
             $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
-            $franchisedPath = $restPath.'/'.$id_evaluation.'/franchised.png';
-            $successFranchised = file_put_contents($franchisedPath, $franchisedSignature);
+            $franchisedPath = $id_evaluation.'/franchised.png';
+            $fullFranchisedPath = $restPath.'/'.$franchisedPath;
+            $successFranchised = file_put_contents($fullFranchisedPath, $franchisedSignature);
             if(!$successFranchised)
                 return new View("Error while uploading franchised signature", Response::HTTP_NOT_ACCEPTABLE);
         }else{
             $franchisedPath = null;
         }
 
+        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
         $evaluation->setControllerName($controllerName);
         $evaluation->setControllerSignature($controllerPath);
         $evaluation->setFranchisedSignature($franchisedPath);
-        $evaluation->setTemp(false);
         $em->persist($evaluation);
         $em->flush();
 
-        return new Response($evaluation, Response::HTTP_OK);
+        $html2pdf = $this->get(Html2Pdf::class);
+        $html2pdf->create('P', 'A4', 'fr', true, 'UTF-8', array(10,15,10,15));
+        return $html2pdf->generatePdf($evaluation, 'Visite-de-conformité-'.$evaluation->getId());
     }
 }
