@@ -64,6 +64,12 @@ class Evaluation
     private $franchisedSignature;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="evaluations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="refusal", type="boolean", nullable=true)
@@ -81,14 +87,6 @@ class Evaluation
     private $evaluationAnswers;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Generates the magic method
      *
      */
@@ -97,6 +95,14 @@ class Evaluation
         return "Évaluation du ".$this->date->format('Y-m-d H:i:s');
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -254,6 +260,54 @@ class Evaluation
     }
 
     /**
+     * Set refusal.
+     *
+     * @param bool|null $refusal
+     *
+     * @return Evaluation
+     */
+    public function setRefusal($refusal = null)
+    {
+        $this->refusal = $refusal;
+
+        return $this;
+    }
+
+    /**
+     * Get refusal.
+     *
+     * @return bool|null
+     */
+    public function getRefusal()
+    {
+        return $this->refusal;
+    }
+
+    /**
+     * Set restaurant.
+     *
+     * @param \AppBundle\Entity\Restaurant $restaurant
+     *
+     * @return Evaluation
+     */
+    public function setRestaurant(\AppBundle\Entity\Restaurant $restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant.
+     *
+     * @return \AppBundle\Entity\Evaluation
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
      * Add evaluationAnswer.
      *
      * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
@@ -287,29 +341,5 @@ class Evaluation
     public function getEvaluationAnswers()
     {
         return $this->evaluationAnswers;
-    }
-
-    /**
-     * Set refusal
-     *
-     * @param boolean $refusal
-     *
-     * @return Evaluation
-     */
-    public function setRefusal($refusal)
-    {
-        $this->refusal = $refusal;
-
-        return $this;
-    }
-
-    /**
-     * Get refusal
-     *
-     * @return boolean
-     */
-    public function getRefusal()
-    {
-        return $this->refusal;
     }
 }

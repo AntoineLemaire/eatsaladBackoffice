@@ -2,12 +2,14 @@
 
 namespace AppBundle\Service;
 
-class Html2Pdf
+use Spipu\Html2Pdf\Html2Pdf;
+
+class HtmlToPdf
 {
-    private $pdf;
+    public $pdf;
 
     public function create($orientation = null, $format = null, $lang = null, $unicode = null, $encoding = null, $margin = null){
-        $this->pdf = new \Html2Pdf(
+        $this->pdf = new Html2Pdf(
             $orientation ? $orientation : $this->orientation,
             $format ? $format : $this->format,
             $lang ? $lang : $this->lang,

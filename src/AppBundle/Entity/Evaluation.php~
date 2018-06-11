@@ -29,13 +29,6 @@ class Evaluation
     private $date;
 
     /**
-     * @var \boolean
-     *
-     * @ORM\Column(name="temp", type="boolean")
-     */
-    private $temp;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="comment", type="text", nullable=true)
@@ -71,9 +64,15 @@ class Evaluation
     private $franchisedSignature;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Evaluation", inversedBy="evaluations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column(name="refusal", type="boolean")
+     * @ORM\Column(name="refusal", type="boolean", nullable=true)
      */
     private $refusal;
 
@@ -88,14 +87,6 @@ class Evaluation
     private $evaluationAnswers;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluationAnswers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Generates the magic method
      *
      */
@@ -106,217 +97,4 @@ class Evaluation
         // return $this->id;
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set date.
-     *
-     * @param \DateTime $date
-     *
-     * @return Evaluation
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date.
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set temp.
-     *
-     * @param bool $temp
-     *
-     * @return Evaluation
-     */
-    public function setTemp($temp)
-    {
-        $this->temp = $temp;
-
-        return $this;
-    }
-
-    /**
-     * Get temp.
-     *
-     * @return bool
-     */
-    public function getTemp()
-    {
-        return $this->temp;
-    }
-
-    /**
-     * Set comment.
-     *
-     * @param string|null $comment
-     *
-     * @return Evaluation
-     */
-    public function setComment($comment = null)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment.
-     *
-     * @return string|null
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Set subcategoriesDone.
-     *
-     * @param array $subcategoriesDone
-     *
-     * @return Evaluation
-     */
-    public function setSubcategoriesDone($subcategoriesDone)
-    {
-        $this->subcategoriesDone = $subcategoriesDone;
-
-        return $this;
-    }
-
-    /**
-     * Get subcategoriesDone.
-     *
-     * @return array
-     */
-    public function getSubcategoriesDone()
-    {
-        return $this->subcategoriesDone;
-    }
-
-    /**
-     * Set controllerName.
-     *
-     * @param string|null $controllerName
-     *
-     * @return Evaluation
-     */
-    public function setControllerName($controllerName = null)
-    {
-        $this->controllerName = $controllerName;
-
-        return $this;
-    }
-
-    /**
-     * Get controllerName.
-     *
-     * @return string|null
-     */
-    public function getControllerName()
-    {
-        return $this->controllerName;
-    }
-
-    /**
-     * Set controllerSignature.
-     *
-     * @param string|null $controllerSignature
-     *
-     * @return Evaluation
-     */
-    public function setControllerSignature($controllerSignature = null)
-    {
-        $this->controllerSignature = $controllerSignature;
-
-        return $this;
-    }
-
-    /**
-     * Get controllerSignature.
-     *
-     * @return string|null
-     */
-    public function getControllerSignature()
-    {
-        return $this->controllerSignature;
-    }
-
-    /**
-     * Set franchisedSignature.
-     *
-     * @param string|null $franchisedSignature
-     *
-     * @return Evaluation
-     */
-    public function setFranchisedSignature($franchisedSignature = null)
-    {
-        $this->franchisedSignature = $franchisedSignature;
-
-        return $this;
-    }
-
-    /**
-     * Get franchisedSignature.
-     *
-     * @return string|null
-     */
-    public function getFranchisedSignature()
-    {
-        return $this->franchisedSignature;
-    }
-
-    /**
-     * Add evaluationAnswer.
-     *
-     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
-     *
-     * @return Evaluation
-     */
-    public function addEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
-    {
-        $this->evaluationAnswers[] = $evaluationAnswer;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluationAnswer.
-     *
-     * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
-    {
-        return $this->evaluationAnswers->removeElement($evaluationAnswer);
-    }
-
-    /**
-     * Get evaluationAnswers.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluationAnswers()
-    {
-        return $this->evaluationAnswers;
-    }
 }

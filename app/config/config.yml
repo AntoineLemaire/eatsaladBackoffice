@@ -111,7 +111,7 @@ easy_admin:
         Evaluation:
             class: AppBundle\Entity\Evaluation
             list:
-                fields: ['id', 'date', { property: 'controllerName', label: 'Controlleur' }, { property: 'controllerSignature', label: 'Signature du controlleur', type: 'image', base_path: 'uploads/photos/' }, { property: 'franchisedSignature', label: 'Signature du franchisé', type: 'image', base_path: 'uploads/photos/' }, { property: 'temp', label: 'Effectué' }]
+                fields: ['id', 'date', { property: 'controllerName', label: 'Controlleur' }, { property: 'controllerSignature', label: 'Signature du controlleur', type: 'image', base_path: 'uploads/photos/' }, { property: 'franchisedSignature', label: 'Signature du franchisé', type: 'image', base_path: 'uploads/photos/' }]
         Restaurant:
             class: AppBundle\Entity\Restaurant
         City:

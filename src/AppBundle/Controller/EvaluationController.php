@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Evaluation;
-use AppBundle\Service\Html2Pdf;
 use Symfony\Component\Filesystem\Filesystem;
+use AppBundle\Service\HtmlToPdf;
 
 class EvaluationController extends FOSRestController
 {
@@ -214,8 +214,10 @@ class EvaluationController extends FOSRestController
         $em->persist($evaluation);
         $em->flush();
 
-        $html2pdf = $this->get(Html2Pdf::class);
+        $template = $this->renderView('Pdf/pdf.html.twig', array('evaluation' => $evaluation));
+
+        $html2pdf = $this->container->get(HtmlToPdf::class);
         $html2pdf->create('P', 'A4', 'fr', true, 'UTF-8', array(10,15,10,15));
-        return $html2pdf->generatePdf($evaluation, 'Visite-de-conformité-'.$evaluation->getId());
+        return $html2pdf->generatePdf($template, 'Visite-de-conformité-'.$evaluation->getId());
     }
 }

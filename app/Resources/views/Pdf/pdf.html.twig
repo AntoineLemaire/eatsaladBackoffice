@@ -14,7 +14,7 @@
                                 <table border="0" cellpadding="20" cellspacing="0" width="50%" id="emailHeader">
                                     <tr>
                                         <td align="center" valign="top">
-                                            <img width="150" src="{{ asset('img/baratcorportate-logo.png') }}"/>
+                                            <img width="150" src="http://localhost/eatsaladBackoffice/web/img/baratcorportate-logo.png"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -28,7 +28,7 @@
                                             <p>Visite de conformité effectuée par</p>
                                             </td>
                                         <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ controllerName }}</p>
+                                            <p style="font-weight:bold">{{ evaluation.getControllerName() }}</p>
                                             </td>
                                         </tr>
                                     <tr>
@@ -36,7 +36,7 @@
                                             <p>Dans le restaurant</p>
                                             </td>
                                         <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ restaurantName }}</p>
+                                            <p style="font-weight:bold">{{ evaluation.getRestaurant().getName() }}</p>
                                             </td>
                                         </tr>
                                     <tr>
@@ -44,7 +44,7 @@
                                             <p>Le</p>
                                             </td>
                                         <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluationDate|format('d/m/Y') }}</p>
+                                            <p style="font-weight:bold">{{ evaluation.getDate()|date('d/m/Y') }}</p>
                                             </td>
                                         </tr>
                                     <tr>
@@ -52,7 +52,7 @@
                                             <p>À</p>
                                             </td>
                                         <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluationDate|format('h:m:s') }}</p>
+                                            <p style="font-weight:bold">{{ evaluation.getDate()|date('h:m:s') }}</p>
                                             </td>
                                         </tr>
                                     </table>
@@ -64,11 +64,11 @@
                                     <tr>
                                         <td align="center" valign="top">
                                             <p>Signature du contrôleur</p>
-                                            <img width="100%" src="{{ controllerSignature }}"/>
+                                            <img width="100%" src="http://localhost/eatsaladBackoffice/web/uploads/photos/{{ evaluation.getControllerSignature() }}"/>
                                             </td>
                                         <td align="center" valign="top">
                                             <p>Signature du franchisé ou responsable du magasin</p>
-                                            <img width="100%" src="{{ franchisedSignature }}"/>
+                                            <img width="100%" src="http://localhost/eatsaladBackoffice/web/uploads/photos/{{ evaluation.getFranchisedSignature() }}"/>
                                         </td>
                                     </tr>
                                 </table>
