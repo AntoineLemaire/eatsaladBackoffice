@@ -36,6 +36,12 @@ class Question
     private $question;
 
     /**
+     * @ORM\ManyToOne(targetEntity="SubCategory", inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subCategory;
+
+    /**
      * Generates the magic method
      *
      */

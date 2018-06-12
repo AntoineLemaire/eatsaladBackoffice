@@ -72,9 +72,9 @@ class Evaluation
     /**
      * @var boolean
      *
-     * @ORM\Column(name="refusal", type="boolean", nullable=true)
+     * @ORM\Column(name="accepted", type="boolean", nullable=true)
      */
-    private $refusal;
+    private $accepted;
 
     /**
      * One Evaluation have Many EvaluationAnswers.
@@ -95,6 +95,38 @@ class Evaluation
         return "Évaluation du ".$this->date->format('Y-m-d H:i:s');
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * Generate the total score
+     *
+     * @return int
+     */
+    public function getScore()
+    {
+        $totalScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            $totalScore += $evaluationAnswer->getAnswer()->getScore();
+            $totalQuestions++;
+        }
+        return round(($totalScore / ($totalQuestions * 3)) * 100);
+    }
+
+    /**
+     * Generate the total score
+     *
+     * @return int
+     */
+    public function getSubcategoryScore($id_subcategory)
+    {
+        $totalScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            $totalScore += $evaluationAnswer->getAnswer()->getScore();
+            $totalQuestions++;
+        }
+        return round(($totalScore / ($totalQuestions * 3)) * 100);
     }
 
     /**
@@ -260,27 +292,27 @@ class Evaluation
     }
 
     /**
-     * Set refusal.
+     * Set accepted.
      *
-     * @param bool|null $refusal
+     * @param bool|null $accepted
      *
      * @return Evaluation
      */
-    public function setRefusal($refusal = null)
+    public function setAccepted($accepted = null)
     {
-        $this->refusal = $refusal;
+        $this->accepted = $accepted;
 
         return $this;
     }
 
     /**
-     * Get refusal.
+     * Get accepted.
      *
      * @return bool|null
      */
-    public function getRefusal()
+    public function getAccepted()
     {
-        return $this->refusal;
+        return $this->accepted;
     }
 
     /**

@@ -20,6 +20,7 @@ class HtmlToPdf
     }
 
     public function generatePdf($template, $name){
+        $this->pdf->setTestTdInOnePage(false);
         $this->pdf->writeHTML($template);
         return $this->pdf->Output($name.'.pdf', 'F');
     }
