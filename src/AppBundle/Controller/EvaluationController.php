@@ -53,8 +53,8 @@ class EvaluationController extends FOSRestController
     }
 
     /**
-    * @Rest\Post("/rest/evaluation")
-    */
+     * @Rest\Post("/rest/evaluation")
+     */
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -69,7 +69,7 @@ class EvaluationController extends FOSRestController
         }
         $evaluation->setDate($date);
         $evaluation->setSubcategoriesDone($subcategoriesDone);
-        $restaurant->addEvaluation($evaluation);
+        $evaluation->setRestaurant($restaurant);
         $em->persist($restaurant);
         $em->persist($evaluation);
         $em->flush();
@@ -179,9 +179,9 @@ class EvaluationController extends FOSRestController
         $restPath = $this->container->getParameter('photos_directory');
 
         $fileSystem = new Filesystem();
-        if (!$fileSystem->exists($restPath.'/'.$id_evaluation)){
+        if (!$fileSystem->exists($restPath.'/'.$id_evaluation.'/signatures')){
             try {
-                $fileSystem->mkdir($restPath.'/'.$id_evaluation);
+                $fileSystem->mkdir($restPath.'/'.$id_evaluation.'/signatures');
             } catch (IOExceptionInterface $exception) {
                 return new View("An error occurred while creating your directory at ".$exception->getPath(), Response::HTTP_NOT_ACCEPTABLE);
             }
@@ -189,7 +189,7 @@ class EvaluationController extends FOSRestController
         // Save Signatures to server
         $controllerBase64 = str_replace('data:image/png;base64,', '', $controllerImage);
         $controllerSignature = base64_decode(str_replace(' ', '+', $controllerBase64));
-        $controllerPath = $id_evaluation.'/controller.png';
+        $controllerPath = $id_evaluation.'/signatures/controller.png';
         $fullControllerPath = $restPath.'/'.$controllerPath;
         $successController = file_put_contents($fullControllerPath, $controllerSignature);
         if(!$successController || empty($controllerName))
@@ -198,7 +198,7 @@ class EvaluationController extends FOSRestController
         if($franchisedImage != null){
             $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
             $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
-            $franchisedPath = $id_evaluation.'/franchised.png';
+            $franchisedPath = $id_evaluation.'/signatures/franchised.png';
             $fullFranchisedPath = $restPath.'/'.$franchisedPath;
             $successFranchised = file_put_contents($fullFranchisedPath, $franchisedSignature);
             if(!$successFranchised)
@@ -218,6 +218,14 @@ class EvaluationController extends FOSRestController
 
         $html2pdf = $this->container->get(HtmlToPdf::class);
         $html2pdf->create('P', 'A4', 'fr', true, 'UTF-8', array(10,15,10,15));
-        return $html2pdf->generatePdf($template, 'Visite-de-conformité-'.$evaluation->getId());
+        if (!$fileSystem->exists($restPath.'/'.$id_evaluation.'/pdf')){
+            try {
+                $fileSystem->mkdir($restPath.'/'.$id_evaluation.'/pdf');
+            } catch (IOExceptionInterface $exception) {
+                return new View("An error occurred while creating pdf directory at ".$exception->getPath(), Response::HTTP_NOT_ACCEPTABLE);
+            }
+        }
+        $html2pdf->generatePdf($template, $restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId());
+        return new View("Report printed", Response::HTTP_OK);
     }
 }

@@ -77,7 +77,7 @@ class EvaluationAnswerController extends FOSRestController
                 foreach ($photos as $photo) {
                     $evaluationAnswerImages = new Image();
                     $evaluationAnswerImages->setEvaluationAnswer($evaluationAnswer);
-                    $evaluationAnswerImages->setPath($postDatas['id_evaluation'].'/'.$evaluationAnswer->getId().'/');
+                    $evaluationAnswerImages->setPath($postDatas['id_evaluation'].'/answers/'.$evaluationAnswer->getId().'/');
                     $evaluationAnswerImages->setName($photo['name']);
                     $evaluationAnswer->addImage($evaluationAnswerImages);
                 }

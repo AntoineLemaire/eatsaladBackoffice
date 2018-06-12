@@ -1,82 +1,148 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title></title>
-        <style>*{font-family:Helvetica, sans-serif}</style>
-    </head>
-    <body>
-        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-            <tr>
-                <td align="center" valign="top">
-                    <table border="0" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
-                        <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="20" cellspacing="0" width="50%" id="emailHeader">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <img width="150" src="http://localhost/eatsaladBackoffice/web/img/baratcorportate-logo.png"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailFooter">
-                                    <tr>
-                                        <td align="right" style="padding:0px 5px" valign="top" width="50%">
-                                            <p>Visite de conformité effectuée par</p>
-                                            </td>
-                                        <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluation.getControllerName() }}</p>
-                                            </td>
-                                        </tr>
-                                    <tr>
-                                        <td align="right" style="padding:0px 5px" valign="top" width="50%">
-                                            <p>Dans le restaurant</p>
-                                            </td>
-                                        <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluation.getRestaurant().getName() }}</p>
-                                            </td>
-                                        </tr>
-                                    <tr>
-                                        <td align="right" style="padding:0px 5px" valign="top" width="50%">
-                                            <p>Le</p>
-                                            </td>
-                                        <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluation.getDate()|date('d/m/Y') }}</p>
-                                            </td>
-                                        </tr>
-                                    <tr>
-                                        <td align="right" style="padding:0px 5px" valign="top" width="50%">
-                                            <p>À</p>
-                                            </td>
-                                        <td align="left" style="padding:0px 5px" valign="top" width="50%">
-                                            <p style="font-weight:bold">{{ evaluation.getDate()|date('h:m:s') }}</p>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <p>Signature du contrôleur</p>
-                                            <img width="100%" src="http://localhost/eatsaladBackoffice/web/uploads/photos/{{ evaluation.getControllerSignature() }}"/>
-                                            </td>
-                                        <td align="center" valign="top">
-                                            <p>Signature du franchisé ou responsable du magasin</p>
-                                            <img width="100%" src="http://localhost/eatsaladBackoffice/web/uploads/photos/{{ evaluation.getFranchisedSignature() }}"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </body>
-</html>
+<page style="font-size: 14px">
+    <table align="center" style="width: 100%">
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <th style="width: 100%;text-align: center"><img src="http://bmagne.ovh/eatsaladBackoffice/web/img/baratcorportate-logo.png" alt="Logo" width=150 /></th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <th style="width: 45%;text-align: right;margin-right: 10px;">Visite de conformité effectuée par :</th>
+                        <td style="width: 5%">&nbsp;</td>
+                        <td style="width: 45%;text-align: left;margin-left: 10px">{{ evaluation.getControllerName() }}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 45%;text-align: right;margin-right: 10px;">Dans le restaurant EatSalad :</th>
+                        <td style="width: 5%">&nbsp;</td>
+                        <td style="width: 45%;text-align: left;margin-left: 10px">{{ evaluation.getRestaurant().getName() }}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 45%;text-align: right;margin-right: 10px;">Le :</th>
+                        <td style="width: 5%">&nbsp;</td>
+                        <td style="width: 45%;text-align: left;margin-left: 10px">{{ evaluation.getDate()|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 45%;text-align: right;margin-right: 10px;">À :</th>
+                        <td style="width: 5%">&nbsp;</td>
+                        <td style="width: 45%;text-align: left;margin-left: 10px">{{ evaluation.getDate()|date('H:i') }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; text-align: center">
+                    <tr>
+                        <td style="width: 50%">
+                            <table style=" width: 100%; text-align: center">
+                                <tr>
+                                    <th style="width: 100%">Signature du controlleur</th>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%"><img src="http://bmagne.ovh/eatsaladBackoffice/web/uploads/evaluations/{{ evaluation.getControllerSignature() }}" alt="Logo" width=300 /></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 50%">
+                            <table style=" width: 100%; text-align: center">
+                                <tr>
+                                    <th style="width: 100%">Signature du franchisé</th>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%"><img src="http://bmagne.ovh/eatsaladBackoffice/web/uploads/evaluations/{{ evaluation.getFranchisedSignature() }}" alt="Logo" width=300 /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</page>
