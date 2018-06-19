@@ -1,231 +1,100 @@
+<style type="text/Css">
+    <!--
+    table{
+        border-collapse: collapse;
+    }
+    table,tr,td
+    {
+        border: none;
+        margin:0;
+    }
+    td{
+        padding:10px;
+    }
+    -->
+</style>
 <page style="font-size: 14px">
-    <table align="center" style="width: 100%">
+    <table cellspacing="0" border="0" cellpadding="0">
         <tr>
-            <td>
+            <td colspan="2">
                 <table style="width: 100%; text-align: center">
                     <tr>
-                        <th style="width: 100%;text-align: center"><img src="http://bmagne.ovh/eatsaladBackoffice/web/img/eatsalad-logo.png" alt="Logo" width=150 /></th>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-    <table align="center" style="width: 100%;background-color: #89BD29;color: #ffffff;">
-        <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
+                        <td style="width: 100%;text-align: center"><img src="http://bmagne.ovh/eatsaladBackoffice/web/img/eatsalad-logo.png" alt="logo" width="300"/></td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2" style="text-align: center;margin-right: 10px;">Visite de conformité du restaurant {{ evaluation.getRestaurant().getName() }}</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2">&nbsp;</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2" style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center;">
-                    <tr>
-                        <td style="width: 50%">
-                            <table style=" width: 100%; text-align: center">
-                                <tr>
-                                    <td style="width: 100%">Compte rendu du restaurant <strong>{{ evaluation.getRestaurant().getName() }}</strong> </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%">éffectuée le <strong>{{ evaluation.getDate()|date('m/d/Y') }} </strong> à <strong>{{ evaluation.getDate()|date('H:m') }}</strong> </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%">par <strong>{{ evaluation.getControllerName() }}</strong> </td>
-                                </tr>
-                                <tr>
-                                    {#<td style="width: 100%">SCORE TOTAL : {{ evaluation.getScore() }}%</td>#}
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2">&nbsp;</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2" style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2">&nbsp;</td>
         </tr>
         <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
+            <td colspan="2" style="text-align: center;margin-right: 10px;">Score total : {{ evaluation.getScore() }}%</td>
         </tr>
-        <tr>
-            <td>
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table style="width: 100%; text-align: center;background-color: #89BD29">
-                {% for category in categories %}
-                    <tr>
-                        <td style="width: 50%">
-                            <h1 style="font-family:Helvetica, sans-serif;color: #FFFFFF;text-align: center;font-weight: 500;font-size: 25px;margin: 40px auto;border:none;">{{ category.getName() }}</h1>
-                            {% for subcategory in category.getSubCategories() %}
-                            <table style="border:1px solid #fff;border-radius: 8px;margin: 10px auto;padding: 0px;overflow: hidden;" cellpadding="20" cellspacing="0" width="100%">
-                                <tr>
-                                    <td colspan="2" style="background-image: linear-gradient(90deg, white 0%, #bdd88c 0%);">
-                                        <h3 style="padding: 0px;margin:0;padding: 10px;color:#6a962f;">{{ subcategory.getName() }}<span style="float:right">0%</span></h3>
-                                    </td>
-                                </tr>
-                                {% for evaluationAnswer in evaluation.getEvaluationAnswers() %}
-                                    {% if evaluationAnswer.getQuestion().getSubCategory().getId() == subcategory.getId() %}
-                                        <tr style="min-height: 40px;padding: 10px;40px;display: inline-flex;width: 100%;align-items: center;border-top:1px dashed #fff">
-                                            <td style="width:70%;font-size: 17px;display: inline-flex;align-items: center;color:#fff">{{ evaluationAnswer.getQuestion().getQuestion() }}</td>
-                                            <td style="width:30%;text-align:center;">
-                                                {% if evaluationAnswer.getAnswer().getScore() == 0 %}
-                                                    <span style="background-color:#c30004;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer().getAnswer() }}</span>
-                                                {% elseif evaluationAnswer.getAnswer().getScore() == 1 %}
-                                                    <span style="background-color:#fc6308;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer().getAnswer() }}</span>
-                                                {% elseif evaluationAnswer.getAnswer().getScore() == 2 %}
-                                                    <span style="background-color:#fece09;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer().getAnswer() }}</span>
-                                                {% elseif evaluationAnswer.getAnswer().getScore() == 3 %}
-                                                    <span style="background-color:#1cd304;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer().getAnswer() }}</span>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                        {% if evaluationAnswer.getComment() %}
-                                        <tr>
-                                            <td colspan="2" style="width:100%;">
-                                                <p style="display:block;width:100%;text-align:center;color:#fff">"{{ evaluationAnswer.getComment() }}"</p>
-                                            </td>
-                                        </tr>
-                                        {% endif %}
-                                        <tr>
-                                            <td colspan="2" style="text-align:center">
-                                                {% for image in evaluationAnswer.getImages() %}
-                                                    <img style="padding:1px;width:24%;height:auto;margin:0 auto; text-align:center" src="http://bmagne.ovh/eatsaladBackoffice/web/uploads/evaluations/{{ image.getPath() ~ image.getName() }}" />
-                                                {% endfor %}
-                                            </td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                            </table>
-                            {% endfor %}
-                        </td>
-                    </tr>
+        {% for category in categories %}
+            <tr style="page-break-before:always;">
+                <td colspan="2" style="text-align: center;color: #89BD29;">
+                     {{ category.getName() }}
+                </td>
+            </tr>
+            {% for subcategory in category.getSubCategories() %}
+                <tr style="border-top-left-radius: 8px;">
+                    <td style="text-align:left;background-image: linear-gradient(90deg, #ffffff {{ subcategory.score }}%, #bdd88c 0%)">
+                        {{ subcategory.getName() }}
+                    </td>
+                    <td style="text-align:right">
+                        {{ subcategory.score }}%
+                    </td>
+                </tr>
+                {% for evaluationAnswer in evaluation.getEvaluationAnswers() %}
+                    {% if evaluationAnswer.getQuestion().getSubcategory().getId() == subcategory.getId() %}
+                        <tr style="background-color:#89BD29;">
+                            <td style="color:#ffffff;width: 70%;">{{ evaluationAnswer.getQuestion().getQuestion() }}</td>
+                            <td style="width:30%;text-align: center;">
+                            {% if evaluationAnswer.getAnswer().getScore() == 0 %}
+                                <span style="width:70%;text-transform:uppercase;background-color:#c30004;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                            {% elseif evaluationAnswer.getAnswer().getScore() == 1 %}
+                                <span style="width:70%;text-transform:uppercase;background-color:#fc6308;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                            {% elseif evaluationAnswer.getAnswer().getScore() == 2 %}
+                                <span style="width:70%;text-transform:uppercase;background-color:#fece09;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                            {% elseif evaluationAnswer.getAnswer().getScore() == 3 %}
+                                <span style="width:70%;text-transform:uppercase;background-color:#1cd304;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        {% if evaluationAnswer.getComment() is not empty %}
+                            <tr style="background-color:#89BD29;">
+                                <td colspan="2" >
+                                    <p style="text-align:center;color:#fff">"{{ evaluationAnswer.getComment() }}"</p>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if evaluationAnswer.getImages() is not empty %}
+                            <tr style="background-color:#89BD29;">
+                                <td colspan="2" style="text-align:center">
+                                    {% for image in evaluationAnswer.getImages() %}
+                                        <img style="padding:1px;height:auto;margin:0 auto;text-align:center;border-radius:2px; width: 24%;" src="http://bmagne.ovh/eatsaladBackoffice/web/uploads/evaluations/{{ image.getPath() ~ image.getName() }}" />
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
-                </table>
-            </td>
-        </tr>
+            {% endfor %}
+        {% endfor %}
     </table>
 </page>
-
-{#foreach ($data->categoryStat as $category) {#}
-
-{#<h1 style="font-family:Helvetica, sans-serif;color: #FFFFFF;text-align: center;font-weight: 500;font-size: 25px;margin: 40px auto;border:none;">' . $category->category . '</h1>#}
-{#foreach ($data->subCategoryStat as $subcategory) {#}
-
-{#if ($subcategory->category == $category->category) {#}
-{#<table border="0" style="border:1px solid #fff;border-radius: 8px;margin: 10px auto;padding: 0px;overflow: hidden;" cellpadding="20" cellspacing="0" width="100%" id="emailBody">#}
-    {#<tr>#}
-        {#<td colspan="2" style="background-image: linear-gradient(90deg, white ' . $subcategory->score . '%, #bdd88c 0%);">#}
-            {#<h3 style="padding: 0px;margin:0;padding: 10px;color:#6a962f;">' . $subcategory->subcategory . '<span style="float:right">' . $subcategory->score . '%</span></h3>#}
-            {#</td>#}
-        {#</tr>#}
-
-    {#foreach ($data->responses as $response) {#}
-
-    {#if ($response->id_question_subcategory == $subcategory->id_question_subcategory && $subcategory->question_category_id == $category->id_question_category) {#}
-
-    {#<tr style="min-height: 40px;padding: 10px;40px;display: inline-flex;width: 100%;align-items: center;border-top:1px dashed #fff">#}
-        {#<td style="width:70%;font-size: 17px;display: inline-flex;align-items: center;color:#fff">' . $response->question . '</td>#}
-        {#<td style="width:30%;text-align:center;">#}
-            {#if ($response->score == 0)#}
-            {#<span style="background-color:#c30004;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">' . $response->response . '</span>#}
-            {#else if ($response->score == 1)#}
-            {#<span style="background-color:#fc6308;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">' . $response->response . '</span>#}
-            {#else if ($response->score == 2)#}
-            {#<span style="background-color:#fece09;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">' . $response->response . '</span>#}
-            {#else if ($response->score == 3)#}
-            {#<span style="background-color:#1cd304;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;width:85%;display:block;font-weight: 600;text-align:center;">' . $response->response . '</span>#}
-            {#</td>#}
-        {#</tr>#}
-
-    {#if ($response->comment != '') {#}
-    {#<tr>#}
-        {#<td colspan="2" style="width:100%;">#}
-            {#<p style="display:block;width:100%;text-align:center;color:#fff">"' . $response->comment . '"</p>#}
-            {#</td>#}
-        {#</tr>#}
-    {#}#}
-    {#<tr>#}
-        {#<td colspan="2" style="text-align:center">#}
-            {#for ($i = 0; $i < count($response->photos); $i++) {#}
-
-            {#if ($response->photos[$i] != null) {#}
-            {#$photoPath = 'http://crazyabout.it/eatsalad/evaluations/' . $data->id_evaluation . '/' . $category->id_question_category . '/' . $subcategory->id_question_subcategory . '/' . $response->id_question . '/' . preg_replace("/.*\/(?!.*\/)/", "", $response->photos[$i]);#}
-            {#<img style="padding:1px;width:24%;height:auto;margin:0 auto; text-align:center" src="'. $photoPath .'" />#}
-            {#}#}
-            {#}#}
-            {#</td>#}
-        {#</tr>#}
-
-    {#}#}
-
-    {#}#}
-    {#</table>#}
-
-{#}#}
-
-{#}#}
-
-
-{#</td>#}
-{#</tr>#}
-{#</table>#}
-
-{#}#}

@@ -217,13 +217,20 @@ class EvaluationController extends FOSRestController
         $em->persist($evaluation);
         $em->flush();
 
-        // Create report signed pdf
-        $templateReport = $this->renderView('Pdf/pdf-report.html.twig', array('evaluation' => $evaluation));
-
         $categories = $em->getRepository('AppBundle:Category')->findAll();
+
+        foreach ($categories as $index => &$category) {
+            $categoryScore = $evaluation->getCategoryScore($category->getId());
+            $category->score = $categoryScore;
+            foreach ($category->getSubcategories() as $index => &$subcategory) {
+                $subCategoryScore = $evaluation->getSubcategoryScore($subcategory->getId());
+                $subcategory->score = $subCategoryScore;
+            }
+        }
+        // Create pdf
+        $templateReport = $this->renderView('Pdf/pdf-report.html.twig', array('evaluation' => $evaluation));
         $templateStatistic = $this->renderView('Pdf/pdf-statistic.html.twig', array('evaluation' => $evaluation, 'categories' => $categories));
-        $html2pdf = $this->container->get(HtmlToPdf::class);
-        $html2pdf->create('P', 'A4', 'fr', true, 'UTF-8', array(10,15,10,15));
+
         if (!$fileSystem->exists($restPath.'/'.$id_evaluation.'/pdf')){
             try {
                 $fileSystem->mkdir($restPath.'/'.$id_evaluation.'/pdf');
@@ -231,11 +238,27 @@ class EvaluationController extends FOSRestController
                 return new View("An error occurred while creating pdf directory at ".$exception->getPath(), Response::HTTP_NOT_ACCEPTABLE);
             }
         }
-//        $html2pdf->generatePdf($templateReport, $restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId());
-        $html2pdf->generatePdf($templateStatistic, $restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId().'-'.$evaluation->getDate()->format('d-m-Y'));
+        $this->get('knp_snappy.pdf')->generateFromHtml(
+            $this->renderView(
+                'Pdf/pdf-report.html.twig',
+                array(
+                    'evaluation'  => $evaluation,
+                )
+            ),
+            $restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId()
+        );
+        $this->get('knp_snappy.pdf')->generateFromHtml(
+            $this->renderView(
+                'Pdf/pdf-statistic.html.twig',
+                array(
+                    'evaluation'  => $evaluation,
+                    'categories' => $categories
+                )
+            ),
+            $restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId()
+        );
         return new View("Report printed", Response::HTTP_OK);
     }
-
 
     /**
      * @Route(path = "/admin/evaluation/report/download", name = "report_download")

@@ -148,3 +148,9 @@ stof_doctrine_extensions:
     orm:
         default:
             sortable: true
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /home/bmagneovix/wkhtmltox/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        options:    []

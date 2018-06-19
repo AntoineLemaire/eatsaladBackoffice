@@ -120,13 +120,33 @@ class Evaluation
      */
     public function getSubcategoryScore($id_subcategory)
     {
-        $totalScore = 0;
+        $subcategoryScore = 0;
         $totalQuestions = 0;
         foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
-            $totalScore += $evaluationAnswer->getAnswer()->getScore();
-            $totalQuestions++;
+            if ($evaluationAnswer->getQuestion()->getSubcategory()->getId() == $id_subcategory){
+                $subcategoryScore += $evaluationAnswer->getAnswer()->getScore();
+                $totalQuestions++;
+            }
         }
-        return round(($totalScore / ($totalQuestions * 3)) * 100);
+        return round(($subcategoryScore / ($totalQuestions * 3)) * 100);
+    }
+
+    /**
+     * Generate the category score
+     *
+     * @return int
+     */
+    public function getCategoryScore($id_category)
+    {
+        $categoryScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            if ($evaluationAnswer->getQuestion()->getSubcategory()->getCategory()->getId() == $id_category){
+                $categoryScore += $evaluationAnswer->getAnswer()->getScore();
+                $totalQuestions++;
+            }
+        }
+        return round(($categoryScore / ($totalQuestions * 3)) * 100);
     }
 
     /**

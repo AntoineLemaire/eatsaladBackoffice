@@ -35,6 +35,12 @@ class SubCategory
     private $questions;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="subCategories")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
      * Generates the magic method
      *
      */
@@ -121,5 +127,29 @@ class SubCategory
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return SubCategory
+     */
+    public function setCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
