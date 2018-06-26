@@ -1,3 +1,14 @@
+<style type="text/css">
+    /* ----- Custom Font Import ----- */
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin,latin-ext);
+    /* ----- Text Styles ----- */
+    table{
+        font-family: 'Lato', Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+    }
+</style>
 <page style="font-size: 14px">
     <table align="center" style="width: 100%">
         <tr>
@@ -140,7 +151,7 @@
                                         {% if evaluation.getAccepted() %}
                                             <img src="{{ kernelRootDir }}/uploads/evaluations/{{ evaluation.getFranchisedSignature() }}" alt="Logo" width=300 />
                                         {% else %}
-                                            <span style="color: red;font-weight: bold;text-align: center;width: 100%;display: block;">REFUSÉ</span>
+                                            <p style="color: red;font-weight: bold;text-align: center;height: 350px;width: 100%;display: block;">REFUSÉ</p>
                                         {% endif %}
                                     </td>
                                 </tr>

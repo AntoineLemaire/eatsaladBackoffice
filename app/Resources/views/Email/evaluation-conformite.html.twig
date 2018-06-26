@@ -177,8 +177,8 @@
                             </tr>
 
                             <tr>
-                                <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 60px 90px 0;" align="left">Bonjour, vous trouverez ci-joint le compte rendu de la visite de conformité du {{ evaluation.getDate() | date('d/m/Y')  }} au sein de l'établissement EatSalad {{ evaluation.getRestaurant().getName() }}, ainsi que le rapport correspondant.
-                                    {% if not evaluation.getAccepted() %}<br/>Pour rappel, vous avez refusé de signer ce dernier.{% endif %}
+                                <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 60px 90px 0;" align="left">Bonjour,<br/> vous trouverez ci-joint le compte rendu de la visite de conformité du {{ evaluation.getDate() | date('d/m/Y')  }} au sein de l'établissement EatSalad {{ evaluation.getRestaurant().getName() }}, ainsi que le rapport correspondant.
+                                    {% if not evaluation.getAccepted() %}<br/><br/>Rappel : <span style="color:red">vous avez refusé de signer ce dernier.</span>{% endif %}
                                 </td>
                             </tr>
                         </table>
@@ -196,7 +196,6 @@
                             </tr>
                         </table>
                         <!-- /// Divider -->
-
                         <!-- / Info Bullets -->
                         <table class="container info-bullets" border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
                             <tr>

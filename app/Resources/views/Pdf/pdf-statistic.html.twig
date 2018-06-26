@@ -1,4 +1,13 @@
-<style>
+<style type="text/css">
+    /* ----- Custom Font Import ----- */
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin,latin-ext);
+    /* ----- Text Styles ----- */
+    table{
+        font-family: 'Lato', Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+    }
     .header{
         text-align: center;
     }
@@ -51,7 +60,7 @@
     }
 </style>
 <div class="header col-6">
-    <img width="300" src="{{ kernelRootDir }}/../web/img/eatsalad-logo.png" alt="">
+    <img width="300" src="{{ kernelRootDir }}/web/img/eatsalad-logo.png" alt="">
     <p style="text-align: center;margin-right: 10px;">Visite de conformité du restaurant {{ evaluation.getRestaurant().getName() }}</p>
     <p style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</p>
     <p style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</p>

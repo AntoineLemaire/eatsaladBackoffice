@@ -74,9 +74,9 @@ class EvaluationAnswer
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ class EvaluationAnswer
     }
 
     /**
-     * Set comment.
+     * Set comment
      *
      * @param string $comment
      *
@@ -98,7 +98,7 @@ class EvaluationAnswer
     }
 
     /**
-     * Get comment.
+     * Get comment
      *
      * @return string
      */
@@ -108,9 +108,9 @@ class EvaluationAnswer
     }
 
     /**
-     * Set question.
+     * Set question
      *
-     * @param \AppBundle\Entity\Question|null $question
+     * @param \AppBundle\Entity\Question $question
      *
      * @return EvaluationAnswer
      */
@@ -122,9 +122,9 @@ class EvaluationAnswer
     }
 
     /**
-     * Get question.
+     * Get question
      *
-     * @return \AppBundle\Entity\Question|null
+     * @return \AppBundle\Entity\Question
      */
     public function getQuestion()
     {
@@ -132,9 +132,9 @@ class EvaluationAnswer
     }
 
     /**
-     * Set answer.
+     * Set answer
      *
-     * @param \AppBundle\Entity\Answer|null $answer
+     * @param \AppBundle\Entity\Answer $answer
      *
      * @return EvaluationAnswer
      */
@@ -146,9 +146,9 @@ class EvaluationAnswer
     }
 
     /**
-     * Get answer.
+     * Get answer
      *
-     * @return \AppBundle\Entity\Answer|null
+     * @return \AppBundle\Entity\Answer
      */
     public function getAnswer()
     {
@@ -156,7 +156,7 @@ class EvaluationAnswer
     }
 
     /**
-     * Add image.
+     * Add image
      *
      * @param \AppBundle\Entity\Image $image
      *
@@ -170,19 +170,17 @@ class EvaluationAnswer
     }
 
     /**
-     * Remove image.
+     * Remove image
      *
      * @param \AppBundle\Entity\Image $image
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeImage(\AppBundle\Entity\Image $image)
     {
-        return $this->images->removeElement($image);
+        $this->images->removeElement($image);
     }
 
     /**
-     * Get images.
+     * Get images
      *
      * @return \Doctrine\Common\Collections\Collection
      */

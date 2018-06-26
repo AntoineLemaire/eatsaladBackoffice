@@ -215,23 +215,25 @@ class EvaluationController extends FOSRestController
         if(!$successController || empty($controllerName))
             return new View("Error while uploading controller data", Response::HTTP_NOT_ACCEPTABLE);
 
+        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+
         if($franchisedImage != null || $franchisedImage != ""){
             $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
             $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
             $franchisedPath = $id_evaluation.'/signatures/franchised.png';
             $fullFranchisedPath = $restPath.'/'.$franchisedPath;
             $successFranchised = file_put_contents($fullFranchisedPath, $franchisedSignature);
+            $evaluation->setAccepted(true);
             if(!$successFranchised)
                 return new View("Error while uploading franchised signature", Response::HTTP_NOT_ACCEPTABLE);
         }else{
             $franchisedPath = null;
+            $evaluation->setAccepted(false);
         }
 
-        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
         $evaluation->setControllerName($controllerName);
         $evaluation->setControllerSignature($controllerPath);
         $evaluation->setFranchisedSignature($franchisedPath);
-        $evaluation->setAccepted(true);
         $em->persist($evaluation);
         $em->flush();
 
