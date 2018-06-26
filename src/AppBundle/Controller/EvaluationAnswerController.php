@@ -25,11 +25,39 @@ class EvaluationAnswerController extends FOSRestController
     public function getAction($id_evaluation)
     {
         $evaluation = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id_evaluation);
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:EvaluationAnswer')->findByEvaluation($evaluation);
-        if ($restresult === null) {
+        if ($evaluation === null) {
             return new View("there are no answer exist", Response::HTTP_NOT_FOUND);
         }
-        return $restresult;
+        return $evaluation->getEvaluationAnswers();
+    }
+
+    /**
+     * @Rest\Get("/rest/evaluation-answer-preview/{id_evaluation}")
+     */
+    public function previewAction($id_evaluation)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluation = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+        if ($evaluation === null) {
+            return new View("there are no answer exist", Response::HTTP_NOT_FOUND);
+        }
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
+        foreach ($categories as $index => &$category) {
+            $categoryScore = $evaluation->getCategoryScore($category->getId());
+            $category->score = $categoryScore;
+            foreach ($category->getSubcategories() as $index => &$subcategory) {
+                $subCategoryScore = $evaluation->getSubcategoryScore($subcategory->getId());
+                $subcategory->score = $subCategoryScore;
+            }
+        }
+
+        $result = array(
+            'categories' => $categories,
+            'evaluation' => $evaluation,
+            'score' => $evaluation->getScore()
+        );
+
+        return $result;
     }
 
     /**

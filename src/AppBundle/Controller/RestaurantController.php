@@ -58,7 +58,7 @@ class RestaurantController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $restaurant = new Restaurant();
         $name = $request->get('name');
-        $emails = $request->get('emails');
+        $emails = explode(';', $request->get('emails'));
         $address = $request->get('address');
         $id_city = $request->get('id_city');
         $city = $em->getRepository('AppBundle:City')->find($id_city);
@@ -69,8 +69,7 @@ class RestaurantController extends FOSRestController
         $restaurant->setName($name);
         $restaurant->setAddress($address);
         $restaurant->setEmails($emails);
-        $city->addRestaurant($restaurant);
-        $em->persist($city);
+        $restaurant->setCity($city);
         $em->persist($restaurant);
         $em->flush();
         return new View("Restaurant Added Successfully", Response::HTTP_OK);

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\SubCategory;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class SubCategoryController extends FOSRestController
 {
@@ -18,7 +20,7 @@ class SubCategoryController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->findBy([], ['position' => 'ASC']);
         if ($restresult === null) {
             return new View("there are no subcategories exist", Response::HTTP_NOT_FOUND);
         }
@@ -74,5 +76,24 @@ class SubCategoryController extends FOSRestController
             $em->flush();
         }
         return new View("Deleted successfully", Response::HTTP_OK);
+    }
+
+    /**
+     * Resorts an item using it's doctrine sortable property
+     * @param integer $id
+     * @param integer $position
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sortAction(Request $request)
+    {
+        $id = $request->request->get('id');
+        $position = $request->request->get('position');
+        $em = $this->getDoctrine()->getManager();
+        $subcategory = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->find($id);
+        $subcategory->setPosition($position);
+        $em->persist($subcategory);
+        $em->flush();
+
+        return new JsonResponse($subcategory->getPosition(), 200);
     }
 }

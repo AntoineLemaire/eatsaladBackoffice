@@ -37,11 +37,7 @@ class City
 
     /**
      * One City have Many Restaurants.
-     * @ORM\ManyToMany(targetEntity="Restaurant", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="city_restaurant",
-     *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id", unique=true, onDelete="CASCADE")},
-     *      )
+     * @ORM\OneToMany(targetEntity="Restaurant", cascade={"persist", "remove"}, mappedBy="city")
      */
     private $restaurants;
 

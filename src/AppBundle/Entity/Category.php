@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class Category
 {
@@ -22,6 +23,12 @@ class Category
     private $id;
 
     /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -31,6 +38,7 @@ class Category
     /**
      * One Category have Many SubCategories.
      * @ORM\OneToMany(targetEntity="SubCategory", mappedBy="category", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $subCategories;
 
@@ -54,9 +62,9 @@ class Category
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -64,7 +72,31 @@ class Category
     }
 
     /**
-     * Set name.
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return Category
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set name
      *
      * @param string $name
      *
@@ -78,7 +110,7 @@ class Category
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
@@ -88,7 +120,7 @@ class Category
     }
 
     /**
-     * Add subCategory.
+     * Add subCategory
      *
      * @param \AppBundle\Entity\SubCategory $subCategory
      *
@@ -102,19 +134,17 @@ class Category
     }
 
     /**
-     * Remove subCategory.
+     * Remove subCategory
      *
      * @param \AppBundle\Entity\SubCategory $subCategory
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeSubCategory(\AppBundle\Entity\SubCategory $subCategory)
     {
-        return $this->subCategories->removeElement($subCategory);
+        $this->subCategories->removeElement($subCategory);
     }
 
     /**
-     * Get subCategories.
+     * Get subCategories
      *
      * @return \Doctrine\Common\Collections\Collection
      */

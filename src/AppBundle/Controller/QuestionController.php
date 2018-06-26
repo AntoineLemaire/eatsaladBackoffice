@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Question;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class QuestionController extends FOSRestController
 {
@@ -18,7 +19,7 @@ class QuestionController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Question')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Question')->findBy([], ['position' => 'ASC']);
         if ($restresult === null) {
             return new View("there are no questions exist", Response::HTTP_NOT_FOUND);
         }
@@ -74,5 +75,24 @@ class QuestionController extends FOSRestController
             $em->flush();
         }
         return new View("Deleted successfully", Response::HTTP_OK);
+    }
+
+    /**
+     * Resorts an item using it's doctrine sortable property
+     * @param integer $id
+     * @param integer $position
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sortAction(Request $request)
+    {
+        $id = $request->request->get('id');
+        $position = $request->request->get('position');
+        $em = $this->getDoctrine()->getManager();
+        $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($id);
+        $question->setPosition($position);
+        $em->persist($question);
+        $em->flush();
+
+        return new JsonResponse($question->getPosition(), 200);
     }
 }

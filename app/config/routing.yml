@@ -2,6 +2,24 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+admin_question_sort:
+    path: /admin/question/sort
+    defaults:
+        _controller: AppBundle:Question:sort
+    methods:  POST
+
+admin_category_sort:
+    path: /admin/category/sort
+    defaults:
+        _controller: AppBundle:Category:sort
+    methods:  POST
+
+admin_subcategory_sort:
+    path: /admin/subcategory/sort
+    defaults:
+        _controller: AppBundle:SubCategory:sort
+    methods:  POST
+
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/AdminController.php"
     type:     annotation

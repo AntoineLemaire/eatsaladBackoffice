@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * SubCategory
+ *
+ * @ORM\Table(name="sub_category")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
+ */
+class SubCategory
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
+     * One SubCategory have Many Questions.
+     * @ORM\OneToMany(targetEntity="Question", cascade={"persist", "remove"}, mappedBy="subCategory")
+     */
+    private $questions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="subCategories")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the SubCategory in the select
+        return $this->name;
+        // to show the id of the SubCategory in the select
+        // return $this->id;
+    }
+
+}

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\Category;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CategoryController extends FOSRestController
 {
@@ -18,7 +19,7 @@ class CategoryController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy([], ['position' => 'ASC']);
         if ($restresult === null) {
             return new View("there are no category exist", Response::HTTP_NOT_FOUND);
         }
@@ -70,5 +71,24 @@ class CategoryController extends FOSRestController
             $em->flush();
         }
         return new View("Deleted successfully", Response::HTTP_OK);
+    }
+
+    /**
+     * Resorts an item using it's doctrine sortable property
+     * @param integer $id
+     * @param integer $position
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sortAction(Request $request)
+    {
+        $id = $request->request->get('id');
+        $position = $request->request->get('position');
+        $em = $this->getDoctrine()->getManager();
+        $category = $this->getDoctrine()->getRepository('AppBundle:Category')->find($id);
+        $category->setPosition($position);
+        $em->persist($category);
+        $em->flush();
+
+        return new JsonResponse($category->getPosition(), 200);
     }
 }

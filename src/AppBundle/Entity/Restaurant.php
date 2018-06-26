@@ -38,7 +38,7 @@ class Restaurant
     /**
      * @var array
      *
-     * @ORM\Column(name="emails", type="text")
+     * @ORM\Column(name="emails", type="array", nullable=false)
      */
     private $emails;
 
@@ -47,6 +47,12 @@ class Restaurant
      * @ORM\OneToMany(targetEntity="Evaluation", cascade={"persist", "remove"}, mappedBy="restaurant")
      */
     private $evaluations;
+
+    /**
+     * One Restaurant have Many Evaluations.
+     * @ORM\ManyToOne(targetEntity="City", cascade={"persist", "remove"}, inversedBy="restaurants")
+     */
+    private $city;
 
     /**
      * Generates the magic method
@@ -58,7 +64,6 @@ class Restaurant
         // to show the id of the Category in the select
         // return $this->id;
     }
-
     /**
      * Constructor
      */
@@ -68,9 +73,9 @@ class Restaurant
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +83,7 @@ class Restaurant
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
      *
@@ -92,7 +97,7 @@ class Restaurant
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
@@ -102,7 +107,7 @@ class Restaurant
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -116,7 +121,7 @@ class Restaurant
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -126,9 +131,9 @@ class Restaurant
     }
 
     /**
-     * Set emails.
+     * Set emails
      *
-     * @param string $emails
+     * @param array $emails
      *
      * @return Restaurant
      */
@@ -140,9 +145,9 @@ class Restaurant
     }
 
     /**
-     * Get emails.
+     * Get emails
      *
-     * @return string
+     * @return array
      */
     public function getEmails()
     {
@@ -150,7 +155,7 @@ class Restaurant
     }
 
     /**
-     * Add evaluation.
+     * Add evaluation
      *
      * @param \AppBundle\Entity\Evaluation $evaluation
      *
@@ -164,24 +169,46 @@ class Restaurant
     }
 
     /**
-     * Remove evaluation.
+     * Remove evaluation
      *
      * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
     {
-        return $this->evaluations->removeElement($evaluation);
+        $this->evaluations->removeElement($evaluation);
     }
 
     /**
-     * Get evaluations.
+     * Get evaluations
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvaluations()
     {
         return $this->evaluations;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \AppBundle\Entity\City $city
+     *
+     * @return Restaurant
+     */
+    public function setCity(\AppBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \AppBundle\Entity\City
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

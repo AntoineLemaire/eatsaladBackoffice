@@ -1,100 +1,103 @@
-<style type="text/Css">
-    <!--
-    table{
-        border-collapse: collapse;
+<style>
+    .header{
+        text-align: center;
     }
-    table,tr,td
-    {
-        border: none;
-        margin:0;
+    .header img{
+        margin-bottom: 50px;
     }
-    td{
-        padding:10px;
+    h2{
+        color: #89BD29;
     }
-    -->
+    .category-container{
+        padding: 5px;
+        page-break-after: always;
+    }
+    .subcategory-container{
+        background: #89BD29;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+    .background-score{
+        background-color: rgba(255,255,255,0.5);
+        height: 60px;
+        position: absolute;
+        top: -20px;
+        left: 0;
+    }
+    .evaluation-answer-container{
+        padding: 0 10px;
+    }
+    .evaluation-answer-container .row{
+        margin:10px auto;
+        color: #fff;
+        display: flex;
+        align-items:center;
+    }
+    .evaluation-answer-container .row:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    h3{
+        color: #fff;
+        text-align: center;
+    }
+    h3 .subcategory-score{
+        position: absolute;
+        right: 10px;
+    }
 </style>
-<page style="font-size: 14px">
-    <table cellspacing="0" border="0" cellpadding="0">
-        <tr>
-            <td colspan="2">
-                <table style="width: 100%; text-align: center">
-                    <tr>
-                        <td style="width: 100%;text-align: center"><img src="http://bmagne.ovh/eatsaladBackoffice/web/img/eatsalad-logo.png" alt="logo" width="300"/></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;margin-right: 10px;">Visite de conformité du restaurant {{ evaluation.getRestaurant().getName() }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;margin-right: 10px;">Score total : {{ evaluation.getScore() }}%</td>
-        </tr>
-        {% for category in categories %}
-            <tr style="page-break-before:always;">
-                <td colspan="2" style="text-align: center;color: #89BD29;">
-                     {{ category.getName() }}
-                </td>
-            </tr>
-            {% for subcategory in category.getSubCategories() %}
-                <tr style="border-top-left-radius: 8px;">
-                    <td style="text-align:left;background-image: linear-gradient(90deg, #ffffff {{ subcategory.score }}%, #bdd88c 0%)">
-                        {{ subcategory.getName() }}
-                    </td>
-                    <td style="text-align:right">
-                        {{ subcategory.score }}%
-                    </td>
-                </tr>
+<div class="header col-6">
+    <img width="300" src="{{ kernelRootDir }}/../web/img/eatsalad-logo.png" alt="">
+    <p style="text-align: center;margin-right: 10px;">Visite de conformité du restaurant {{ evaluation.getRestaurant().getName() }}</p>
+    <p style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</p>
+    <p style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</p>
+    <p style="text-align: center;margin-right: 10px;">Score total : {{ evaluation.getScore() }}%</p>
+</div>
+
+{% for category in categories %}
+    <div class="category-container">
+        <h2>{{ category.getName() }}</h2>
+        {% for subcategory in category.getSubCategories() %}
+            <div class="subcategory-container">
+                <div style="position: relative;margin-bottom: 30px;">
+                    <div class="background-score" style="width: {{ subcategory.score }}%"></div>
+                    <h3>{{ subcategory.getName() }}<span class="subcategory-score">{{ subcategory.score }}%</span></h3>
+                </div>
                 {% for evaluationAnswer in evaluation.getEvaluationAnswers() %}
                     {% if evaluationAnswer.getQuestion().getSubcategory().getId() == subcategory.getId() %}
-                        <tr style="background-color:#89BD29;">
-                            <td style="color:#ffffff;width: 70%;">{{ evaluationAnswer.getQuestion().getQuestion() }}</td>
-                            <td style="width:30%;text-align: center;">
+                        <div class="evaluation-answer-container">
+                            <div class="row">
+                                <span style="float:left;width: 70%;line-height: 40px">{{ evaluationAnswer.getQuestion().getQuestion() }}</span>
                             {% if evaluationAnswer.getAnswer().getScore() == 0 %}
-                                <span style="width:70%;text-transform:uppercase;background-color:#c30004;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                                <span style="width: 250px;float:left;text-transform:uppercase;background-color:#c30004;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
                             {% elseif evaluationAnswer.getAnswer().getScore() == 1 %}
-                                <span style="width:70%;text-transform:uppercase;background-color:#fc6308;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                                <span style="width: 250px;float:left;text-transform:uppercase;background-color:#fc6308;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
                             {% elseif evaluationAnswer.getAnswer().getScore() == 2 %}
-                                <span style="width:70%;text-transform:uppercase;background-color:#fece09;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                                <span style="width: 250px;float:left;text-transform:uppercase;background-color:#fece09;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
                             {% elseif evaluationAnswer.getAnswer().getScore() == 3 %}
-                                <span style="width:70%;text-transform:uppercase;background-color:#1cd304;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;display:block;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
+                                <span style="width: 250px;float:left;text-transform:uppercase;background-color:#1cd304;border-radius: 8px;color: #fff;padding: 10px 5px;margin: 0 auto;font-weight: 600;text-align:center;">{{ evaluationAnswer.getAnswer() }}</span>
                             {% endif %}
-                            </td>
-                        </tr>
-                        {% if evaluationAnswer.getComment() is not empty %}
-                            <tr style="background-color:#89BD29;">
-                                <td colspan="2" >
-                                    <p style="text-align:center;color:#fff">"{{ evaluationAnswer.getComment() }}"</p>
-                                </td>
-                            </tr>
-                        {% endif %}
-                        {% if evaluationAnswer.getImages() is not empty %}
-                            <tr style="background-color:#89BD29;">
-                                <td colspan="2" style="text-align:center">
+                            </div>
+                            {% if evaluationAnswer.getImages() is not empty %}
+                                <div style="background-color:#89BD29;width: 100%;display: flex;justify-content: space-around;">
                                     {% for image in evaluationAnswer.getImages() %}
-                                        <img style="padding:1px;height:auto;margin:0 auto;text-align:center;border-radius:2px; width: 24%;" src="http://bmagne.ovh/eatsaladBackoffice/web/uploads/evaluations/{{ image.getPath() ~ image.getName() }}" />
+                                        <img style="padding:1px;height:auto;margin:0 auto;text-align:center;border-radius:2px; width: 24%;" src="{{ kernelRootDir }}/uploads/evaluations/{{ image.getPath() ~ image.getName() }}" />
                                     {% endfor %}
-                                </td>
-                            </tr>
-                        {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if evaluationAnswer.getComment() is not empty %}
+                                <div style="background-color:#89BD29;width: 100%;clear: both;margin-bottom: 20px;">
+                                    <p style="text-align:center;color:#fff">"{{ evaluationAnswer.getComment() }}"</p>
+                                </div>
+                            {% endif %}
+                        </div>
                     {% endif %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         {% endfor %}
-    </table>
-</page>
+    </div>
+{% endfor %}

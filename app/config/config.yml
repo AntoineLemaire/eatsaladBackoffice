@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: doctrine_extensions.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -36,6 +37,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        kernelRootDir: "%kernel.root_dir%/../web"
 
 # Doctrine Configuration
 doctrine:
@@ -61,7 +64,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
+    transport: gmail
     host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
@@ -93,16 +96,37 @@ easy_admin:
         Answer:
             class: AppBundle\Entity\Answer
         Question:
+            disabled_actions: ['search']
             class: AppBundle\Entity\Question
+            new:
+                fields:
+                    - { property: 'position', icon: 'position'}
+                    - { property: 'question', icon: 'question' }
+                    - { property: 'subCategory', icon: 'question', label: 'Sous catégorie' }
             edit:
                 fields:
-                    - { property: 'position', icon: 'position', help: 'Position de la question dans la sous-catégorie' }
+                    - { property: 'position', icon: 'position'}
                     - { property: 'question', icon: 'question' }
-                    - { property: 'subCategory', icon: 'question' }
+                    - { property: 'subCategory', icon: 'question', label: 'Sous catégorie' }
+            list:
+                sort: ['position', 'ASC']
+                fields: ['position', 'question', 'subCategory']
+                max_results: 500
+            search:
+                sort: ['position', 'ASC']
+
         Category:
             class: AppBundle\Entity\Category
+            list:
+                sort: ['position', 'ASC']
+                fields: ['position', 'name']
+                max_results: 500
         SubCategory:
             class: AppBundle\Entity\SubCategory
+            list:
+                sort: ['position', 'ASC']
+                fields: ['position', 'name', 'category']
+                max_results: 500
             edit:
                 fields:
                     - { property: 'name'}
@@ -110,14 +134,34 @@ easy_admin:
                     - { property: 'questions', type: 'entity', type_options: { class: 'AppBundle\Entity\Question', multiple: true } }
         Evaluation:
             class: AppBundle\Entity\Evaluation
+            disabled_actions: ['new', 'edit']
             list:
-                fields: ['id', 'restaurant', { property: 'score', label: 'Score' }, { property: 'date', type: 'date', format: 'd/m/Y' }, { property: 'controllerName', label: 'Controlleur' }, { property: 'accepted', label: 'Acceptation par le franchisé', type: 'boolean' }]
+                fields: ['id', 'restaurant', { property: 'comment', label: 'Commentaire' }, { property: 'score', label: 'Score' }, { property: 'date', type: 'date', format: 'd/m/Y' }, { property: 'controllerName', label: 'Controlleur' }, { property: 'accepted', label: 'Acceptation par le franchisé', type: 'boolean' }]
                 actions:
                     - { label: '', name: 'report_download', icon: 'file-text-o', type: 'route' }
+                    - { label: '', name: 'statistics_download', icon: 'bar-chart', type: 'route' }
         Restaurant:
             class: AppBundle\Entity\Restaurant
+            list:
+                fields: ['name', 'address', 'emails', 'city']
+            edit:
+                fields:
+                    - { property: 'name', label: 'Nom'}
+                    - { property: 'address', label: 'Adresse'}
+                    - { property: 'emails' }
+                    - { property: 'city' }
+            new:
+                fields:
+                    - { property: 'name', label: 'Nom'}
+                    - { property: 'address', label: 'Adresse'}
+                    - { property: 'emails' }
+                    - { property: 'city' }
         City:
             class: AppBundle\Entity\City
+            edit:
+                fields:
+                    - { property: 'name', label: 'Nom'}
+                    - { property: 'postcode', label: 'Code postal' }
 
 # Nelmio CORS Configuration
 nelmio_cors:
@@ -143,14 +187,23 @@ fos_rest:
         formats:
             json: true
 
-# Stof\DoctrineExtensionsBundle configuration
 stof_doctrine_extensions:
     orm:
         default:
             sortable: true
+            tree: true
 
 knp_snappy:
+    temporary_folder: %kernel.cache_dir%/snappy
     pdf:
         enabled:    true
-        binary:     /home/bmagneovix/wkhtmltox/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        binary:     /usr/bin/wkhtmltox/bin/wkhtmltopdf
+        options:
+            no-outline: true
+            page-size: LETTER
+            # Recommended to set UTF-8 as default encoding :)
+            encoding: UTF-8
+    image:
+        enabled:    true
+        binary:     /usr/bin/wkhtmltox/bin/wkhtmltoimage
         options:    []

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Question
  *
  * @ORM\Table(name="question")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\QuestionRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class Question
 {
@@ -36,6 +36,7 @@ class Question
     private $question;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="SubCategory", inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
      */

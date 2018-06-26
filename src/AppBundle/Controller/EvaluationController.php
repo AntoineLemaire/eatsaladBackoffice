@@ -14,6 +14,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use AppBundle\Service\HtmlToPdf;
 // Import the BinaryFileResponse
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+
 
 class EvaluationController extends FOSRestController
 {
@@ -145,6 +147,22 @@ class EvaluationController extends FOSRestController
     }
 
     /**
+     * @Rest\Post("/rest/evaluation/comment")
+     */
+    public function commentAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id_evaluation = $request->request->get('id_evaluation');
+        $comment = $request->request->get('comment');
+        $evaluation = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+        $evaluation->setComment($comment);
+        $em->persist($evaluation);
+        $em->flush();
+
+        return new View("Comment added successfully", Response::HTTP_OK);
+    }
+
+    /**
      * @Rest\Post("/rest/evaluation-signature/upload")
      */
     public function uploadSignatureAction(Request $request)
@@ -171,7 +189,7 @@ class EvaluationController extends FOSRestController
     /**
      * @Rest\Post("/rest/evaluation/report")
      */
-    public function createReport(Request $request)
+    public function createReport(Request $request, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $id_evaluation = $request->request->get('id_evaluation');
@@ -197,7 +215,7 @@ class EvaluationController extends FOSRestController
         if(!$successController || empty($controllerName))
             return new View("Error while uploading controller data", Response::HTTP_NOT_ACCEPTABLE);
 
-        if($franchisedImage != null){
+        if($franchisedImage != null || $franchisedImage != ""){
             $franchisedBase64 = str_replace('data:image/png;base64,', '', $franchisedImage);
             $franchisedSignature = base64_decode(str_replace(' ', '+', $franchisedBase64));
             $franchisedPath = $id_evaluation.'/signatures/franchised.png';
@@ -238,26 +256,32 @@ class EvaluationController extends FOSRestController
                 return new View("An error occurred while creating pdf directory at ".$exception->getPath(), Response::HTTP_NOT_ACCEPTABLE);
             }
         }
-        $this->get('knp_snappy.pdf')->generateFromHtml(
-            $this->renderView(
-                'Pdf/pdf-report.html.twig',
-                array(
-                    'evaluation'  => $evaluation,
-                )
-            ),
-            $restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId()
-        );
-        $this->get('knp_snappy.pdf')->generateFromHtml(
-            $this->renderView(
-                'Pdf/pdf-statistic.html.twig',
-                array(
-                    'evaluation'  => $evaluation,
-                    'categories' => $categories
-                )
-            ),
-            $restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId()
-        );
-        return new View("Report printed", Response::HTTP_OK);
+
+        $report = $this->get('knp_snappy.pdf')->getOutputFromHtml($templateReport);
+        file_put_contents($restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId().'.pdf', $report);
+
+        $statistics = $this->get('knp_snappy.pdf')->getOutputFromHtml($templateStatistic);
+        file_put_contents($restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId().'.pdf', $statistics);
+
+        foreach ($evaluation->getRestaurant()->getEmails() as $index => $email) {
+            $message = (new \Swift_Message('Viste de conformité'))
+               ->setFrom('bmagne@me.com')
+               ->setTo($email)
+                ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId().'.pdf'))
+                ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId().'.pdf'))
+                ->setBody(
+                   $this->renderView(
+                       'Email/evaluation-conformite.html.twig',
+                       array(
+                           'evaluation' => $evaluation
+                       )
+                   ),
+                   'text/html'
+               );
+            $this->get('mailer')->send($message);
+
+        }
+        return new Response('Rapport généré et Email envoyé', 200);
     }
 
     /**
@@ -271,6 +295,23 @@ class EvaluationController extends FOSRestController
         $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
 
         $filePath = $this->container->getParameter('photos_directory') . '/' . $evaluation->getId() . '/pdf/visite-de-conformité-' . $evaluation->getId() . '.pdf';
+
+        // This should return the file located in /mySymfonyProject/web/public-resources/TextFile.txt
+        // to being viewed in the Browser
+        return new BinaryFileResponse($filePath);
+    }
+
+    /**
+     * @Route(path = "/admin/evaluation/statistics/download", name = "statistics_download")
+     */
+    public function statisticsDownload(Request $request)
+    {
+        // change the properties of the given entity and save the changes
+        $em = $this->getDoctrine()->getManager();
+        $id_evaluation = $request->query->get('id');
+        $evaluation = $em->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+
+        $filePath = $this->container->getParameter('photos_directory') . '/' . $evaluation->getId() . '/pdf/statistiques-' . $evaluation->getId() . '.pdf';
 
         // This should return the file located in /mySymfonyProject/web/public-resources/TextFile.txt
         // to being viewed in the Browser

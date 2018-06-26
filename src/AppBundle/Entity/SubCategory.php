@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * SubCategory
  *
  * @ORM\Table(name="sub_category")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SubCategoryRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class SubCategory
 {
@@ -29,8 +30,15 @@ class SubCategory
     private $name;
 
     /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
      * One SubCategory have Many Questions.
      * @ORM\OneToMany(targetEntity="Question", cascade={"persist", "remove"}, mappedBy="subCategory")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
 
@@ -60,9 +68,9 @@ class SubCategory
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +78,7 @@ class SubCategory
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
      *
@@ -84,7 +92,7 @@ class SubCategory
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
@@ -94,7 +102,31 @@ class SubCategory
     }
 
     /**
-     * Add question.
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return SubCategory
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Add question
      *
      * @param \AppBundle\Entity\Question $question
      *
@@ -108,19 +140,17 @@ class SubCategory
     }
 
     /**
-     * Remove question.
+     * Remove question
      *
      * @param \AppBundle\Entity\Question $question
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeQuestion(\AppBundle\Entity\Question $question)
     {
-        return $this->questions->removeElement($question);
+        $this->questions->removeElement($question);
     }
 
     /**
-     * Get questions.
+     * Get questions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -130,7 +160,7 @@ class SubCategory
     }
 
     /**
-     * Set category.
+     * Set category
      *
      * @param \AppBundle\Entity\Category $category
      *
@@ -144,7 +174,7 @@ class SubCategory
     }
 
     /**
-     * Get category.
+     * Get category
      *
      * @return \AppBundle\Entity\Category
      */
