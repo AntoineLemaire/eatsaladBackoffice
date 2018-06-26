@@ -267,7 +267,7 @@ class EvaluationController extends FOSRestController
 
         foreach ($evaluation->getRestaurant()->getEmails() as $index => $email) {
             $message = (new \Swift_Message('Viste de conformité'))
-               ->setFrom('bmagne@me.com')
+               ->setFrom('benmgne@gmail.com')
                ->setTo($email)
                 ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId().'.pdf'))
                 ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId().'.pdf'))
@@ -283,7 +283,7 @@ class EvaluationController extends FOSRestController
             $this->get('mailer')->send($message);
 
         }
-        return new Response('Rapport généré et Email envoyé', 200);
+        return 'Rapport généré et Email envoyé';
     }
 
     /**

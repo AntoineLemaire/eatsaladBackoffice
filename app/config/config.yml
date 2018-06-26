@@ -62,6 +62,16 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: gmail
@@ -90,9 +100,36 @@ easy_admin:
             - { entity: 'Answer', label: 'Réponses', icon: 'comment' }
             - { entity: 'City', label: 'Villes', icon: 'map-marker' }
             - { entity: 'Restaurant', label: 'Restaurants', icon: 'cutlery' }
+            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
         assets:
             favicon: '/assets/backend/favicon.png'
     entities:
+        User:
+            class: AppBundle\Entity\User
+            form:
+                fields:
+                    - firstname
+                    - lastname
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+            edit:
+                fields:
+                    # ...
+                    - { property: 'plainPassword', type_options: { required: false} }
+            list:
+                fields: ['firstname', 'lastname', 'email', 'enabled', 'lastLogin', 'roles']
+                form_options: { validation_groups: ['Profile'] }
+            new:
+                fields:
+                    # ...
+                    - { property: 'plainPassword', type_options: { required: true} }
+                    # ...
+                form_options: { validation_groups: ['Registration'] }
         Answer:
             class: AppBundle\Entity\Answer
         Question:
@@ -179,8 +216,9 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: '^/rest', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: ^/rest, priorities: [ html, json, xml ], fallback_format: ~, prefer_extension: true }
             - { path: '^/admin', stop: true }
+            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: html, prefer_extension: true }
     param_fetcher_listener: true
     view:
         view_response_listener: 'force'
