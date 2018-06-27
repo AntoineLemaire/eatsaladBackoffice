@@ -1,0 +1,159 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Evaluation
+ *
+ * @ORM\Table(name="evaluation")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EvaluationRepository")
+ */
+class Evaluation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="subcategories_done", type="array", nullable=false)
+     */
+    private $subcategoriesDone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="controller_name", type="string", length=255, nullable=true)
+     */
+    private $controllerName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="controller_signature", type="string", length=255, nullable=true)
+     */
+    private $controllerSignature;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="franchised_signature", type="text", nullable=true)
+     */
+    private $franchisedSignature;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="evaluations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="accepted", type="boolean", nullable=true)
+     */
+    private $accepted;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="temp", type="boolean", nullable=false)
+     */
+    private $temp;
+
+    /**
+     * One Evaluation have Many EvaluationAnswers.
+     * @ORM\ManyToMany(targetEntity="EvaluationAnswer", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="evaluation_evaluation_answer",
+     *      joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evaluation_answer_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
+     *      )
+     */
+    private $evaluationAnswers;
+
+    /**
+     * Generates the magic method
+     *
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return "Évaluation du ".$this->date->format('Y-m-d H:i:s');
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+
+    /**
+     * Generate the total score
+     *
+     * @return int
+     */
+    public function getScore()
+    {
+        $totalScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            $totalScore += $evaluationAnswer->getAnswer()->getScore();
+            $totalQuestions++;
+        }
+        return round(($totalScore / ($totalQuestions * 3)) * 100);
+    }
+
+    /**
+     * Generate the total score
+     *
+     * @return int
+     */
+    public function getSubcategoryScore($id_subcategory)
+    {
+        $subcategoryScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            if ($evaluationAnswer->getQuestion()->getSubcategory()->getId() == $id_subcategory){
+                $subcategoryScore += $evaluationAnswer->getAnswer()->getScore();
+                $totalQuestions++;
+            }
+        }
+        return round(($subcategoryScore / ($totalQuestions * 3)) * 100);
+    }
+
+    /**
+     * Generate the category score
+     *
+     * @return int
+     */
+    public function getCategoryScore($id_category)
+    {
+        $categoryScore = 0;
+        $totalQuestions = 0;
+        foreach ($this->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            if ($evaluationAnswer->getQuestion()->getSubcategory()->getCategory()->getId() == $id_category){
+                $categoryScore += $evaluationAnswer->getAnswer()->getScore();
+                $totalQuestions++;
+            }
+        }
+        return round(($categoryScore / ($totalQuestions * 3)) * 100);
+    }
+
+}

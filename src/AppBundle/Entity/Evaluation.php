@@ -77,6 +77,13 @@ class Evaluation
     private $accepted;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="temp", type="boolean", nullable=false)
+     */
+    private $temp;
+
+    /**
      * One Evaluation have Many EvaluationAnswers.
      * @ORM\ManyToMany(targetEntity="EvaluationAnswer", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="evaluation_evaluation_answer",
@@ -158,9 +165,9 @@ class Evaluation
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -168,7 +175,7 @@ class Evaluation
     }
 
     /**
-     * Set date.
+     * Set date
      *
      * @param \DateTime $date
      *
@@ -182,7 +189,7 @@ class Evaluation
     }
 
     /**
-     * Get date.
+     * Get date
      *
      * @return \DateTime
      */
@@ -192,13 +199,13 @@ class Evaluation
     }
 
     /**
-     * Set comment.
+     * Set comment
      *
-     * @param string|null $comment
+     * @param string $comment
      *
      * @return Evaluation
      */
-    public function setComment($comment = null)
+    public function setComment($comment)
     {
         $this->comment = $comment;
 
@@ -206,9 +213,9 @@ class Evaluation
     }
 
     /**
-     * Get comment.
+     * Get comment
      *
-     * @return string|null
+     * @return string
      */
     public function getComment()
     {
@@ -216,7 +223,7 @@ class Evaluation
     }
 
     /**
-     * Set subcategoriesDone.
+     * Set subcategoriesDone
      *
      * @param array $subcategoriesDone
      *
@@ -230,7 +237,7 @@ class Evaluation
     }
 
     /**
-     * Get subcategoriesDone.
+     * Get subcategoriesDone
      *
      * @return array
      */
@@ -240,13 +247,13 @@ class Evaluation
     }
 
     /**
-     * Set controllerName.
+     * Set controllerName
      *
-     * @param string|null $controllerName
+     * @param string $controllerName
      *
      * @return Evaluation
      */
-    public function setControllerName($controllerName = null)
+    public function setControllerName($controllerName)
     {
         $this->controllerName = $controllerName;
 
@@ -254,9 +261,9 @@ class Evaluation
     }
 
     /**
-     * Get controllerName.
+     * Get controllerName
      *
-     * @return string|null
+     * @return string
      */
     public function getControllerName()
     {
@@ -264,13 +271,13 @@ class Evaluation
     }
 
     /**
-     * Set controllerSignature.
+     * Set controllerSignature
      *
-     * @param string|null $controllerSignature
+     * @param string $controllerSignature
      *
      * @return Evaluation
      */
-    public function setControllerSignature($controllerSignature = null)
+    public function setControllerSignature($controllerSignature)
     {
         $this->controllerSignature = $controllerSignature;
 
@@ -278,9 +285,9 @@ class Evaluation
     }
 
     /**
-     * Get controllerSignature.
+     * Get controllerSignature
      *
-     * @return string|null
+     * @return string
      */
     public function getControllerSignature()
     {
@@ -288,13 +295,13 @@ class Evaluation
     }
 
     /**
-     * Set franchisedSignature.
+     * Set franchisedSignature
      *
-     * @param string|null $franchisedSignature
+     * @param string $franchisedSignature
      *
      * @return Evaluation
      */
-    public function setFranchisedSignature($franchisedSignature = null)
+    public function setFranchisedSignature($franchisedSignature)
     {
         $this->franchisedSignature = $franchisedSignature;
 
@@ -302,9 +309,9 @@ class Evaluation
     }
 
     /**
-     * Get franchisedSignature.
+     * Get franchisedSignature
      *
-     * @return string|null
+     * @return string
      */
     public function getFranchisedSignature()
     {
@@ -312,13 +319,13 @@ class Evaluation
     }
 
     /**
-     * Set accepted.
+     * Set accepted
      *
-     * @param bool|null $accepted
+     * @param boolean $accepted
      *
      * @return Evaluation
      */
-    public function setAccepted($accepted = null)
+    public function setAccepted($accepted)
     {
         $this->accepted = $accepted;
 
@@ -326,9 +333,9 @@ class Evaluation
     }
 
     /**
-     * Get accepted.
+     * Get accepted
      *
-     * @return bool|null
+     * @return boolean
      */
     public function getAccepted()
     {
@@ -336,7 +343,31 @@ class Evaluation
     }
 
     /**
-     * Set restaurant.
+     * Set temp
+     *
+     * @param boolean $temp
+     *
+     * @return Evaluation
+     */
+    public function setTemp($temp)
+    {
+        $this->temp = $temp;
+
+        return $this;
+    }
+
+    /**
+     * Get temp
+     *
+     * @return boolean
+     */
+    public function getTemp()
+    {
+        return $this->temp;
+    }
+
+    /**
+     * Set restaurant
      *
      * @param \AppBundle\Entity\Restaurant $restaurant
      *
@@ -350,9 +381,9 @@ class Evaluation
     }
 
     /**
-     * Get restaurant.
+     * Get restaurant
      *
-     * @return \AppBundle\Entity\Evaluation
+     * @return \AppBundle\Entity\Restaurant
      */
     public function getRestaurant()
     {
@@ -360,7 +391,7 @@ class Evaluation
     }
 
     /**
-     * Add evaluationAnswer.
+     * Add evaluationAnswer
      *
      * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
      *
@@ -374,19 +405,17 @@ class Evaluation
     }
 
     /**
-     * Remove evaluationAnswer.
+     * Remove evaluationAnswer
      *
      * @param \AppBundle\Entity\EvaluationAnswer $evaluationAnswer
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeEvaluationAnswer(\AppBundle\Entity\EvaluationAnswer $evaluationAnswer)
     {
-        return $this->evaluationAnswers->removeElement($evaluationAnswer);
+        $this->evaluationAnswers->removeElement($evaluationAnswer);
     }
 
     /**
-     * Get evaluationAnswers.
+     * Get evaluationAnswers
      *
      * @return \Doctrine\Common\Collections\Collection
      */

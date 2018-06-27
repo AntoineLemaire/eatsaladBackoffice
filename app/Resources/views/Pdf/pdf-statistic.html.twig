@@ -25,6 +25,8 @@
         background: #89BD29;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
         overflow: hidden;
         margin-top: 30px;
     }
@@ -60,7 +62,7 @@
     }
 </style>
 <div class="header col-6">
-    <img width="300" src="{{ kernelRootDir }}/web/img/eatsalad-logo.png" alt="">
+    <img width="300" src="{{ kernelRootDir }}/img/eatsalad-logo.png" alt="">
     <p style="text-align: center;margin-right: 10px;">Visite de conformité du restaurant {{ evaluation.getRestaurant().getName() }}</p>
     <p style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</p>
     <p style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</p>
