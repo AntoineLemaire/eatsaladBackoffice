@@ -136,7 +136,7 @@ class EvaluationController extends FOSRestController
             $restPath = $this->container->getParameter('photos_directory');
             $evaluationAnswers = $evaluation->getEvaluationAnswers();
             foreach ($evaluationAnswers as $index => $evaluationAnswer) {
-                $photos = $evaluationAnswer->getPhotos();
+                $photos = $evaluationAnswer->getImages();
                 foreach ($photos as $index => $photo) {
                     $fileSystem->remove($restPath.'/'.$evaluation->getId());
                 }
@@ -243,10 +243,10 @@ class EvaluationController extends FOSRestController
 
         foreach ($categories as $index => &$category) {
             $categoryScore = $evaluation->getCategoryScore($category->getId());
-            $category->score = $categoryScore;
+            $category->setScore($categoryScore);
             foreach ($category->getSubcategories() as $index => &$subcategory) {
                 $subCategoryScore = $evaluation->getSubcategoryScore($subcategory->getId());
-                $subcategory->score = $subCategoryScore;
+                $subcategory->setScore($subCategoryScore);
             }
         }
         // Create pdf
@@ -269,7 +269,7 @@ class EvaluationController extends FOSRestController
 
         foreach ($evaluation->getRestaurant()->getEmails() as $index => $email) {
             $message = (new \Swift_Message('Viste de conformité'))
-               ->setFrom('benmgne@gmail.com')
+               ->setFrom('corporate.barat@gmail.com')
                ->setTo($email)
                 ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/statistiques-'.$evaluation->getId().'.pdf'))
                 ->attach(\Swift_Attachment::fromPath($restPath.'/'.$id_evaluation.'/pdf/visite-de-conformité-'.$evaluation->getId().'.pdf'))

@@ -36,6 +36,11 @@ class SubCategory
     private $position;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
+    /**
      * One SubCategory have Many Questions.
      * @ORM\OneToMany(targetEntity="Question", cascade={"persist", "remove"}, mappedBy="subCategory")
      * @ORM\OrderBy({"position" = "ASC"})
@@ -123,6 +128,30 @@ class SubCategory
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return SubCategory
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**

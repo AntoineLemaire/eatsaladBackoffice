@@ -114,7 +114,7 @@
     {% set _list_item_actions = easyadmin_get_actions_for_list_item(_entity_config.name) %}
 
     <div class="table-responsive">
-    <table draggable="true" class="table">
+    <table class="table">
         <thead>
         {% block table_head %}
             <tr>
@@ -145,7 +145,7 @@
         {% endblock table_head %}
         </thead>
 
-        <tbody class="sortable-ui" data-url="{{ path('admin_category_sort') }}">
+        <tbody draggable="true" class="sortable-ui" data-url="{{ path('admin_category_sort') }}">
         {% block table_body %}
             {% for item in paginator.currentPageResults %}
                 {# the empty string concatenation is needed when the primary key is an object (e.g. an Uuid object) #}

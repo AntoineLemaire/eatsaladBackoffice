@@ -7,7 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
     photos_directory: '%kernel.project_dir%/web/uploads/evaluations'
 
 framework:
@@ -74,23 +74,24 @@ fos_user:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: gmail
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
 
 # EasyAdmin Configuration
 easy_admin:
     list:
         actions:
+            - { name: 'show', icon: '', label: 'Détail' }
             - { name: 'edit', icon: 'pencil', label: '' }
             - { name: 'delete', icon: 'trash', label: '' }
     site_name: 'EatSalad'
     design:
-        brand_color: '#76B728'
+        brand_color: '#8DC26F'
         menu:
-            - { entity: 'Evaluation', label: 'Évaluation', icon: 'check-circle', default: true }
+            - { entity: 'Evaluation', label: 'Évaluations', icon: 'check-circle', default: true }
             - label: 'Questions'
               icon: 'tasks'
               children:
@@ -100,12 +101,14 @@ easy_admin:
             - { entity: 'Answer', label: 'Réponses', icon: 'comment' }
             - { entity: 'City', label: 'Villes', icon: 'map-marker' }
             - { entity: 'Restaurant', label: 'Restaurants', icon: 'cutlery' }
-            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
+            - { entity: 'User', label: 'Utilisateurs', icon: 'user'}
         assets:
-            favicon: '/assets/backend/favicon.png'
+            favicon: '/favicon.png'
     entities:
         User:
+            label: 'Utilisateurs'
             class: AppBundle\Entity\User
+            disabled_actions: ['show']
             form:
                 fields:
                     - firstname
@@ -124,6 +127,8 @@ easy_admin:
             list:
                 fields: ['firstname', 'lastname', 'email', 'enabled', 'lastLogin', 'roles']
                 form_options: { validation_groups: ['Profile'] }
+                #dql_filter: "entity.roles NOT LIKE '%ROLE_ADMIN%'"
+
             new:
                 fields:
                     # ...
@@ -131,9 +136,17 @@ easy_admin:
                     # ...
                 form_options: { validation_groups: ['Registration'] }
         Answer:
+            label: 'Réponses'
+            disabled_actions: ['search', 'show']
             class: AppBundle\Entity\Answer
+            list:
+                fields:
+                    - { property: 'id'}
+                    - { property: 'answer', label: 'Réponse' }
+                    - { property: 'score'}
         Question:
-            disabled_actions: ['search']
+            label: 'Questions'
+            disabled_actions: ['search', 'show']
             class: AppBundle\Entity\Question
             new:
                 fields:
@@ -147,41 +160,65 @@ easy_admin:
                     - { property: 'subCategory', icon: 'question', label: 'Sous catégorie' }
             list:
                 sort: ['position', 'ASC']
-                fields: ['position', 'question', 'subCategory']
+                fields:
+                    - { property: 'position'}
+                    - { property: 'Question' }
+                    - { property: 'subCategory', label: 'Sous-catégorie' }
                 max_results: 500
             search:
                 sort: ['position', 'ASC']
 
         Category:
             class: AppBundle\Entity\Category
+            label: 'Categories'
+            disabled_actions: ['show']
             list:
                 sort: ['position', 'ASC']
                 fields: ['position', 'name']
                 max_results: 500
+            new:
+                fields: ['position', 'name']
+            edit:
+                fields: ['position', 'name']
         SubCategory:
+            disabled_actions: ['show']
+            label: 'Sous catégories'
             class: AppBundle\Entity\SubCategory
             list:
                 sort: ['position', 'ASC']
                 fields: ['position', 'name', 'category']
                 max_results: 500
             edit:
-                fields:
-                    - { property: 'name'}
-                    - { property: 'category'}
-                    - { property: 'questions', type: 'entity', type_options: { class: 'AppBundle\Entity\Question', multiple: true } }
+                fields: ['position', 'name']
+
         Evaluation:
+            label: 'Évaluations'
             class: AppBundle\Entity\Evaluation
-            disabled_actions: ['new', 'edit']
+            disabled_actions: ['new', 'edit', 'delete']
+            show:
+                fields: ['id', 'restaurant', { property: 'comment', label: 'Commentaire' }, { property: 'score', label: 'Score' }, { property: 'date', type: 'date', format: 'd/m/Y' }, { property: 'controllerName', label: 'Controlleur' }, { property: 'accepted', label: 'Acceptation par le franchisé', type: 'boolean' }]
+                actions:
+                    - { name: 'report_download', label: 'Télécharger le rapport signé', icon: 'file-text-o', type: 'route' }
+                    - { name: 'statistics_download', label: 'Télécharger le rapport statistique', icon: 'bar-chart', type: 'route' }
             list:
+                max_results: 500
                 dql_filter: "entity.temp != 1"
                 fields: ['id', 'restaurant', { property: 'comment', label: 'Commentaire' }, { property: 'score', label: 'Score' }, { property: 'date', type: 'date', format: 'd/m/Y' }, { property: 'controllerName', label: 'Controlleur' }, { property: 'accepted', label: 'Acceptation par le franchisé', type: 'boolean' }]
                 actions:
                     - { label: '', name: 'report_download', icon: 'file-text-o', type: 'route' }
                     - { label: '', name: 'statistics_download', icon: 'bar-chart', type: 'route' }
         Restaurant:
+            label: 'Restaurants'
             class: AppBundle\Entity\Restaurant
             list:
-                fields: ['name', 'address', 'emails', 'city']
+                max_results: 100
+                fields:
+                    - { property: 'id'}
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'address', label: 'Adresse' }
+                    - { property: 'emails'}
+                    - { property: 'city', label: 'Ville'}
+                    - { property: 'evaluations', label: 'Évaluations', template: 'evaluations.html.twig' }
             edit:
                 fields:
                     - { property: 'name', label: 'Nom'}
@@ -195,7 +232,15 @@ easy_admin:
                     - { property: 'emails' }
                     - { property: 'city' }
         City:
+            label: 'Villes'
+            disabled_actions: ['search', 'show']
             class: AppBundle\Entity\City
+            list:
+                fields:
+                    - { property: 'id'}
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'postcode', label: 'Code Postal' }
+                    - { property: 'restaurants'}
             edit:
                 fields:
                     - { property: 'name', label: 'Nom'}
@@ -203,14 +248,22 @@ easy_admin:
 
 # Nelmio CORS Configuration
 nelmio_cors:
-    defaults:
-        allow_credentials: false
-        allow_origin: ['*']
-        allow_headers: ['*']
-        allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-        max_age: 3600
-        hosts: []
-        origin_regex: false
+        defaults:
+            allow_credentials: false
+            allow_origin: []
+            allow_headers: []
+            allow_methods: []
+            expose_headers: []
+            max_age: 0
+            hosts: []
+            origin_regex: false
+            forced_allow_origin_value: ~
+        paths:
+            '^/rest/':
+                allow_origin: ['*']
+                allow_headers: ['X-Custom-Auth']
+                allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+                max_age: 3600
 
 # FOSRest Configuration
 fos_rest:

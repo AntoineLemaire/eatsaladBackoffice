@@ -36,8 +36,14 @@ class SubCategory
     private $position;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
+    /**
      * One SubCategory have Many Questions.
      * @ORM\OneToMany(targetEntity="Question", cascade={"persist", "remove"}, mappedBy="subCategory")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
 

@@ -125,6 +125,22 @@ class Evaluation
      *
      * @return int
      */
+    public function removeSubcategoryDone($id_subcategory)
+    {
+        $subcategoriesDone = $this->getSubcategoriesDone();
+        if (($key = array_search($id_subcategory, $subcategoriesDone)) !== false) {
+            unset($subcategoriesDone[$key]);
+        }
+        $this->setSubcategoriesDone($subcategoriesDone);
+
+        return $this;
+    }
+
+    /**
+     * Generate the total score
+     *
+     * @return int
+     */
     public function getSubcategoryScore($id_subcategory)
     {
         $subcategoryScore = 0;
@@ -135,7 +151,10 @@ class Evaluation
                 $totalQuestions++;
             }
         }
-        return round(($subcategoryScore / ($totalQuestions * 3)) * 100);
+        if ($totalQuestions == 0)
+            return 0;
+        else
+            return round(($subcategoryScore / ($totalQuestions * 3)) * 100);
     }
 
     /**
@@ -153,7 +172,10 @@ class Evaluation
                 $totalQuestions++;
             }
         }
-        return round(($categoryScore / ($totalQuestions * 3)) * 100);
+        if ($totalQuestions == 0)
+            return 0;
+        else
+            return round(($categoryScore / ($totalQuestions * 3)) * 100);
     }
 
     /**

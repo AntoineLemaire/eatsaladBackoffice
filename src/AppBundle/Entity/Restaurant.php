@@ -45,6 +45,7 @@ class Restaurant
     /**
      * One Restaurant have Many Evaluations.
      * @ORM\OneToMany(targetEntity="Evaluation", cascade={"persist", "remove"}, mappedBy="restaurant")
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $evaluations;
 

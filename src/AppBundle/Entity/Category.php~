@@ -29,6 +29,11 @@ class Category
     private $position;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -38,6 +43,7 @@ class Category
     /**
      * One Category have Many SubCategories.
      * @ORM\OneToMany(targetEntity="SubCategory", mappedBy="category", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $subCategories;
 
@@ -52,4 +58,127 @@ class Category
         // return $this->id;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subCategories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return Category
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return Category
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add subCategory
+     *
+     * @param \AppBundle\Entity\SubCategory $subCategory
+     *
+     * @return Category
+     */
+    public function addSubCategory(\AppBundle\Entity\SubCategory $subCategory)
+    {
+        $this->subCategories[] = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove subCategory
+     *
+     * @param \AppBundle\Entity\SubCategory $subCategory
+     */
+    public function removeSubCategory(\AppBundle\Entity\SubCategory $subCategory)
+    {
+        $this->subCategories->removeElement($subCategory);
+    }
+
+    /**
+     * Get subCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubCategories()
+    {
+        return $this->subCategories;
+    }
 }

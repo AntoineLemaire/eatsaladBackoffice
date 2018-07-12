@@ -44,10 +44,10 @@ class EvaluationAnswerController extends FOSRestController
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
         foreach ($categories as $index => &$category) {
             $categoryScore = $evaluation->getCategoryScore($category->getId());
-            $category->score = $categoryScore;
+            $category->setScore($categoryScore);
             foreach ($category->getSubcategories() as $index => &$subcategory) {
                 $subCategoryScore = $evaluation->getSubcategoryScore($subcategory->getId());
-                $subcategory->score = $subCategoryScore;
+                $subcategory->setScore($subCategoryScore);
             }
         }
 
@@ -58,6 +58,34 @@ class EvaluationAnswerController extends FOSRestController
         );
 
         return $result;
+    }
+
+    /**
+     * @Rest\Delete("/rest/evaluation-answer-delete/{id_evaluation}/{id_subcategory}")
+     */
+    public function cancelAlreadyDoneAction($id_evaluation, $id_subcategory)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluation = $this->getDoctrine()->getRepository('AppBundle:Evaluation')->find($id_evaluation);
+
+        foreach ($evaluation->getEvaluationAnswers() as $index => $evaluationAnswer) {
+            if($evaluationAnswer->getQuestion()->getSubcategory()->getId() == $id_subcategory){
+                $em->remove($evaluationAnswer);
+            }
+        }
+        $evaluation->removeSubcategoryDone($id_subcategory);
+        $em->flush();
+
+//        $subcategoriesDone = $evaluation->getSubcategoriesDone();
+//        if (($key = array_search($id_subcategory, $subcategoriesDone)) !== false) {
+//            unset($subcategoriesDone[$key]);
+//        }
+//
+//        $evaluation->setSubcategoriesDone($subcategoriesDone);
+//        $em->persist($evaluation);
+//        $em->flush();
+
+        return 'ok';
     }
 
     /**

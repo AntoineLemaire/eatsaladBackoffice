@@ -29,6 +29,11 @@ class Category
     private $position;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -93,6 +98,30 @@ class Category
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return Category
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**

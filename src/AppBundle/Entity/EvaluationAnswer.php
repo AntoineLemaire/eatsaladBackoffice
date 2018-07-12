@@ -39,7 +39,7 @@ class EvaluationAnswer
     /**
      * One EvaluationAnswer have Many Photos.
      * @ORM\ManyToOne(targetEntity="Answer", cascade={"persist"})
-     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", onDelete="SET NULL")
      *
      */
     private $answer;
