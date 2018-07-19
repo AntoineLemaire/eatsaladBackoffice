@@ -18,11 +18,16 @@ class CityController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:City')->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->createQueryBuilder();
+        $dql = $restresult->select('c')
+            ->from('AppBundle:City', 'c')
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         if ($restresult === null) {
             return new View("there are no city exist", Response::HTTP_NOT_FOUND);
         }
-        return $restresult;
+        return $dql;
     }
 
     /**

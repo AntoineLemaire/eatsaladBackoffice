@@ -50,6 +50,13 @@ class Restaurant
     private $evaluations;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="totalscore", type="integer")
+     */
+    private $totalscore;
+
+    /**
      * One Restaurant have Many Evaluations.
      * @ORM\ManyToOne(targetEntity="City", cascade={"persist", "remove"}, inversedBy="restaurants")
      */
@@ -81,6 +88,34 @@ class Restaurant
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get totalscore
+     *
+     * @return string
+     */
+    public function getTotalscore()
+    {
+        $calc = 0;
+        $i = 0;
+        foreach ($this->getEvaluations() as $evaluation) {
+            $calc += $evaluation->getScore();
+            $i++;
+        }
+        if ($i == 0){
+            return "Pas encore d'évaluations disponibles";
+        }
+        $score = round(($calc / $i), 1);
+        if ($score >= 75)
+            $color = "#8EC172";
+        elseif ($score < 75 && $score >= 50)
+            $color = "#9AD430";
+        elseif ($score < 50 && $score >= 25)
+            $color = "#FFC500";
+        else
+            $color = "#FF4200";
+        return "<span style='border-radius: 2px;padding: 5px 10px;color:#fff;font-weight:bold;background-color:".$color." '>".$score."%</span>";
     }
 
     /**

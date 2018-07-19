@@ -50,10 +50,26 @@ class EvaluationController extends FOSRestController
     public function getByRestaurantAction($id_restaurant)
     {
         $restaurant = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->find($id_restaurant);
-        if ($restaurant === null) {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->createQueryBuilder();
+        $dql = $restresult->select('e')
+            ->from('AppBundle:Evaluation', 'e')
+            ->andWhere('e.restaurant = :restaurant')
+            ->andWhere('e.temp = :temp')
+            ->setParameter('restaurant', $restaurant)
+            ->setParameter('temp', false)
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        if ($dql === null) {
             return new View("evaluation not found", Response::HTTP_NOT_FOUND);
         }
-        return $restaurant->getEvaluations();
+//        $result = [];
+//        foreach ($restaurant->getEvaluations() as $index => $evaluation) {
+//            if (!$evaluation->getTemp()){
+//                $result[] = $evaluation;
+//            }
+//        }
+        return $dql;
     }
 
     /**

@@ -1,0 +1,9 @@
+{% if value matches '/^[-+]?[0-9]*\\.?[0-9]+$/' or value matches '/^\\d+$/' %}
+    {% if field_options.format %}
+        {{ field_options.format|format(value) }}
+    {% else %}
+        {{ value|number_format }}
+    {% endif %}
+{% else %}
+    {{ value|raw }}
+{% endif %}

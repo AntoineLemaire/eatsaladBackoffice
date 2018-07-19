@@ -99,7 +99,16 @@ class Evaluation
      */
     public function __toString(){
         // to show the name of the Category in the select
-        return "Évaluation du ".$this->date->format('Y-m-d H:i:s');
+        $score = $this->getScore();
+        if ($score >= 75)
+            $color = "#8EC172";
+        elseif ($score < 75 && $score >= 50)
+            $color = "#9AD430";
+        elseif ($score < 50 && $score >= 25)
+            $color = "#FFC500";
+        else
+            $color = "#FF4200";
+        return "Évaluation du ".$this->date->format('Y-m-d à H:i').", <span style='border-radius: 2px;padding: 5px 10px;color:#fff;font-weight:bold;background-color:".$color." '>score : ".$this->getScore()."%</span>";
         // to show the id of the Category in the select
         // return $this->id;
     }

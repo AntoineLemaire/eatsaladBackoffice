@@ -231,6 +231,10 @@ easy_admin:
                     - { property: 'address', label: 'Adresse'}
                     - { property: 'emails' }
                     - { property: 'city' }
+            show:
+                dql_filter: 'entity.temp = 0'
+                fields: ['id', { property: 'name', label: 'Nom' }, { property: 'address', label: 'Adresse' }, 'emails', { property: 'totalscore', label: 'Moyenne totale' }, 'evaluations', { property: 'city', label: 'Ville'}]
+
         City:
             label: 'Villes'
             disabled_actions: ['search', 'show']

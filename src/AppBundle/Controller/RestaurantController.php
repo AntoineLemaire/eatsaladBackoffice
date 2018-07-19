@@ -19,11 +19,16 @@ class RestaurantController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Restaurant')->findAll();
-        if ($restresult === null) {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->createQueryBuilder();
+        $dql = $restresult->select('r')
+            ->from('AppBundle:Restaurant', 'r')
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        if ($dql === null) {
             return new View("there are no restaurants exist", Response::HTTP_NOT_FOUND);
         }
-        return $restresult;
+        return $dql;
     }
 
     /**
@@ -43,11 +48,19 @@ class RestaurantController extends FOSRestController
      */
     public function getByCityAction($id_city)
     {
+        $em = $this->getDoctrine()->getManager();
         $city = $this->getDoctrine()->getRepository('AppBundle:City')->find($id_city);
-        if ($city === null) {
+        $restresult = $em->createQueryBuilder();
+        $dql = $restresult->select('r')
+            ->from('AppBundle:Restaurant', 'r')
+            ->andWhere('r.city = :city')
+            ->setParameter('city', $city)
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        if ($dql === null) {
             return new View("there are no restaurants exist", Response::HTTP_NOT_FOUND);
         }
-        return $city->getRestaurants();
+        return $dql;
     }
 
     /**

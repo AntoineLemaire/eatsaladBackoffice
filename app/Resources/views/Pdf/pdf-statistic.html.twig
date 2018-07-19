@@ -67,6 +67,16 @@
     <p style="text-align: center;margin-right: 10px;">Le {{ evaluation.getDate()|date('d/m/Y') }} à {{ evaluation.getDate()|date('H:m') }}</p>
     <p style="text-align: center;margin-right: 10px;">Effectué par {{ evaluation.getControllerName() }}</p>
     <p style="text-align: center;margin-right: 10px;">Score total : {{ evaluation.getScore() }}%</p>
+    <div style="text-align:left;margin: 30px auto 0;page-break-after: always;display:flex;justify-content: space-around">
+        {% for category in categories %}
+            <div class="col-6" style="width:45%;padding: 20px;margin:5px auto;background: #89BD29;color:#fff;border-radius: 5px">
+                <h3><strong>{{ category.getName() }}</strong></h3>
+                {% for subcategory in category.getSubCategories() %}
+                    <p>- {{ subcategory.getName() }} : <span class="subcategory-score">{{ subcategory.score }}%</span></p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% for category in categories %}
