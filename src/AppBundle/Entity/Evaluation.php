@@ -108,7 +108,7 @@ class Evaluation
             $color = "#FFC500";
         else
             $color = "#FF4200";
-        return "Évaluation du ".$this->date->format('Y-m-d à H:i').", <span style='border-radius: 2px;padding: 5px 10px;color:#fff;font-weight:bold;background-color:".$color." '>score : ".$this->getScore()."%</span>";
+        return "Évaluation du ".$this->date->format('d/m/Y').", <span style='border-radius: 2px;padding: 5px 10px;color:#fff;font-weight:bold;background-color:".$color." '>score : ".$this->getScore()."%</span>";
         // to show the id of the Category in the select
         // return $this->id;
     }

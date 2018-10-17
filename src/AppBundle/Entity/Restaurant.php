@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -52,7 +51,7 @@ class Restaurant
     /**
      * @var array
      *
-     * @ORM\Column(name="totalscore", type="integer")
+     * @ORM\Column(name="totalscore", type="integer", nullable=true)
      */
     private $totalscore;
 
