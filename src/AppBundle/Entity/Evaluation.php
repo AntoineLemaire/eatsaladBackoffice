@@ -100,6 +100,9 @@ class Evaluation
     public function __toString(){
         // to show the name of the Category in the select
         $score = $this->getScore();
+        if ($score == 0){
+            return "Évaluation du ".$this->date->format('d/m/Y').", <a href='".getenv('HTTP_X_FORWARDED_FOR')."/rest/evaluation/report/".$this->id."' style='border-radius: 2px;padding: 5px 10px;color:#fff;font-weight:bold;background-color:red;'>Erreur : regénérer évaluation</a>";
+        }
         if ($score >= 75)
             $color = "#8EC172";
         elseif ($score < 75 && $score >= 50)
@@ -126,6 +129,9 @@ class Evaluation
             $totalScore += $evaluationAnswer->getAnswer()->getScore();
             $totalQuestions++;
         }
+        if (($totalQuestions * 3) == 0)
+            return 0;
+        else
         return round(($totalScore / ($totalQuestions * 3)) * 100);
     }
 
