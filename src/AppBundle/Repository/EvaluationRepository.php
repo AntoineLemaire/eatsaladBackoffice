@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class EvaluationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findSubcategoriesDone($id){
+        $qb = $this->createQueryBuilder('e');
+        $qb
+            ->select('e.subcategoriesDone')
+            ->andWhere('e.id = :id')
+            ->setParameter(':id', $id);
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+
+    }
+
 }
