@@ -296,7 +296,7 @@ knp_snappy:
     temporary_folder: %kernel.cache_dir%/snappy
     pdf:
         enabled:    true
-        binary:     /usr/bin/wkhtmltox/bin/wkhtmltopdf
+        binary:     /usr/local/bin/wkhtmltopdf
         options:
             no-outline: true
             page-size: LETTER
@@ -304,5 +304,5 @@ knp_snappy:
             encoding: UTF-8
     image:
         enabled:    true
-        binary:     /usr/bin/wkhtmltox/bin/wkhtmltoimage
+        binary:     /usr/local/bin/wkhtmltoimage
         options:    []
