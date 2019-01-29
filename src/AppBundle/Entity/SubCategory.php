@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SubCategory
  *
  * @ORM\Table(name="sub_category")
- * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SubCategoryRepository")
  */
 class SubCategory
 {

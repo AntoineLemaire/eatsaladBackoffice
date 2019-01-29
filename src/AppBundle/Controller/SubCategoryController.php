@@ -20,7 +20,7 @@ class SubCategoryController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->findBy(['active' => true], ['position' => 'ASC']);
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:SubCategory')->findEnabledOnes();
         if ($restresult === null) {
             return new View("there are no subcategories exist", Response::HTTP_NOT_FOUND);
         }

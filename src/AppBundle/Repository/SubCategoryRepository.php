@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class SubCategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEnabledOnes(){
+        $qb = $this->createQueryBuilder('s');
+        $qb
+            ->select('s, q')
+            ->leftJoin('s.questions','q')
+            ->where('s.active = true')
+            ->andWhere('q.active = true')
+        ;
+        return $qb->getQuery()->getResult();
+    }
 }
