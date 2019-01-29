@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -186,7 +186,11 @@ class Category
      */
     public function getSubCategories()
     {
-        return $this->subCategories;
+        return $this->subCategories->matching(
+            Criteria::create()->where(
+                Criteria::expr()->eq('active', true)
+            )
+        );
     }
 
     /**
