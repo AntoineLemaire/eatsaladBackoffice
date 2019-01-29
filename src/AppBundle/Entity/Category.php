@@ -186,11 +186,7 @@ class Category
      */
     public function getSubCategories()
     {
-        return $this->subCategories->matching(
-            Criteria::create()->where(
-                Criteria::expr()->eq('active', true)
-            )
-        );
+        return $this->subCategories;
     }
 
     /**
