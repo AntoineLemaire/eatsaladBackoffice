@@ -41,7 +41,7 @@ class EvaluationAnswerController extends FOSRestController
         if ($evaluation === null) {
             return new View("there are no answer exist", Response::HTTP_NOT_FOUND);
         }
-        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findEnabledOnes();
         foreach ($categories as $index => &$category) {
             $categoryScore = $evaluation->getCategoryScore($category->getId());
             $category->setScore($categoryScore);

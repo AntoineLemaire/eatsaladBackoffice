@@ -266,7 +266,7 @@ class EvaluationController extends FOSRestController
         $em->persist($evaluation);
         $em->flush();
 
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findEnabledOnes();
 
         foreach ($categories as $index => &$category) {
             $categoryScore = $evaluation->getCategoryScore($category->getId());
@@ -400,7 +400,7 @@ class EvaluationController extends FOSRestController
         $em->persist($evaluation);
         $em->flush();
 
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findEnabledOnes();
 
         foreach ($categories as $index => &$category) {
             $categoryScore = $evaluation->getCategoryScore($category->getId());
