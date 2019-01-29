@@ -19,7 +19,7 @@ class QuestionController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Question')->findBy([], ['position' => 'ASC']);
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Question')->findBy(['active' => true], ['position' => 'ASC']);
         if ($restresult === null) {
             return new View("there are no questions exist", Response::HTTP_NOT_FOUND);
         }

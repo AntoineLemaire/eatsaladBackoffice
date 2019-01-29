@@ -23,6 +23,13 @@ class Category
     private $id;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", options={"default" : 1})
+     */
+    private $active = true;
+    
+    /**
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      */
@@ -180,5 +187,29 @@ class Category
     public function getSubCategories()
     {
         return $this->subCategories;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Category
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }
