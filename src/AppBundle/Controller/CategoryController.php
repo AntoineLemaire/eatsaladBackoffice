@@ -19,7 +19,7 @@ class CategoryController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy([], ['position' => 'ASC']);
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(['active' => true], ['position' => 'ASC']);
         if ($restresult === null) {
             return new View("there are no category exist", Response::HTTP_NOT_FOUND);
         }

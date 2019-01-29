@@ -146,7 +146,7 @@ easy_admin:
                     - { property: 'score'}
         Question:
             label: 'Questions'
-            disabled_actions: ['search', 'show']
+            disabled_actions: ['search', 'show', 'delete']
             class: AppBundle\Entity\Question
             new:
                 fields:
@@ -162,6 +162,7 @@ easy_admin:
                 sort: ['position', 'ASC']
                 fields:
                     - { property: 'position'}
+                    - { property: 'active'}
                     - { property: 'Question' }
                     - { property: 'subCategory', label: 'Sous-catégorie' }
                 max_results: 500
@@ -171,22 +172,22 @@ easy_admin:
         Category:
             class: AppBundle\Entity\Category
             label: 'Categories'
-            disabled_actions: ['show']
+            disabled_actions: ['show', 'delete']
             list:
                 sort: ['position', 'ASC']
-                fields: ['position', 'name']
+                fields: ['position', 'active', 'name']
                 max_results: 500
             new:
                 fields: ['position', 'name']
             edit:
                 fields: ['position', 'name']
         SubCategory:
-            disabled_actions: ['show']
+            disabled_actions: ['show', 'delete']
             label: 'Sous catégories'
             class: AppBundle\Entity\SubCategory
             list:
                 sort: ['position', 'ASC']
-                fields: ['position', 'name', 'category']
+                fields: ['position', 'active', 'name', 'category']
                 max_results: 500
             edit:
                 fields: ['position', 'name']
